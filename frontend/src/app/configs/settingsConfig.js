@@ -2,28 +2,207 @@ import themesConfig from 'app/configs/themesConfig';
 import i18n from '../../i18n';
 
 const settingsConfig = {
-  layout: {
-    style: 'layout1', // layout1 layout2 layout3
-    config: {}, // checkout default layout configs at app/theme-layouts for example  app/theme-layouts/layout1/Layout1Config.js
+  "customScrollbars": true,
+  "direction": "ltr",
+  "theme": {
+    "main": {
+      "palette": {
+        "mode": "dark",
+        "text": {
+          "primary": "rgb(255,255,255)",
+          "secondary": "rgb(148, 163, 184)",
+          "disabled": "rgb(156, 163, 175)"
+        },
+        "common": {
+          "black": "rgb(17, 24, 39)",
+          "white": "rgb(255, 255, 255)"
+        },
+        "primary": {
+          "light": "#BFB7BF",
+          "main": "#2A0F29",
+          "dark": "#0F040F",
+          "contrastDefaultColor": "light",
+          "contrastText": "rgb(255,255,255)"
+        },
+        "secondary": {
+          "light": "#D9B9C3",
+          "main": "#801737",
+          "dark": "#500716",
+          "contrastText": "rgb(255,255,255)"
+        },
+        "background": {
+          "paper": "#200D1F",
+          "default": "#2D132C"
+        },
+        "error": {
+          "light": "#ffcdd2",
+          "main": "#f44336",
+          "dark": "#b71c1c"
+        },
+        "divider": "rgba(241,245,249,.12)"
+      },
+      "status": {
+        "danger": "orange"
+      }
+    },
+    "navbar": {
+      "palette": {
+        "mode": "dark",
+        "text": {
+          "primary": "rgb(255,255,255)",
+          "secondary": "rgb(148, 163, 184)",
+          "disabled": "rgb(156, 163, 175)"
+        },
+        "common": {
+          "black": "rgb(17, 24, 39)",
+          "white": "rgb(255, 255, 255)"
+        },
+        "primary": {
+          "light": "#BFB7BF",
+          "main": "#2A0F29",
+          "dark": "#0F040F",
+          "contrastDefaultColor": "light",
+          "contrastText": "rgb(255,255,255)"
+        },
+        "secondary": {
+          "light": "#D9B9C3",
+          "main": "#801737",
+          "dark": "#500716",
+          "contrastText": "rgb(255,255,255)"
+        },
+        "background": {
+          "paper": "#200D1F",
+          "default": "#2D132C"
+        },
+        "error": {
+          "light": "#ffcdd2",
+          "main": "#f44336",
+          "dark": "#b71c1c"
+        },
+        "divider": "rgba(241,245,249,.12)",
+        "status": {
+          "danger": "orange"
+        }
+      },
+      "status": {
+        "danger": "orange"
+      }
+    },
+    "toolbar": {
+      "palette": {
+        "mode": "dark",
+        "text": {
+          "primary": "rgb(255,255,255)",
+          "secondary": "rgb(148, 163, 184)",
+          "disabled": "rgb(156, 163, 175)"
+        },
+        "common": {
+          "black": "rgb(17, 24, 39)",
+          "white": "rgb(255, 255, 255)"
+        },
+        "primary": {
+          "light": "#BFB7BF",
+          "main": "#2A0F29",
+          "dark": "#0F040F",
+          "contrastDefaultColor": "light",
+          "contrastText": "rgb(255,255,255)"
+        },
+        "secondary": {
+          "light": "#D9B9C3",
+          "main": "#801737",
+          "dark": "#500716",
+          "contrastText": "rgb(255,255,255)"
+        },
+        "background": {
+          "paper": "#200D1F",
+          "default": "#2D132C"
+        },
+        "error": {
+          "light": "#ffcdd2",
+          "main": "#f44336",
+          "dark": "#b71c1c"
+        },
+        "divider": "rgba(241,245,249,.12)"
+      },
+      "status": {
+        "danger": "orange"
+      }
+    },
+    "footer": {
+      "palette": {
+        "mode": "dark",
+        "text": {
+          "primary": "rgb(255,255,255)",
+          "secondary": "rgb(148, 163, 184)",
+          "disabled": "rgb(156, 163, 175)"
+        },
+        "common": {
+          "black": "rgb(17, 24, 39)",
+          "white": "rgb(255, 255, 255)"
+        },
+        "primary": {
+          "light": "#BFB7BF",
+          "main": "#2A0F29",
+          "dark": "#0F040F",
+          "contrastDefaultColor": "light",
+          "contrastText": "rgb(255,255,255)"
+        },
+        "secondary": {
+          "light": "#D9B9C3",
+          "main": "#801737",
+          "dark": "#500716",
+          "contrastText": "rgb(255,255,255)"
+        },
+        "background": {
+          "paper": "#200D1F",
+          "default": "#2D132C"
+        },
+        "error": {
+          "light": "#ffcdd2",
+          "main": "#f44336",
+          "dark": "#b71c1c"
+        },
+        "divider": "rgba(241,245,249,.12)",
+        "status": {
+          "danger": "orange"
+        }
+      },
+      "status": {
+        "danger": "orange"
+      }
+    }
   },
-  customScrollbars: true,
-  direction: i18n.dir(i18n.options.lng) || 'ltr', // rtl, ltr
-  theme: {
-    main: themesConfig.default,
-    navbar: themesConfig.defaultDark,
-    toolbar: themesConfig.default,
-    footer: themesConfig.defaultDark,
+  "layout": {
+    "style": "layout1",
+    "config": {
+      "mode": "container",
+      "containerWidth": 1570,
+      "navbar": {
+        "display": true,
+        "style": "style-3",
+        "folded": true,
+        "position": "left"
+      },
+      "toolbar": {
+        "display": true,
+        "style": "fixed"
+      },
+      "footer": {
+        "display": false,
+        "style": "fixed"
+      },
+      "leftSidePanel": {
+        "display": true
+      },
+      "rightSidePanel": {
+        "display": true
+      }
+    }
   },
-  /*
-   To make whole app auth protected by default set defaultAuth:['admin','staff','user']
-   To make whole app accessible without authorization by default set defaultAuth: null
-   *** The individual route configs which has auth option won't be overridden.
-   */
-  defaultAuth: ['admin'],
-  /*
-    Default redirect url for the logged-in user,
-   */
-  loginRedirectUrl: '/',
+  "defaultAuth": [
+    "admin"
+  ],
+  "loginRedirectUrl": "/"
 };
 
 export default settingsConfig;
