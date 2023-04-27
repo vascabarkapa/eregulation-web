@@ -1,20 +1,42 @@
-import i18next from 'i18next';
-import ar from './navigation-i18n/ar';
-import en from './navigation-i18n/en';
-import tr from './navigation-i18n/tr';
-
-i18next.addResourceBundle('en', 'navigation', en);
-i18next.addResourceBundle('tr', 'navigation', tr);
-i18next.addResourceBundle('ar', 'navigation', ar);
-
 const navigationConfig = [
   {
     id: 'example-component',
-    title: 'Example',
-    translate: 'EXAMPLE',
+    title: 'Dashboard',
     type: 'item',
-    icon: 'heroicons-outline:star',
+    icon: 'heroicons-outline:home',
     url: 'example',
+  },
+  {
+    id: 'temparature-component',
+    title: 'Temparature',
+    type: 'item',
+    icon: 'heroicons-outline:sun',
+    url: '#',
+  },
+  {
+    id: 'humidity-component',
+    title: 'Humidity',
+    type: 'item',
+    icon: 'heroicons-outline:cloud',
+    url: '#',
+  },
+  {
+    id: 'divider-1',
+    type: 'divider',
+  },
+  {
+    id: 'users-component',
+    title: 'Users',
+    type: 'item',
+    icon: 'heroicons-outline:users',
+    url: '#',
+  },
+  {
+    id: 'about-component',
+    title: 'About',
+    type: 'item',
+    icon: 'heroicons-outline:information-circle',
+    url: '#',
   },
 ];
 
