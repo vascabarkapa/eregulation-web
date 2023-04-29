@@ -32,7 +32,7 @@ const StyledPanel = styled(FuseScrollbars)(({ theme, opened }) => ({
 }));
 
 function needsToBeOpened(location, item) {
-  return location && isUrlInChildren(item, location.pathname);
+  return location.pathname === item.url;
 }
 
 function isUrlInChildren(parent, url) {
@@ -63,6 +63,14 @@ function NavbarStyle3Content(props) {
   const dispatch = useDispatch();
   const contrastTheme = useSelector(selectContrastMainTheme(theme.palette.primary.main));
   const location = useLocation();
+
+  useEffect(() => {
+    navigation?.forEach((item) => {
+      if (needsToBeOpened(location, item)) {
+        setSelectedNavigation([item]);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     navigation?.forEach((item) => {

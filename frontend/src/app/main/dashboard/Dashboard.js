@@ -1,4 +1,3 @@
-
 const Dashboard = () => {
     return (
         <div className="p-24">
