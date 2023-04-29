@@ -10,6 +10,7 @@ import { selectContrastMainTheme } from 'app/store/fuse/settingsSlice';
 import { useLocation } from 'react-router-dom';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import { selectNavigation } from 'app/store/fuse/navigationSlice';
+import UserNavbarMenu from 'app/theme-layouts/shared-components/UserNavbarMenu';
 
 const Root = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -133,10 +134,11 @@ function NavbarStyle3Content(props) {
                 dense={props.dense}
               />
             </FuseScrollbars>
+            <UserNavbarMenu />
           </div>
         </ThemeProvider>
 
-{/*         {selectedNavigation.length > 0 && (
+        {/*         {selectedNavigation.length > 0 && (
           <StyledPanel
             id="fuse-navbar-panel"
             opened={panelOpen}
