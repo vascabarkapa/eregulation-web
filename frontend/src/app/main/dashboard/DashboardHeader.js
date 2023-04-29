@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useEffect, useState } from 'react';
-import Clock from '../../shared/components/Clock';
+import CurrentDateAndTime from '../../shared/components/CurrentDateAndTime';
 
 function DashboardHeader(props) {
   const date = new Date();
@@ -38,8 +38,8 @@ function DashboardHeader(props) {
             </div>
           </div>
         </div>
-        <div className="flex items-center mt-24 sm:mt-0 sm:mx-8 space-x-12">
-          <Clock />
+        <div className="flex items-center mt-24 sm:mt-0 sm:mx-8 space-x-12 mx-16">
+          <CurrentDateAndTime />
         </div>
       </div>
     </div>

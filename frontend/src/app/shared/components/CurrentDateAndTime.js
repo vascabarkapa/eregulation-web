@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
-function Clock() {
+function CurrentDateAndTime() {
     const [time, setTime] = useState(new Date());
 
     useEffect(() => {
@@ -44,4 +44,4 @@ function Clock() {
     );
 }
 
-export default Clock;
+export default CurrentDateAndTime;
