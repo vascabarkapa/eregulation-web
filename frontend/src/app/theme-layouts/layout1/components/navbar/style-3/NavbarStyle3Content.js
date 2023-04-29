@@ -136,7 +136,7 @@ function NavbarStyle3Content(props) {
           </div>
         </ThemeProvider>
 
-        {selectedNavigation.length > 0 && (
+{/*         {selectedNavigation.length > 0 && (
           <StyledPanel
             id="fuse-navbar-panel"
             opened={panelOpen}
@@ -150,7 +150,7 @@ function NavbarStyle3Content(props) {
               onItemClick={handleChildItemClick}
             />
           </StyledPanel>
-        )}
+        )} */}
       </Root>
     </ClickAwayListener>
   );
