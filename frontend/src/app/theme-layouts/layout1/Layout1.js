@@ -12,7 +12,6 @@ import LeftSideLayout1 from './components/LeftSideLayout1';
 import NavbarWrapperLayout1 from './components/NavbarWrapperLayout1';
 import RightSideLayout1 from './components/RightSideLayout1';
 import ToolbarLayout1 from './components/ToolbarLayout1';
-import SettingsPanel from '../shared-components/SettingsPanel';
 
 const Root = styled('div')(({ theme, config }) => ({
   ...(config.mode === 'boxed' && {
@@ -46,10 +45,6 @@ function Layout1(props) {
           {config.toolbar.display && (
             <ToolbarLayout1 className={config.toolbar.style === 'fixed' && 'sticky top-0'} />
           )}
-
-          <div className="sticky top-0 z-99">
-            {/* <SettingsPanel /> */}
-          </div>
 
           <div className="flex flex-col flex-auto min-h-0 relative z-10">
             <FuseDialog />
