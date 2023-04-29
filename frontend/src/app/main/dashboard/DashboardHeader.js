@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useEffect, useState } from 'react';
+import Clock from '../../shared/components/Clock';
 
 function DashboardHeader(props) {
   const date = new Date();
@@ -39,14 +39,7 @@ function DashboardHeader(props) {
           </div>
         </div>
         <div className="flex items-center mt-24 sm:mt-0 sm:mx-8 space-x-12">
-          <Button
-            className="whitespace-nowrap"
-            variant="contained"
-            color="secondary"
-            startIcon={<FuseSvgIcon size={20}>heroicons-solid:cog</FuseSvgIcon>}
-          >
-            Settings
-          </Button>
+          <Clock />
         </div>
       </div>
     </div>
