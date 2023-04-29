@@ -1,4 +1,4 @@
-import Dashboard from "./dashboard/Dashboard";
+import DashboardPage from "./dashboard/DashboardPage";
 
 const PagesConfig = {
   settings: {
@@ -9,7 +9,7 @@ const PagesConfig = {
   routes: [
     {
       path: 'dashboard',
-      element: <Dashboard />,
+      element: <DashboardPage />,
     },
   ],
 };
