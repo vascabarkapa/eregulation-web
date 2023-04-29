@@ -24,7 +24,7 @@ function Error404Page() {
             404 | Not Found
           </Typography>
           <Button
-            className="whitespace-nowrap font-extrabold mt-20 text-xl"
+            className="whitespace-nowrap font-extrabold mt-10 md:mt-20 text-lg md:text-xl"
             variant="text"
             color="secondary"
             onClick={handleDashboard}
