@@ -10,7 +10,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
     },
 }));
 
-const Dashboard = () => {
+const DashboardPage = () => {
     return (
         <Root
             header={<DashboardHeader />}
@@ -24,4 +24,4 @@ const Dashboard = () => {
     );
 }
 
-export default Dashboard;
+export default DashboardPage;
