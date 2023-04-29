@@ -47,12 +47,12 @@ function UserMenu(props) {
                 onClose={userMenuClose}
                 anchorOrigin={{
                     vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'bottom',
                     horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
+                  }}
                 classes={{
                     paper: 'py-8',
                 }}
