@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 function Error404Page() {
