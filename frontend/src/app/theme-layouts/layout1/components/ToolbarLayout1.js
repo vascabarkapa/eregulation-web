@@ -7,16 +7,8 @@ import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectFuseCurrentLayoutConfig, selectToolbarTheme } from 'app/store/fuse/settingsSlice';
 import { selectFuseNavbar } from 'app/store/fuse/navbarSlice';
-import AdjustFontSize from '../../shared-components/AdjustFontSize';
-import FullScreenToggle from '../../shared-components/FullScreenToggle';
-import LanguageSwitcher from '../../shared-components/LanguageSwitcher';
-import NotificationPanelToggleButton from '../../shared-components/notificationPanel/NotificationPanelToggleButton';
-import NavigationShortcuts from '../../shared-components/NavigationShortcuts';
-import NavigationSearch from '../../shared-components/NavigationSearch';
 import NavbarToggleButton from '../../shared-components/NavbarToggleButton';
 import UserMenu from '../../shared-components/UserMenu';
-import QuickPanelToggleButton from '../../shared-components/quickPanel/QuickPanelToggleButton';
-import ChatPanelToggleButton from '../../shared-components/chatPanel/ChatPanelToggleButton';
 
 function ToolbarLayout1(props) {
   const config = useSelector(selectFuseCurrentLayoutConfig);
@@ -38,7 +30,7 @@ function ToolbarLayout1(props) {
         position="static"
       >
         <Toolbar className="p-0 min-h-48 md:min-h-64">
-          <div className="flex flex-1 px-16">
+          <div className="flex flex-1 lg:hidden px-16">
             {config.navbar.display && config.navbar.position === 'left' && (
               <>
                 {/*                 <Hidden lgDown>
@@ -59,7 +51,7 @@ function ToolbarLayout1(props) {
             )}
           </div>
 
-          <div className="flex items-center px-8 h-full overflow-x-auto">
+          <div className="flex lg:hidden items-center px-8 h-full overflow-x-auto">
             {/* <QuickPanelToggleButton /> */}
 
             {/* <NotificationPanelToggleButton /> */}
