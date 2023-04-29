@@ -22,7 +22,7 @@ function UserMenu(props) {
   return (
     <>
       <Button
-        className="min-h-40 min-w-40 px-0 md:px-16 py-0 md:py-6"
+        className="min-h-40 min-w-40 px-16 py-0 md:py-6"
         onClick={userMenuClick}
         color="inherit"
       >
