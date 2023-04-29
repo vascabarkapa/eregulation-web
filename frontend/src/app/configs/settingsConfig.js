@@ -1,6 +1,3 @@
-import themesConfig from 'app/configs/themesConfig';
-import i18n from '../../i18n';
-
 const settingsConfig = {
   "customScrollbars": true,
   "direction": "ltr",
