@@ -30,7 +30,6 @@ function UserMenu(props) {
         <>
             <CustomButton
                 className="my-24 mx-10 py-32 hidden lg:flex"
-                sty
                 onClick={userMenuClick}
                 color="inherit"
             >
