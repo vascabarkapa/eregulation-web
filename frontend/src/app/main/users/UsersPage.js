@@ -1,9 +1,12 @@
-const UsersPage = () => {
+import * as React from 'react';
+import UsersHeader from './UsersHeader';
+import UsersTable from './UsersTable';
+
+export default function UsersPage() {
     return (
-        <div className="p-24">
-            The Users Page is being created!
+        <div className="container">
+            <UsersHeader />
+            <UsersTable />
         </div>
     );
 }
-
-export default UsersPage;
