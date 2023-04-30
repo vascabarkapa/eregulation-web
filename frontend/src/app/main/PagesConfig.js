@@ -1,4 +1,7 @@
 import DashboardPage from "./dashboard/DashboardPage";
+import TemparaturePage from "./temparature/TemparaturePage";
+import HumidityPage from "./humidity/HumidityPage";
+import UsersPage from "./users/UsersPage";
 
 const PagesConfig = {
   settings: {
@@ -10,6 +13,18 @@ const PagesConfig = {
     {
       path: 'dashboard',
       element: <DashboardPage />,
+    },
+    {
+      path: 'temparature',
+      element: <TemparaturePage />,
+    },
+    {
+      path: 'humidity',
+      element: <HumidityPage />,
+    },
+    {
+      path: 'users',
+      element: <UsersPage />,
     },
   ],
 };

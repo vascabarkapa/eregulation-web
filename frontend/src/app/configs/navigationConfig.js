@@ -29,7 +29,7 @@ const navigationConfig = [
     title: 'Users',
     type: 'item',
     icon: 'heroicons-outline:users',
-    url: '/user',
+    url: '/users',
   },
   {
     id: 'about-component',
