@@ -7,7 +7,7 @@ function DashboardHeader(props) {
   const date = new Date();
   const hours = date.getHours();
 
-  const [greeting, setGreeting] = useState();
+  const [greeting, setGreeting] = useState('Good morning');
 
   useEffect(() => {
     if (hours >= 3 && hours < 12) {

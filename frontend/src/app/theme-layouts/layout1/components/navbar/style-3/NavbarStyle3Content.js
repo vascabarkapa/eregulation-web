@@ -17,42 +17,8 @@ const Root = styled('div')(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-const StyledPanel = styled(FuseScrollbars)(({ theme, opened }) => ({
-  backgroundColor: theme.palette.background.default,
-  color: theme.palette.text.primary,
-  transition: theme.transitions.create(['opacity'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.shortest,
-  }),
-  opacity: 0,
-  pointerEvents: 'none',
-  ...(opened && {
-    opacity: 1,
-    pointerEvents: 'initial',
-  }),
-}));
-
 function needsToBeOpened(location, item) {
   return location.pathname === item.url;
-}
-
-function isUrlInChildren(parent, url) {
-  if (!parent.children) {
-    return false;
-  }
-
-  for (let i = 0; i < parent.children.length; i += 1) {
-    if (parent.children[i].children) {
-      if (isUrlInChildren(parent.children[i], url)) {
-        return true;
-      }
-    }
-    if (parent.children[i].url === url || url.includes(parent.children[i].url)) {
-      return true;
-    }
-  }
-
-  return false;
 }
 
 function NavbarStyle3Content(props) {
@@ -82,29 +48,6 @@ function NavbarStyle3Content(props) {
   }, [navigation, location]);
 
   function handleParentItemClick(selected) {
-    /** if there is no child item do not set/open panel
-     */
-    if (!selected.children) {
-      setSelectedNavigation([]);
-      setPanelOpen(false);
-      return;
-    }
-
-    /**
-     * If navigation already selected toggle panel visibility
-     */
-    if (selectedNavigation[0]?.id === selected.id) {
-      setPanelOpen(!panelOpen);
-    } else {
-      /**
-       * Set navigation and open panel
-       */
-      setSelectedNavigation([selected]);
-      setPanelOpen(true);
-    }
-  }
-
-  function handleChildItemClick(selected) {
     setPanelOpen(false);
     if (isMobile) {
       dispatch(navbarCloseMobile());
@@ -137,22 +80,6 @@ function NavbarStyle3Content(props) {
             <UserNavbarMenu />
           </div>
         </ThemeProvider>
-
-        {/*         {selectedNavigation.length > 0 && (
-          <StyledPanel
-            id="fuse-navbar-panel"
-            opened={panelOpen}
-            className={clsx('shadow-5 overflow-y-auto overflow-x-hidden')}
-            option={{ suppressScrollX: true, wheelPropagation: false }}
-          >
-            <FuseNavigation
-              className={clsx('navigation')}
-              navigation={selectedNavigation}
-              layout="vertical"
-              onItemClick={handleChildItemClick}
-            />
-          </StyledPanel>
-        )} */}
       </Root>
     </ClickAwayListener>
   );
