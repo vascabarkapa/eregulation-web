@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import { Button, Tooltip } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon';
 import { motion } from 'framer-motion';
+import UsersDeleteModal from './UsersDeleteModal';
 
 function createData(first_name, last_name, username, email, actions) {
     return { first_name, last_name, username, email, actions };
@@ -27,7 +29,18 @@ const rows = [
     createData('Ava', 'Hernandez', 'avahernandez', 'ava.hernandez@gmail.com', ''),
 ];
 
-export default function UsersPage() {
+const UsersTable = () => {
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+    function handleOpenDeleteModal(user) {
+        setOpenDeleteModal(true);
+    };
+
+    const handleDelete = () => {
+        setOpenDeleteModal(false);
+        // delete api
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -46,7 +59,7 @@ export default function UsersPage() {
                     <TableBody>
                         {rows.map((row) => (
                             <TableRow
-                                key={row.name}
+                                key={row.email}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell>{row.first_name + ' ' + row.last_name}</TableCell>
@@ -69,6 +82,7 @@ export default function UsersPage() {
                                             variant="text"
                                             color="secondary"
                                             type="button"
+                                            onClick={() => handleOpenDeleteModal(row)}
                                         >
                                             <FuseSvgIcon>
                                                 heroicons-solid:trash
@@ -81,6 +95,10 @@ export default function UsersPage() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            {openDeleteModal && <UsersDeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal}
+                onConfirm={handleDelete} />}
         </motion.div>
     );
 }
+
+export default UsersTable;
