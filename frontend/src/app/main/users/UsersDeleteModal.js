@@ -17,14 +17,14 @@ const UsersDeleteModal = ({ open, setOpen, onConfirm }) => {
             <Dialog
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="alert-delete-title"
-                aria-describedby="alert-delete-description"
+                aria-labelledby="alert-users-delete-title"
+                aria-describedby="alert-users-delete-description"
             >
-                <DialogTitle id="alert-delete-title">
+                <DialogTitle id="alert-users-delete-title">
                     Delete confirmation
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-delete-description">
+                    <DialogContentText id="alert-users-delete-description">
                         Are you sure you want to delete the User?
                     </DialogContentText>
                 </DialogContent>
