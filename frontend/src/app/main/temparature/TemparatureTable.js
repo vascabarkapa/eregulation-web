@@ -32,7 +32,7 @@ const TemparatureTable = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
         >
-            <TableContainer sx={{ width: '95%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '2rem' }} component={Paper}>
+            <TableContainer sx={{ marginLeft: 'auto', marginRight: 'auto' }} component={Paper}>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
