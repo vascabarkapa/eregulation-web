@@ -1,7 +1,11 @@
+import TemparatureHeader from "./TemparatureHeader";
+import TemparatureTable from "./TemparatureTable";
+
 const TemparaturePage = () => {
     return (
-        <div className="p-24">
-            We are under scheduled maintenance. Sorry for the inconvenience, Temparature Page will be back shortly!
+        <div className="container">
+            <TemparatureHeader />
+            <TemparatureTable />
         </div>
     );
 }
