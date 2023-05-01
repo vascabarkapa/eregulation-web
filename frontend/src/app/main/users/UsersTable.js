@@ -36,7 +36,7 @@ const UsersTable = () => {
 
     function handleOpenFormModal(user) {
         setOpenFormModal(true);
-    };
+    }
 
     const handleForm = () => {
         setOpenFormModal(false);
@@ -45,7 +45,7 @@ const UsersTable = () => {
 
     function handleOpenDeleteModal(user) {
         setOpenDeleteModal(true);
-    };
+    }
 
     const handleDelete = () => {
         setOpenDeleteModal(false);
