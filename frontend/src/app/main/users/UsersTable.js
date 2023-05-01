@@ -11,6 +11,7 @@ import { Button, Tooltip } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon';
 import { motion } from 'framer-motion';
 import UsersDeleteModal from './UsersDeleteModal';
+import UsersFormModal from './UsersFormModal';
 
 function createData(first_name, last_name, username, email, actions) {
     return { first_name, last_name, username, email, actions };
@@ -30,7 +31,17 @@ const rows = [
 ];
 
 const UsersTable = () => {
+    const [openFormModal, setOpenFormModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+    function handleOpenFormModal(user) {
+        setOpenFormModal(true);
+    };
+
+    const handleForm = () => {
+        setOpenFormModal(false);
+        // delete api
+    }
 
     function handleOpenDeleteModal(user) {
         setOpenDeleteModal(true);
@@ -71,6 +82,7 @@ const UsersTable = () => {
                                             variant="text"
                                             color="secondary"
                                             type="button"
+                                            onClick={() => handleOpenFormModal(row)}
                                         >
                                             <FuseSvgIcon>
                                                 heroicons-solid:pencil-alt
@@ -95,6 +107,8 @@ const UsersTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            {openFormModal && <UsersFormModal open={openFormModal} setOpen={setOpenFormModal}
+                onConfirm={handleForm} />}
             {openDeleteModal && <UsersDeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal}
                 onConfirm={handleDelete} />}
         </motion.div>
