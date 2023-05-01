@@ -66,6 +66,7 @@ const UsersTable = () => {
                             <TableCell className="font-extrabold uppercase">Full Name</TableCell>
                             <TableCell className="font-extrabold uppercase">Username</TableCell>
                             <TableCell className="font-extrabold uppercase">Email</TableCell>
+                            <TableCell className="font-extrabold uppercase">Role</TableCell>
                             <TableCell className="font-extrabold uppercase"></TableCell>
                         </TableRow>
                     </TableHead>
@@ -78,6 +79,9 @@ const UsersTable = () => {
                                 <TableCell>{row.first_name + ' ' + row.last_name}</TableCell>
                                 <TableCell>{row.username}</TableCell>
                                 <TableCell>{row.email}</TableCell>
+                                <TableCell>
+                                    <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-pink-200 text-red-800">Admin</div>
+                                </TableCell>
                                 <TableCell align="right">
                                     <Tooltip title="Edit" placement="top">
                                         <Button
