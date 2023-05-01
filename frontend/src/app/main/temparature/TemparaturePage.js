@@ -1,7 +1,7 @@
 const TemparaturePage = () => {
     return (
         <div className="p-24">
-            The Temparature Page is being created!
+            We are under scheduled maintenance. Sorry for the inconvenience, Temparature Page will be back shortly!
         </div>
     );
 }

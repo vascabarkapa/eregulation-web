@@ -16,7 +16,7 @@ const DashboardPage = () => {
             header={<DashboardHeader />}
             content={
                 <div className="p-24">
-                    Coming soon!
+                    We are under scheduled maintenance. Sorry for the inconvenience, Dashboard Details will be back shortly!
                 </div>
             }
         />
