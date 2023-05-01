@@ -6,6 +6,7 @@ import SignInConfig from '../main/sign-in/SignInConfig';
 import SignUpConfig from '../main/sign-up/SignUpConfig';
 import SignOutConfig from '../main/sign-out/SignOutConfig';
 import Error404Page from '../main/404/Error404Page';
+import Error500Page from '../main/500/Error500Page';
 import PagesConfig from '../main/PagesConfig';
 
 const routeConfigs = [PagesConfig, SignOutConfig, SignInConfig, SignUpConfig];
@@ -24,6 +25,10 @@ const routes = [
   {
     path: '404',
     element: <Error404Page />,
+  },
+  {
+    path: '500',
+    element: <Error500Page />,
   },
   {
     path: '*',
