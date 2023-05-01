@@ -6,7 +6,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
 
 function TemparatureLive() {
-    const { date, limit, spent, minimum } = { date: '2023-05-01T22:24:15.000Z', limit: 12, spent: 10, minimum: 5 };
+    const { date } = { date: '2023-05-01T22:24:15.000Z' };
 
     return (
         <Paper className="relative flex flex-col flex-auto p-24 pr-12 pb-12 rounded-2xl shadow overflow-hidden">
@@ -33,7 +33,7 @@ function TemparatureLive() {
                 </div>
             </div>
             <div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-96 h-96 -m-24">
-                <FuseSvgIcon size={96} className="opacity-25 text-white-400">
+                <FuseSvgIcon size={100} className="opacity-25 text-white-400">
                     heroicons-outline:sun
                 </FuseSvgIcon>
             </div>
