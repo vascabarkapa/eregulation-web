@@ -17,7 +17,7 @@ const navigationConfig = [
     id: 'humidity-component',
     title: 'Humidity',
     type: 'item',
-    icon: 'heroicons-outline:cloud',
+    icon: 'material-outline:water_drop',
     url: '/humidity',
   },
   {

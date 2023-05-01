@@ -39,7 +39,7 @@ const UsersHeader = () => {
                         onClick={() => handleOpenFormModal(null)}
                         variant="contained"
                         color="secondary"
-                        startIcon={<FuseSvgIcon>heroicons-outline:plus</FuseSvgIcon>}
+                        startIcon={<FuseSvgIcon>feather:user-plus</FuseSvgIcon>}
                     >
                         Add User
                     </Button>
