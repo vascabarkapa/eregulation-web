@@ -12,6 +12,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon';
 import { motion } from 'framer-motion';
 import UsersDeleteModal from './UsersDeleteModal';
 import UsersFormModal from './UsersFormModal';
+import SnackbarAlert from 'src/app/shared/components/SnackbarAlert';
 
 function createData(first_name, last_name, username, email, actions) {
     return { first_name, last_name, username, email, actions };
@@ -33,6 +34,7 @@ const rows = [
 const UsersTable = () => {
     const [openFormModal, setOpenFormModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [openNotification, setOpenNotification] = useState(false);
 
     function handleOpenFormModal(user) {
         setOpenFormModal(true);
@@ -111,6 +113,29 @@ const UsersTable = () => {
                 onConfirm={handleForm} />}
             {openDeleteModal && <UsersDeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal}
                 onConfirm={handleDelete} />}
+            <div className="hidden md:block">
+                {openNotification && <SnackbarAlert
+                    open={openNotification}
+                    setOpen={setOpenNotification}
+                    vertical={'top'}
+                    horizontal={'center'}
+                    message={'This is some message'}
+                    type={'success'}
+                />
+                }
+            </div>
+            <div className="block md:hidden">
+                {openNotification && <SnackbarAlert
+                    open={openNotification}
+                    setOpen={setOpenNotification}
+                    vertical={'bottom'}
+                    horizontal={'center'}
+                    message={'This is some message'}
+                    type={'success'}
+                />
+                }
+            </div>
+
         </motion.div>
     );
 }
