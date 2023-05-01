@@ -32,8 +32,8 @@ const HumidityTable = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
         >
-            <TableContainer sx={{ width: '95%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '2rem' }} component={Paper}>
-                <Table sx={{ minWidth: 650 }} size="small">
+            <TableContainer sx={{ marginLeft: 'auto', marginRight: 'auto' }} component={Paper}>
+                <Table size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell className="font-extrabold uppercase">Value</TableCell>
