@@ -33,7 +33,7 @@ const TemparatureTable = () => {
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
         >
             <TableContainer sx={{ width: '95%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '2rem' }} component={Paper}>
-                <Table sx={{ minWidth: 650 }} size="small">
+                <Table size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell className="font-extrabold uppercase">Value</TableCell>
