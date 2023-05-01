@@ -5,6 +5,7 @@ import { memo } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
 import { motion } from 'framer-motion';
+import { Tooltip } from '@mui/material';
 
 function TemparatureLive() {
     const { date } = { date: '2023-05-01T22:24:15.000Z' };
@@ -24,9 +25,11 @@ function TemparatureLive() {
 
                     </div>
                     <div className="-mt-8">
-                        <IconButton aria-label="more" size="large">
-                            <FuseSvgIcon>material-outline:refresh</FuseSvgIcon>
-                        </IconButton>
+                        <Tooltip title="Refresh" placement="top">
+                            <IconButton aria-label="more" size="large">
+                                <FuseSvgIcon>material-outline:refresh</FuseSvgIcon>
+                            </IconButton>
+                        </Tooltip>
                     </div>
                 </div>
                 <div className="flex flex-col flex-wrap mt-16">

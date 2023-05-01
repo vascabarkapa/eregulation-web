@@ -13,8 +13,8 @@ const TemparaturePage = () => {
                 </div>
                 <div className="w-full md:w-1/2">
                     <div className="flex flex-col gap-20">
-                        <TemparatureLive />
                         <DateRangeFilter />
+                        <TemparatureLive />
                     </div>
                 </div>
             </div>
