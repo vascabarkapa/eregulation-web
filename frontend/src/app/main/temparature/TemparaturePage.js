@@ -7,7 +7,7 @@ const TemparaturePage = () => {
     return (
         <div className="container">
             <TemparatureHeader />
-            <div className="hidden md:flex flex-col md:flex-row md:justify-between gap-20">
+            <div className="hidden md:flex flex-col md:flex-row md:justify-between gap-20 mx-20">
                 <div className="w-full md:w-1/2">
                     <TemparatureTable />
                 </div>
