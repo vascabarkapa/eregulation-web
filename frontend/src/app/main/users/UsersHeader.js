@@ -1,10 +1,22 @@
 import * as React from 'react';
 import { Button, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon';
+import UsersFormModal from './UsersFormModal';
+import { useState } from 'react';
 
-export default function UsersPage() {
+const UsersHeader = () => {
+    const [openFormModal, setOpenFormModal] = useState(false);
+
+    function handleOpenFormModal(user) {
+        setOpenFormModal(true);
+    }
+
+    const handleForm = () => {
+        setOpenFormModal(false);
+        // delete api
+    }
+
     return (
         <>
             <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between py-32  px-24 sm:px-32">
@@ -24,8 +36,7 @@ export default function UsersPage() {
                 >
                     <Button
                         size="large"
-                        component={Link}
-                        to="#"
+                        onClick={() => handleOpenFormModal(null)}
                         variant="contained"
                         color="secondary"
                         startIcon={<FuseSvgIcon>heroicons-outline:plus</FuseSvgIcon>}
@@ -34,7 +45,11 @@ export default function UsersPage() {
                     </Button>
                 </motion.div>
             </div>
+            {openFormModal && <UsersFormModal open={openFormModal} setOpen={setOpenFormModal}
+                onConfirm={handleForm} />}
         </>
 
     );
 }
+
+export default UsersHeader;
