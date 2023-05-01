@@ -61,10 +61,10 @@ const UsersTable = () => {
                 <Table sx={{ minWidth: 650 }}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Full Name</TableCell>
-                            <TableCell>Username</TableCell>
-                            <TableCell>Email</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell className="font-extrabold uppercase">Full Name</TableCell>
+                            <TableCell className="font-extrabold uppercase">Username</TableCell>
+                            <TableCell className="font-extrabold uppercase">Email</TableCell>
+                            <TableCell className="font-extrabold uppercase"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
