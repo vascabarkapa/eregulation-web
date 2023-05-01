@@ -120,6 +120,27 @@
                 transform: scale(1.0);
             }
         }
+
+        .animate-bounce {
+            animation-name: bounce;
+            animation-duration: 0.7s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 3;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(-50%);
+                animation-timing-function: ease-in-out;
+            }
+
+            50% {
+                transform: translateY(0);
+                animation-timing-function: ease-in-out;
+            }
+        }
     </style>
 </head>
 
@@ -132,12 +153,7 @@
     <div id='root' class='flex'>
         <div id='fuse-splash-screen'>
             <div class='logo'>
-                <img width='128' src='assets/images/logo/eregulation-light.svg' alt='logo'>
-            </div>
-            <div id='spinner'>
-                <div class='bounce1'></div>
-                <div class='bounce2'></div>
-                <div class='bounce3'></div>
+                <img width='128' class="animate-bounce" src='assets/images/logo/eregulation-light.svg' alt='logo'>
             </div>
         </div>
     </div>
