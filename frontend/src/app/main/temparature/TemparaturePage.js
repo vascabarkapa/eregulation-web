@@ -21,7 +21,7 @@ const TemparaturePage = () => {
             <div className="flex flex-col gap-20 md:hidden m-20">
                 <TemparatureLive />
                 <DateRangeFilter />
-                <HumidityTable />
+                <TemparatureTable />
             </div>
         </div>
     );
