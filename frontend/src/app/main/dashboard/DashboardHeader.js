@@ -7,15 +7,15 @@ function DashboardHeader(props) {
   const date = new Date();
   const hours = date.getHours();
 
-  const [greeting, setGreeting] = useState('Good morning');
+  const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
     if (hours >= 3 && hours < 12) {
-      setGreeting("Good morning");
+      setGreeting("Good morning, Test User");
     } else if (hours >= 12 && hours < 17) {
-      setGreeting("Good afternoon");
+      setGreeting("Good afternoon, Test User");
     } else {
-      setGreeting("Good evening");
+      setGreeting("Good evening, Test User");
     }
   }, [])
 
@@ -25,7 +25,7 @@ function DashboardHeader(props) {
         <div className="flex flex-auto items-center min-w-0">
           <div className="flex flex-col min-w-0 mx-16">
             <Typography className="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-              {`${greeting}, Test User!`}
+              {greeting}
             </Typography>
 
             <div className="flex items-center">
