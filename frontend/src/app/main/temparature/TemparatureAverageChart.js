@@ -14,16 +14,16 @@ function TemperatureAverageChart() {
     const { overview, series, ranges, labels } = {
         "overview": {
             "this-week": {
-                "new-issues": 214,
-                "closed-issues": 75,
+                "max-temparature": 28,
+                "min-temparature": 12,
                 "fixed": 3,
                 "wont-fix": 4,
                 "re-opened": 8,
                 "needs-triage": 6
             },
             "last-week": {
-                "new-issues": 197,
-                "closed-issues": 72,
+                "max-temparature": 26,
+                "min-temparature": 14,
                 "fixed": 6,
                 "wont-fix": 11,
                 "re-opened": 6,
@@ -190,7 +190,7 @@ function TemperatureAverageChart() {
         <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden">
             <div className="flex flex-col sm:flex-row items-start justify-between">
                 <Typography className="text-lg font-medium tracking-tight leading-6 truncate">
-                    Github Issues Summary
+                    Statistical Temperature Data
                 </Typography>
                 <div className="mt-12 sm:mt-0 sm:ml-8">
                     <Tabs
@@ -225,7 +225,7 @@ function TemperatureAverageChart() {
             <div className="grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-24 w-full mt-32 sm:mt-16">
                 <div className="flex flex-col flex-auto">
                     <Typography className="font-medium" color="text.secondary">
-                        New vs. Closed
+                        Average Temperature
                     </Typography>
                     <div className="flex flex-col flex-auto">
                         <ReactApexChart
@@ -243,15 +243,15 @@ function TemperatureAverageChart() {
                     <div className="flex-auto grid grid-cols-4 gap-16 mt-24">
                         <div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-2xl bg-indigo-50 text-indigo-800">
                             <Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
-                                {overview[currentRange]['new-issues']}
+                                {overview[currentRange]['max-temparature']}
                             </Typography>
-                            <Typography className="mt-4 text-sm sm:text-lg font-medium">New Issues</Typography>
+                            <Typography className="mt-4 text-sm sm:text-lg font-medium">Max Temparature</Typography>
                         </div>
                         <div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-2xl bg-green-50 text-green-800">
                             <Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
-                                {overview[currentRange]['closed-issues']}
+                                {overview[currentRange]['min-temparature']}
                             </Typography>
-                            <Typography className="mt-4 text-sm sm:text-lg font-medium">Closed</Typography>
+                            <Typography className="mt-4 text-sm sm:text-lg font-medium">Min Temparature</Typography>
                         </div>
                         <Box
                             sx={{
