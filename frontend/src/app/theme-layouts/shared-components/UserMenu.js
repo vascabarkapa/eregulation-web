@@ -59,12 +59,6 @@ function UserMenu(props) {
             </ListItemIcon>
             <ListItemText primary="My Profile" />
           </MenuItem>
-          <MenuItem component={Link} to="/apps/mailbox" onClick={userMenuClose} role="button">
-            <ListItemIcon className="min-w-40">
-              <FuseSvgIcon>heroicons-outline:mail-open</FuseSvgIcon>
-            </ListItemIcon>
-            <ListItemText primary="Inbox" />
-          </MenuItem>
           <MenuItem
             component={NavLink}
             to="/sign-out"
