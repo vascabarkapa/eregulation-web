@@ -2,6 +2,14 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 
 function AboutPage() {
+    function handlePlayStoreClick() {
+        window.open('https://play.google.com/', '_blank');
+    }
+
+    function handleAppStoreClick() {
+        window.open('https://www.apple.com/app-store/', '_blank');
+    }
+
     return (
         <div className="flex flex-col flex-1 items-center justify-center p-16">
             <div className="w-full max-w-6xl text-center mb-72 sm:mb-20">
@@ -37,9 +45,11 @@ function AboutPage() {
                             >
                                 The application can be downloaded via Google Play
                             </Typography>
-                            <a href="https://play.google.com/" target="_blank">
-                                <img className="w-3/6 mt-10 mx-auto cursor-pointer" src="assets/images/badges/google_play_badge.png" />
-                            </a>
+                            <img className="w-3/6 mt-10 mx-auto cursor-pointer"
+                                src="assets/images/badges/google_play_badge.png"
+                                alt="Google Play Badge"
+                                onClick={handlePlayStoreClick}
+                            />
                         </div>
                         <div className="lg:w-1/2">
                             <Typography
@@ -48,9 +58,11 @@ function AboutPage() {
                             >
                                 The application can be downloaded via App Store
                             </Typography>
-                            <a href="https://www.apple.com/app-store/" target="_blank">
-                                <img className="w-3/6 mt-10 mx-auto cursor-pointer" src="assets/images/badges/app_store_badge.png" />
-                            </a>
+                            <img className="w-3/6 mt-10 mx-auto cursor-pointer"
+                                src="assets/images/badges/app_store_badge.png"
+                                alt="App Store Badge"
+                                onClick={handleAppStoreClick}
+                            />
                         </div>
                     </div>
                 </motion.div>
