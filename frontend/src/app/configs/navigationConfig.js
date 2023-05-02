@@ -7,11 +7,11 @@ const navigationConfig = [
     url: '/dashboard',
   },
   {
-    id: 'temparature-component',
-    title: 'Temparature',
+    id: 'temperature-component',
+    title: 'Temperature',
     type: 'item',
     icon: 'heroicons-outline:sun',
-    url: '/temparature',
+    url: '/temperature',
   },
   {
     id: 'humidity-component',

@@ -1,5 +1,5 @@
 import DashboardPage from "./dashboard/DashboardPage";
-import TemparaturePage from "./temparature/TemparaturePage";
+import TemperaturePage from "./temperature/TemperaturePage";
 import HumidityPage from "./humidity/HumidityPage";
 import UsersPage from "./users/UsersPage";
 import AboutPage from "./about/AboutPage";
@@ -16,8 +16,8 @@ const PagesConfig = {
       element: <DashboardPage />,
     },
     {
-      path: 'temparature',
-      element: <TemparaturePage />,
+      path: 'temperature',
+      element: <TemperaturePage />,
     },
     {
       path: 'humidity',

@@ -26,7 +26,7 @@ const rows = [
     createData(25.6, '2023-05-01T18:30:00.000Z'),
 ];
 
-const TemparatureTable = () => {
+const TemperatureTable = () => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -59,4 +59,4 @@ const TemparatureTable = () => {
     );
 }
 
-export default TemparatureTable;
+export default TemperatureTable;

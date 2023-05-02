@@ -15,16 +15,16 @@ function TemperatureAverageChart() {
     const { overview, series, ranges, labels } = {
         "overview": {
             "this-week": {
-                "max-temparature": 28,
-                "min-temparature": 12,
+                "max-temperature": 28,
+                "min-temperature": 12,
                 "fixed": 3,
                 "wont-fix": 4,
                 "re-opened": 8,
                 "needs-triage": 6
             },
             "last-week": {
-                "max-temparature": 26,
-                "min-temparature": 14,
+                "max-temperature": 26,
+                "min-temperature": 14,
                 "fixed": 6,
                 "wont-fix": 11,
                 "re-opened": 6,
@@ -248,15 +248,15 @@ function TemperatureAverageChart() {
                         <div className="flex-auto grid grid-cols-4 gap-16 mt-24">
                             <div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-2xl bg-indigo-50 text-indigo-800">
                                 <Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
-                                    {overview[currentRange]['max-temparature']}&deg;C
+                                    {overview[currentRange]['max-temperature']}&deg;C
                                 </Typography>
-                                <Typography className="mt-4 text-sm sm:text-lg font-medium">Max Temparature</Typography>
+                                <Typography className="mt-4 text-sm sm:text-lg font-medium">Max Temperature</Typography>
                             </div>
                             <div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-2xl bg-green-50 text-green-800">
                                 <Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
-                                    {overview[currentRange]['min-temparature']}&deg;C
+                                    {overview[currentRange]['min-temperature']}&deg;C
                                 </Typography>
-                                <Typography className="mt-4 text-sm sm:text-lg font-medium">Min Temparature</Typography>
+                                <Typography className="mt-4 text-sm sm:text-lg font-medium">Min Temperature</Typography>
                             </div>
                             <Box
                                 sx={{

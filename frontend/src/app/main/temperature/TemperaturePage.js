@@ -1,21 +1,21 @@
 import DateRangeFilter from "src/app/shared/components/DateRangeFilter";
-import TemparatureHeader from "./TemparatureHeader";
-import TemparatureLive from "./TemparatureLive";
-import TemparatureTable from "./TemparatureTable";
-import TemperatureAverageChart from "./TemparatureAverageChart";
+import TemperatureHeader from "./TemperatureHeader";
+import TemperatureLive from "./TemperatureLive";
+import TemperatureTable from "./TemperatureTable";
+import TemperatureAverageChart from "./TemperatureAverageChart";
 
-const TemparaturePage = () => {
+const TemperaturePage = () => {
     return (
         <div className="container">
-            <TemparatureHeader />
+            <TemperatureHeader />
             <div className="hidden md:flex flex-col md:flex-row md:justify-between gap-20 mx-20 mb-20">
                 <div className="w-full md:w-1/2">
-                    <TemparatureTable />
+                    <TemperatureTable />
                 </div>
                 <div className="w-full md:w-1/2">
                     <div className="flex flex-col gap-20">
                         <DateRangeFilter />
-                        <TemparatureLive />
+                        <TemperatureLive />
                     </div>
                 </div>
             </div>
@@ -26,13 +26,13 @@ const TemparaturePage = () => {
             </div>
 
             <div className="flex flex-col gap-20 md:hidden m-20">
-                <TemparatureLive />
+                <TemperatureLive />
                 <DateRangeFilter />
-                <TemparatureTable />
+                <TemperatureTable />
                 <TemperatureAverageChart />
             </div>
         </div>
     );
 }
 
-export default TemparaturePage;
+export default TemperaturePage;

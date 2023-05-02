@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 
-const TemparatureHeader = () => {
+const TemperatureHeader = () => {
     return (
         <>
             <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between py-32  px-24 sm:px-32">
@@ -13,7 +13,7 @@ const TemparatureHeader = () => {
                     delay={300}
                     className="text-24 md:text-32 font-extrabold tracking-tight mx-16"
                 >
-                    Temparature
+                    Temperature
                 </Typography>
             </div>
         </>
@@ -21,4 +21,4 @@ const TemparatureHeader = () => {
     );
 }
 
-export default TemparatureHeader;
+export default TemperatureHeader;
