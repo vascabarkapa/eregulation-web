@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { memo, useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import Box from '@mui/material/Box';
+import { motion } from 'framer-motion';
 
 function HumidityAverageChart() {
     const theme = useTheme();
@@ -187,132 +188,137 @@ function HumidityAverageChart() {
     }
 
     return (
-        <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden">
-            <div className="flex flex-col sm:flex-row items-start justify-between">
-                <Typography className="text-lg font-medium tracking-tight leading-6 truncate">
-                    Statistical Humidity Data
-                </Typography>
-                <div className="mt-12 sm:mt-0 sm:ml-8">
-                    <Tabs
-                        value={tabValue}
-                        onChange={(ev, value) => setTabValue(value)}
-                        indicatorColor="secondary"
-                        textColor="inherit"
-                        variant="scrollable"
-                        scrollButtons={false}
-                        className="-mx-4 min-h-40"
-                        classes={{ indicator: 'flex justify-center bg-transparent w-full h-full' }}
-                        TabIndicatorProps={{
-                            children: (
-                                <Box
-                                    sx={{ bgcolor: 'text.disabled' }}
-                                    className="w-full h-full rounded-full opacity-20"
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+        >
+            <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden">
+                <div className="flex flex-col sm:flex-row items-start justify-between">
+                    <Typography className="text-lg font-medium tracking-tight leading-6 truncate">
+                        Statistical Humidity Data
+                    </Typography>
+                    <div className="mt-12 sm:mt-0 sm:ml-8">
+                        <Tabs
+                            value={tabValue}
+                            onChange={(ev, value) => setTabValue(value)}
+                            indicatorColor="secondary"
+                            textColor="inherit"
+                            variant="scrollable"
+                            scrollButtons={false}
+                            className="-mx-4 min-h-40"
+                            classes={{ indicator: 'flex justify-center bg-transparent w-full h-full' }}
+                            TabIndicatorProps={{
+                                children: (
+                                    <Box
+                                        sx={{ bgcolor: 'text.disabled' }}
+                                        className="w-full h-full rounded-full opacity-20"
+                                    />
+                                ),
+                            }}
+                        >
+                            {Object.entries(ranges).map(([key, label]) => (
+                                <Tab
+                                    className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
+                                    disableRipple
+                                    key={key}
+                                    label={label}
                                 />
-                            ),
-                        }}
-                    >
-                        {Object.entries(ranges).map(([key, label]) => (
-                            <Tab
-                                className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12"
-                                disableRipple
-                                key={key}
-                                label={label}
-                            />
-                        ))}
-                    </Tabs>
+                            ))}
+                        </Tabs>
+                    </div>
                 </div>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-24 w-full mt-32 sm:mt-16">
-                <div className="flex flex-col flex-auto">
-                    <Typography className="font-medium" color="text.secondary">
-                        Average Humidity
-                    </Typography>
+                <div className="grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-24 w-full mt-32 sm:mt-16">
                     <div className="flex flex-col flex-auto">
-                        <ReactApexChart
-                            className="flex-auto w-full"
-                            options={chartOptions}
-                            series={series[currentRange]}
-                            height={320}
-                        />
+                        <Typography className="font-medium" color="text.secondary">
+                            Average Humidity
+                        </Typography>
+                        <div className="flex flex-col flex-auto">
+                            <ReactApexChart
+                                className="flex-auto w-full"
+                                options={chartOptions}
+                                series={series[currentRange]}
+                                height={320}
+                            />
+                        </div>
+                    </div>
+                    <div className="flex flex-col">
+                        <Typography className="font-medium" color="text.secondary">
+                            Overview
+                        </Typography>
+                        <div className="flex-auto grid grid-cols-4 gap-16 mt-24">
+                            <div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-2xl bg-indigo-50 text-indigo-800">
+                                <Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
+                                    {overview[currentRange]['max-humidity']}%
+                                </Typography>
+                                <Typography className="mt-4 text-sm sm:text-lg font-medium">Max Humidity</Typography>
+                            </div>
+                            <div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-2xl bg-green-50 text-green-800">
+                                <Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
+                                    {overview[currentRange]['min-humidity']}%
+                                </Typography>
+                                <Typography className="mt-4 text-sm sm:text-lg font-medium">Min Humidity</Typography>
+                            </div>
+                            <Box
+                                sx={{
+                                    backgroundColor: (_theme) =>
+                                        _theme.palette.mode === 'light'
+                                            ? lighten(theme.palette.background.default, 0.4)
+                                            : lighten(theme.palette.background.default, 0.02),
+                                }}
+                                className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-2xl"
+                            >
+                                <Typography className="text-5xl font-semibold leading-none tracking-tight">
+                                    {overview[currentRange].fixed}
+                                </Typography>
+                                <Typography className="mt-4 text-sm font-medium text-center">Fixed</Typography>
+                            </Box>
+                            <Box
+                                sx={{
+                                    backgroundColor: (_theme) =>
+                                        _theme.palette.mode === 'light'
+                                            ? lighten(theme.palette.background.default, 0.4)
+                                            : lighten(theme.palette.background.default, 0.02),
+                                }}
+                                className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-2xl"
+                            >
+                                <Typography className="text-5xl font-semibold leading-none tracking-tight">
+                                    {overview[currentRange]['wont-fix']}
+                                </Typography>
+                                <Typography className="mt-4 text-sm font-medium text-center">Won't Fix</Typography>
+                            </Box>
+                            <Box
+                                sx={{
+                                    backgroundColor: (_theme) =>
+                                        _theme.palette.mode === 'light'
+                                            ? lighten(theme.palette.background.default, 0.4)
+                                            : lighten(theme.palette.background.default, 0.02),
+                                }}
+                                className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-2xl"
+                            >
+                                <Typography className="text-5xl font-semibold leading-none tracking-tight">
+                                    {overview[currentRange]['re-opened']}
+                                </Typography>
+                                <Typography className="mt-4 text-sm font-medium text-center">Re-opened</Typography>
+                            </Box>
+                            <Box
+                                sx={{
+                                    backgroundColor: (_theme) =>
+                                        _theme.palette.mode === 'light'
+                                            ? lighten(theme.palette.background.default, 0.4)
+                                            : lighten(theme.palette.background.default, 0.02),
+                                }}
+                                className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-2xl"
+                            >
+                                <Typography className="text-5xl font-semibold leading-none tracking-tight">
+                                    {overview[currentRange]['needs-triage']}
+                                </Typography>
+                                <Typography className="mt-4 text-sm font-medium text-center">Needs Triage</Typography>
+                            </Box>
+                        </div>
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <Typography className="font-medium" color="text.secondary">
-                        Overview
-                    </Typography>
-                    <div className="flex-auto grid grid-cols-4 gap-16 mt-24">
-                        <div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-2xl bg-indigo-50 text-indigo-800">
-                            <Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
-                                {overview[currentRange]['max-humidity']}
-                            </Typography>
-                            <Typography className="mt-4 text-sm sm:text-lg font-medium">Max Humidity</Typography>
-                        </div>
-                        <div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-2xl bg-green-50 text-green-800">
-                            <Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
-                                {overview[currentRange]['min-humidity']}
-                            </Typography>
-                            <Typography className="mt-4 text-sm sm:text-lg font-medium">Min Humidity</Typography>
-                        </div>
-                        <Box
-                            sx={{
-                                backgroundColor: (_theme) =>
-                                    _theme.palette.mode === 'light'
-                                        ? lighten(theme.palette.background.default, 0.4)
-                                        : lighten(theme.palette.background.default, 0.02),
-                            }}
-                            className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-2xl"
-                        >
-                            <Typography className="text-5xl font-semibold leading-none tracking-tight">
-                                {overview[currentRange].fixed}
-                            </Typography>
-                            <Typography className="mt-4 text-sm font-medium text-center">Fixed</Typography>
-                        </Box>
-                        <Box
-                            sx={{
-                                backgroundColor: (_theme) =>
-                                    _theme.palette.mode === 'light'
-                                        ? lighten(theme.palette.background.default, 0.4)
-                                        : lighten(theme.palette.background.default, 0.02),
-                            }}
-                            className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-2xl"
-                        >
-                            <Typography className="text-5xl font-semibold leading-none tracking-tight">
-                                {overview[currentRange]['wont-fix']}
-                            </Typography>
-                            <Typography className="mt-4 text-sm font-medium text-center">Won't Fix</Typography>
-                        </Box>
-                        <Box
-                            sx={{
-                                backgroundColor: (_theme) =>
-                                    _theme.palette.mode === 'light'
-                                        ? lighten(theme.palette.background.default, 0.4)
-                                        : lighten(theme.palette.background.default, 0.02),
-                            }}
-                            className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-2xl"
-                        >
-                            <Typography className="text-5xl font-semibold leading-none tracking-tight">
-                                {overview[currentRange]['re-opened']}
-                            </Typography>
-                            <Typography className="mt-4 text-sm font-medium text-center">Re-opened</Typography>
-                        </Box>
-                        <Box
-                            sx={{
-                                backgroundColor: (_theme) =>
-                                    _theme.palette.mode === 'light'
-                                        ? lighten(theme.palette.background.default, 0.4)
-                                        : lighten(theme.palette.background.default, 0.02),
-                            }}
-                            className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-2xl"
-                        >
-                            <Typography className="text-5xl font-semibold leading-none tracking-tight">
-                                {overview[currentRange]['needs-triage']}
-                            </Typography>
-                            <Typography className="mt-4 text-sm font-medium text-center">Needs Triage</Typography>
-                        </Box>
-                    </div>
-                </div>
-            </div>
-        </Paper>
+            </Paper>
+        </motion.div>
     );
 }
 
