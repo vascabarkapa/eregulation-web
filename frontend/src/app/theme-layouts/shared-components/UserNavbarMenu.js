@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import styled from 'styled-components';
+import MyProfileModal from 'src/app/shared/components/MyProfileModal';
 
 const CustomButton = styled(Button)`
   &:hover {
@@ -16,14 +17,20 @@ const CustomButton = styled(Button)`
 `;
 
 function UserMenu(props) {
+    const [openProfile, setOpenProfile] = useState(false);
     const [userMenu, setUserMenu] = useState(null);
-
+  
     const userMenuClick = (event) => {
-        setUserMenu(event.currentTarget);
+      setUserMenu(event.currentTarget);
     };
-
+  
+    const handleMyProfileModal = () => {
+      setOpenProfile(true);
+      setUserMenu(null);
+    };
+  
     const userMenuClose = () => {
-        setUserMenu(null);
+      setUserMenu(null);
     };
 
     return (
@@ -58,7 +65,7 @@ function UserMenu(props) {
                 }}
             >
                 <>
-                    <MenuItem component={Link} to="/apps/profile" onClick={userMenuClose} role="button">
+                    <MenuItem onClick={handleMyProfileModal} role="button">
                         <ListItemIcon className="min-w-40">
                             <FuseSvgIcon>heroicons-outline:user-circle</FuseSvgIcon>
                         </ListItemIcon>
@@ -78,6 +85,7 @@ function UserMenu(props) {
                     </MenuItem>
                 </>
             </Popover>
+            {openProfile && <MyProfileModal open={openProfile} setOpen={setOpenProfile} />}
         </>
     );
 }
