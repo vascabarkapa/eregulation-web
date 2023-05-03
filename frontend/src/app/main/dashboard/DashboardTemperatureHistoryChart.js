@@ -123,7 +123,7 @@ function DashboardTemperatureHistoryChart() {
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
         >
             <ThemeProvider theme={contrastTheme}>
-                <Root className="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto shadow rounded-2xl overflow-hidden">
+                <Root className="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto shadow rounded-2xl">
                     <div className="flex items-center justify-between mt-40 ml-40 mr-24 sm:mr-40">
                         <div className="flex flex-col">
                             <Typography className="mr-16 text-2xl md:text-3xl font-semibold tracking-tight leading-7">

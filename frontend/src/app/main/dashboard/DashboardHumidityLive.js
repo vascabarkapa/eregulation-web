@@ -19,10 +19,10 @@ function DashboardHumidityLive() {
                         <FuseSvgIcon size={'40%'} className="animate-ping">material-outline:water_drop</FuseSvgIcon>
                     </div>
                     <div class="md:w-2/3 w-full">
-                        <div class="flex flex-col shadow rounded-2xl overflow-hidden">
-                            <Paper className="flex flex-col shadow rounded-2xl overflow-hidden">
+                        <div class="flex flex-col shadow rounded-2xl">
+                            <Paper className="flex flex-col shadow rounded-2xl">
                                 <div className="flex items-center justify-center px-8 pt-12">
-                                    <Typography className="mr-16 text-2xl md:text-3xl font-semibold tracking-tight text-center leading-7">
+                                    <Typography className="text-2xl md:text-3xl font-semibold tracking-tight text-center leading-7">
                                         Current Humidity
                                     </Typography>
                                 </div>
