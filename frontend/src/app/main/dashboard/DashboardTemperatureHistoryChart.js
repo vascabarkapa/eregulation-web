@@ -2,13 +2,12 @@ import { useSelector } from 'react-redux';
 import { styled, ThemeProvider, useTheme } from '@mui/material/styles';
 import ReactApexChart from 'react-apexcharts';
 import { useState } from 'react';
-import Tabs from '@mui/material/Tabs';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
 import { selectContrastMainTheme } from 'app/store/fuse/settingsSlice';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ChartData from 'src/app/shared/components/ChartData';
+import { motion } from 'framer-motion';
+
 
 const Root = styled(Paper)(({ theme }) => ({
     background: theme.palette.primary.main,
@@ -119,29 +118,34 @@ function DashboardTemperatureHistoryChart() {
     };
 
     return (
-        <ThemeProvider theme={contrastTheme}>
-            <Root className="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto shadow rounded-2xl overflow-hidden">
-                <div className="flex items-center justify-between mt-40 ml-40 mr-24 sm:mr-40">
-                    <div className="flex flex-col">
-                        <Typography className="mr-16 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
-                            Temperature Overview
-                        </Typography>
-                        <Typography className="font-medium" color="text.secondary">
-                            Temperature overview by month
-                        </Typography>
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+        >
+            <ThemeProvider theme={contrastTheme}>
+                <Root className="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto shadow rounded-2xl overflow-hidden">
+                    <div className="flex items-center justify-between mt-40 ml-40 mr-24 sm:mr-40">
+                        <div className="flex flex-col">
+                            <Typography className="mr-16 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                                Temperature Overview
+                            </Typography>
+                            <Typography className="font-medium" color="text.secondary">
+                                Temperature overview by month
+                            </Typography>
+                        </div>
                     </div>
-                </div>
 
-                <div className="flex flex-col flex-auto h-320">
-                    <ReactApexChart
-                        options={chartOptions}
-                        series={series[currentRange]}
-                        type={chartOptions.chart.type}
-                        height={chartOptions.chart.height}
-                    />
-                </div>
-            </Root>
-        </ThemeProvider>
+                    <div className="flex flex-col flex-auto h-320">
+                        <ReactApexChart
+                            options={chartOptions}
+                            series={series[currentRange]}
+                            type={chartOptions.chart.type}
+                            height={chartOptions.chart.height}
+                        />
+                    </div>
+                </Root>
+            </ThemeProvider>
+        </motion.div>
     );
 }
 

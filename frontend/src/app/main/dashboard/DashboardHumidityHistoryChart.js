@@ -1,12 +1,9 @@
 import { useTheme } from '@mui/material/styles';
-import { useSelector } from 'react-redux';
 import Paper from '@mui/material/Paper';
-import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { Tooltip } from '@mui/material';
 import ReactApexChart from 'react-apexcharts';
 import ChartData from 'src/app/shared/components/ChartData';
+import { motion } from 'framer-motion';
 
 function DashboardHumidityHistoryChart(props) {
     const theme = useTheme();
@@ -89,27 +86,32 @@ function DashboardHumidityHistoryChart(props) {
     };
 
     return (
-        <Paper className="flex flex-col flex-auto shadow rounded-2xl overflow-hidden">
-            <div className="flex items-center justify-between mt-40 ml-40 mr-24 sm:mr-40">
-                <div className="flex flex-col">
-                    <Typography className="mr-16 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
-                        Humidity Overview
-                    </Typography>
-                    <Typography className="font-medium" color="text.secondary">
-                        Humidity overview by month
-                    </Typography>
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+        >
+            <Paper className="flex flex-col flex-auto shadow rounded-2xl overflow-hidden">
+                <div className="flex items-center justify-between mt-40 ml-40 mr-24 sm:mr-40">
+                    <div className="flex flex-col">
+                        <Typography className="mr-16 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                            Humidity Overview
+                        </Typography>
+                        <Typography className="font-medium" color="text.secondary">
+                            Humidity overview by month
+                        </Typography>
+                    </div>
                 </div>
-            </div>
-            <div className="flex flex-col flex-auto h-320 mt-12">
-                <ReactApexChart
-                    className="flex-auto w-full h-full"
-                    options={chartOptions}
-                    series={series}
-                    type={chartOptions.chart.type}
-                    height={chartOptions.chart.height}
-                />
-            </div>
-        </Paper>
+                <div className="flex flex-col flex-auto h-320 mt-12">
+                    <ReactApexChart
+                        className="flex-auto w-full h-full"
+                        options={chartOptions}
+                        series={series}
+                        type={chartOptions.chart.type}
+                        height={chartOptions.chart.height}
+                    />
+                </div>
+            </Paper>
+        </motion.div>
     );
 }
 
