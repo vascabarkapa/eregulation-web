@@ -37,9 +37,6 @@ function UserMenu(props) {
           <Typography component="span" className="font-semibold flex">
             Test User
           </Typography>
-          <Typography className="text-11 font-medium" color="text.secondary">
-            test.user@mail.com
-          </Typography>
         </div>
       </Button>
 
