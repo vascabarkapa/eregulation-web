@@ -43,7 +43,7 @@ function DashboardHeader(props) {
                 <FuseSvgIcon size={20} color="action">
                   heroicons-outline:chip
                 </FuseSvgIcon>
-                <Typography className="mx-6 leading-6 truncate" color="text.secondary">
+                <Typography className="mx-6 leading-6" color="text.secondary">
                   Take control of your surroundings with eRegulation
                 </Typography>
               </div>
@@ -53,7 +53,6 @@ function DashboardHeader(props) {
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
-          className="mx-16"
         >
           <div className="flex items-center mt-24 sm:mt-0 sm:mx-8 space-x-12 mx-16">
             <CurrentDateAndTime />
