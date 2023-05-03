@@ -51,8 +51,8 @@ function SignInPage() {
   }
 
   return (
-    <div className="flex flex-col flex-auto items-center justify-center min-w-0 md:p-32">
-      <Paper className="flex w-auto min-h-auto md:w-full md:max-w-6xl rounded-0 rounded-2xl shadow overflow-hidden">
+    <div className="flex flex-col flex-auto items-center justify-center min-w-0 md:p-32 rounded-0 rounded-2xl">
+      <Paper className="flex w-auto min-h-auto md:w-full md:max-w-6xl shadow overflow-hidden">
         <Box
           className="relative hidden md:flex flex-auto items-center justify-center h-full p-64 lg:px-112 overflow-hidden"
           sx={{ backgroundImage: 'url(assets/images/auth/auth4.png)', backgroundSize: 'cover' }}
