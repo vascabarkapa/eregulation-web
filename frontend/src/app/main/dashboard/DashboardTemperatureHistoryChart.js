@@ -50,7 +50,7 @@ function DashboardTemperatureHistoryChart() {
             colors: [contrastTheme.palette.secondary.dark],
         },
         grid: {
-            show: true,
+            show: false,
             borderColor: contrastTheme.palette.divider,
             padding: {
                 top: 10,
