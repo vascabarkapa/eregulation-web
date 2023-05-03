@@ -26,7 +26,7 @@ function HumidityLive() {
                     </div>
                     <div className="-mt-8">
                         <Tooltip title="Refresh" placement="top">
-                            <IconButton aria-label="more" size="large">
+                            <IconButton size="large">
                                 <FuseSvgIcon>material-outline:refresh</FuseSvgIcon>
                             </IconButton>
                         </Tooltip>
