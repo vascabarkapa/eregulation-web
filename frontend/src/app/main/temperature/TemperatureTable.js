@@ -36,9 +36,9 @@ const TemperatureTable = () => {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell className="font-extrabold uppercase">Value</TableCell>
-                            <TableCell className="font-extrabold uppercase">Time</TableCell>
                             <TableCell className="font-extrabold uppercase">Date</TableCell>
+                            <TableCell className="font-extrabold uppercase">Time</TableCell>
+                            <TableCell className="font-extrabold uppercase">Value</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -47,9 +47,9 @@ const TemperatureTable = () => {
                                 key={row.timestamp}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell>{row.value.toFixed(1)}&deg;C</TableCell>
-                                <TableCell>{DateTimeHelper.getTime(row.timestamp)}</TableCell>
                                 <TableCell>{DateTimeHelper.getDate(row.timestamp)}</TableCell>
+                                <TableCell>{DateTimeHelper.getTime(row.timestamp)}</TableCell>
+                                <TableCell>{row.value.toFixed(1)}&deg;C</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
