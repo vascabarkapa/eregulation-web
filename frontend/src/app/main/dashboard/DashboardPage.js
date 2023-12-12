@@ -1,11 +1,11 @@
-import DashboardHeader from "./DashboardHeader";
+import DashboardHeader from "./components/DashboardHeader";
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import _ from '@lodash';
 import { styled } from '@mui/material/styles';
-import DashboardTemperatureHistoryChart from "./DashboardTemperatureHistoryChart";
-import DashboardHumidityHistoryChart from "./DashboardHumidityHistoryChart";
-import DashboardTemperatureLive from "./DashboardTemperatureLive";
-import DashboardHumidityLive from "./DashboardHumidityLive";
+import DashboardTemperatureHistoryChart from "./components/DashboardTemperatureHistoryChart";
+import DashboardHumidityHistoryChart from "./components/DashboardHumidityHistoryChart";
+import DashboardTemperatureLive from "./components/DashboardTemperatureLive";
+import DashboardHumidityLive from "./components/DashboardHumidityLive";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     '& .FusePageSimple-header': {

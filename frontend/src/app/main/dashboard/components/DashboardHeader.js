@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useEffect, useState } from 'react';
-import CurrentDateAndTime from '../../shared/components/CurrentDateAndTime';
+import CurrentDateAndTime from '../../../shared/components/CurrentDateAndTime';
 import { motion } from 'framer-motion';
 
 
