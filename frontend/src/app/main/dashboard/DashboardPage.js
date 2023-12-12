@@ -6,6 +6,7 @@ import DashboardTemperatureHistoryChart from "./components/DashboardTemperatureH
 import DashboardHumidityHistoryChart from "./components/DashboardHumidityHistoryChart";
 import DashboardTemperatureLive from "./components/DashboardTemperatureLive";
 import DashboardHumidityLive from "./components/DashboardHumidityLive";
+import DashboardLightLive from "./components/DashboardLightLive";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     '& .FusePageSimple-header': {
@@ -20,12 +21,15 @@ const DashboardPage = () => {
             header={<DashboardHeader />}
             content={
                 <div className="grid grid-cols-1 w-full mt-10 mx-20">
-                    <div className="grid grid-cols-2">
+                    <div className="grid grid-cols-3">
                         <div className="col-span-1 my-10 mr-10">
                             <DashboardTemperatureLive />
                         </div>
                         <div className="col-span-1 my-10 ml-10">
                             <DashboardHumidityLive />
+                        </div>
+                        <div className="col-span-1 my-10 ml-10">
+                            <DashboardLightLive />
                         </div>
                     </div>
                     <div className="w-full my-10">

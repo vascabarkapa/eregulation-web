@@ -6,7 +6,8 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Tooltip } from '@mui/material';
 import { motion } from 'framer-motion';
 
-function DashboardTemperatureLive() {
+
+function DashboardLightLive() {
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -15,19 +16,19 @@ function DashboardTemperatureLive() {
             <Paper>
                 <div class="flex flex-row">
                     <div class="w-1/3 md:flex justify-center items-center hidden">
-                        <FuseSvgIcon size={'40%'} className="animate-ping">material-outline:thermostat</FuseSvgIcon>
+                        <FuseSvgIcon size={'40%'} className="animate-ping">heroicons-outline:light-bulb</FuseSvgIcon>
                     </div>
                     <div class="md:w-2/3 w-full">
                         <div class="flex flex-col shadow rounded-2xl">
                             <Paper className="flex flex-col shadow rounded-2xl">
                                 <div className="flex items-center justify-center px-8 pt-12">
                                     <Typography className="text-2xl md:text-3xl font-semibold tracking-tight text-center leading-7">
-                                        Current Temperature
+                                        Current Light
                                     </Typography>
                                 </div>
                                 <div className="text-center mt-20">
                                     <Typography className="text-7xl sm:text-9xl font-bold tracking-tight leading-none">
-                                        28&deg;C
+                                        ON
                                     </Typography>
                                 </div>
                                 <div className="flex items-center justify-between px-8 pt-12">
@@ -49,4 +50,4 @@ function DashboardTemperatureLive() {
     );
 }
 
-export default memo(DashboardTemperatureLive);
+export default memo(DashboardLightLive);
