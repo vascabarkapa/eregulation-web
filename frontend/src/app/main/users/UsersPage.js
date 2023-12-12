@@ -1,6 +1,6 @@
 import * as React from 'react';
-import UsersHeader from './UsersHeader';
-import UsersTable from './UsersTable';
+import UsersHeader from './components/UsersHeader';
+import UsersTable from './components/UsersTable';
 
 const UsersPage = () => {
     return (
