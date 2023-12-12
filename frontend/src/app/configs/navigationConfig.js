@@ -10,7 +10,7 @@ const navigationConfig = [
     id: 'temperature-component',
     title: 'Temperature',
     type: 'item',
-    icon: 'heroicons-outline:sun',
+    icon: 'material-outline:thermostat',
     url: '/temperature',
   },
   {
@@ -19,6 +19,13 @@ const navigationConfig = [
     type: 'item',
     icon: 'material-outline:water_drop',
     url: '/humidity',
+  },
+  {
+    id: 'light-component',
+    title: 'Light',
+    type: 'item',
+    icon: 'heroicons-outline:light-bulb',
+    url: '/light',
   },
   {
     id: 'divider-1',
