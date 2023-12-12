@@ -1,8 +1,8 @@
 import DateRangeFilter from "src/app/shared/components/DateRangeFilter";
-import HumidityHeader from "./HumidityHeader";
-import HumidityLive from "./HumidityLive";
-import HumidityTable from "./HumidityTable";
-import HumidityAverageChart from "./HumidityAverageChart";
+import HumidityHeader from "./components/HumidityHeader";
+import HumidityLive from "./components/HumidityLive";
+import HumidityTable from "./components/HumidityTable";
+import HumidityAverageChart from "./components/HumidityAverageChart";
 
 const HumidityPage = () => {
     return (
