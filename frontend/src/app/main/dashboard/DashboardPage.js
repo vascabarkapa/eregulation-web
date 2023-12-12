@@ -21,14 +21,14 @@ const DashboardPage = () => {
             header={<DashboardHeader />}
             content={
                 <div className="grid grid-cols-1 w-full mt-10 mx-20">
-                    <div className="grid grid-cols-3">
-                        <div className="col-span-1 my-10 mr-10">
+                    <div className="grid grid-cols-1 md:grid-cols-3">
+                        <div className="md:col-span-1 col-span-3 my-10 md:mr-10">
                             <DashboardTemperatureLive />
                         </div>
-                        <div className="col-span-1 my-10 ml-10">
+                        <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
                             <DashboardHumidityLive />
                         </div>
-                        <div className="col-span-1 my-10 ml-10">
+                        <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
                             <DashboardLightLive />
                         </div>
                     </div>
