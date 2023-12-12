@@ -7,7 +7,7 @@ import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
 import { motion } from 'framer-motion';
 import { Tooltip } from '@mui/material';
 
-function TemperatureLive() {
+function LightLive() {
     const { date } = { date: '2023-05-01T22:24:15.000Z' };
 
     return (
@@ -19,7 +19,7 @@ function TemperatureLive() {
                 <div className="flex items-center justify-between">
                     <div className="flex flex-col">
                         <Typography className="text-3xl font-bold" variant="h1">
-                            Current Temperature
+                            Current Light
                         </Typography>
                         <Typography className="text-green-600 font-medium text-sm">Last Update in {DateTimeHelper.convertToLocalFormatWithSeconds(date)}</Typography>
 
@@ -36,13 +36,13 @@ function TemperatureLive() {
                     <div className="flex items-center">
                         <div className="h-16 w-16 bg-red-500 rounded-full animate-ping mr-32"></div>
                         <Typography className="text-9xl font-extrabold" variant="h1">
-                            25&deg;C
+                            AUTO
                         </Typography>
                     </div>
                 </div>
-                <div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-96 h-96 -m-24">
+                <div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-96 h-96 -m-16">
                     <FuseSvgIcon size={100} className="opacity-25 text-white-400">
-                        material-outline:thermostat
+                        heroicons-outline:light-bulb
                     </FuseSvgIcon>
                 </div>
             </Paper>
@@ -50,4 +50,4 @@ function TemperatureLive() {
     );
 }
 
-export default memo(TemperatureLive);
+export default memo(LightLive);
