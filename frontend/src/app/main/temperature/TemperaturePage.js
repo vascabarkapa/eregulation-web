@@ -1,8 +1,8 @@
 import DateRangeFilter from "src/app/shared/components/DateRangeFilter";
-import TemperatureHeader from "./TemperatureHeader";
-import TemperatureLive from "./TemperatureLive";
-import TemperatureTable from "./TemperatureTable";
-import TemperatureAverageChart from "./TemperatureAverageChart";
+import TemperatureHeader from "./components/TemperatureHeader";
+import TemperatureLive from "./components/TemperatureLive";
+import TemperatureTable from "./components/TemperatureTable";
+import TemperatureAverageChart from "./components/TemperatureAverageChart";
 
 const TemperaturePage = () => {
     return (
