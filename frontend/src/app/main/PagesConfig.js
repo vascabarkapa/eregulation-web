@@ -3,6 +3,7 @@ import TemperaturePage from "./temperature/TemperaturePage";
 import HumidityPage from "./humidity/HumidityPage";
 import UsersPage from "./users/UsersPage";
 import AboutPage from "./about/AboutPage";
+import LightPage from "./light/LightPage";
 
 const PagesConfig = {
   settings: {
@@ -22,6 +23,10 @@ const PagesConfig = {
     {
       path: 'humidity',
       element: <HumidityPage />,
+    },
+    {
+      path: 'light',
+      element: <LightPage />,
     },
     {
       path: 'users',
