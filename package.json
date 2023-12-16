@@ -1,0 +1,22 @@
+{
+  "name": "eregulation-web-backend",
+  "version": "1.0.0",
+  "description": "This is Express project for eRegulation backend API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vascabarkapa/eregulation-web.git"
+  },
+  "keywords": [],
+  "author": "Vasilije Čabarkapa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vascabarkapa/eregulation-web/issues"
+  },
+  "homepage": "https://github.com/vascabarkapa/eregulation-web#readme"
+}
