@@ -1,14 +1,15 @@
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { useEffect } from 'react';
-import JwtService from '../../auth/services/jwtService';
 
 function SignOutPage() {
   useEffect(() => {
     setTimeout(() => {
-      JwtService.logout();
-    }, 1000);
-  }, []);
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("current_user");
+        window.location.href = "sign-in";
+    }, 500);
+}, []);
 
   return (
     <div className="flex flex-col flex-auto items-center sm:justify-center min-w-0">

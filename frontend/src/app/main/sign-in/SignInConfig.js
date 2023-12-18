@@ -1,5 +1,8 @@
 import SignInPage from './SignInPage';
 import authRoles from '../../auth/authRoles';
+import { Navigate } from 'react-router-dom';
+
+const ACCESS_TOKEN = localStorage.getItem("access_token");
 
 const SignInConfig = {
   settings: {
@@ -27,7 +30,7 @@ const SignInConfig = {
   routes: [
     {
       path: 'sign-in',
-      element: <SignInPage />,
+      element: !ACCESS_TOKEN ? <SignInPage /> : <Navigate to="/" />,
     },
   ],
 };
