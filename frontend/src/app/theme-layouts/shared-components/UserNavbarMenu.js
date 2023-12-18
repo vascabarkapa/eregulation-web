@@ -17,6 +17,8 @@ const CustomButton = styled(Button)`
 `;
 
 function UserMenu(props) {
+    const CURRENT_USER = JSON.parse(localStorage.getItem("current_user"));
+
     const [openProfile, setOpenProfile] = useState(false);
     const [userMenu, setUserMenu] = useState(null);
   
@@ -42,7 +44,7 @@ function UserMenu(props) {
             >
                 <div className="flex flex-col mx-4 items-center">
                     <Typography component="span" className="font-semibold flex">
-                        Test User
+                        {CURRENT_USER.first_name + " " + CURRENT_USER.last_name}
                     </Typography>
 
                 </div>

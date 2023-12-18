@@ -1,11 +1,13 @@
 import Typography from '@mui/material/Typography';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useEffect, useState } from 'react';
-import CurrentDateAndTime from '../../../shared/components/CurrentDateAndTime';
 import { motion } from 'framer-motion';
+import CurrentDateAndTime from '../../../shared/components/CurrentDateAndTime';
 
 
 function DashboardHeader(props) {
+  const CURRENT_USER = JSON.parse(localStorage.getItem("current_user"));
+
   const date = new Date();
   const hours = date.getHours();
 
@@ -13,11 +15,11 @@ function DashboardHeader(props) {
 
   useEffect(() => {
     if (hours >= 3 && hours < 12) {
-      setGreeting("Good morning, Test User");
+      setGreeting("Good morning, " + CURRENT_USER.first_name + " " + CURRENT_USER.last_name);
     } else if (hours >= 12 && hours < 17) {
-      setGreeting("Good afternoon, Test User");
+      setGreeting("Good afternoon, " + CURRENT_USER.first_name + " " + CURRENT_USER.last_name);
     } else {
-      setGreeting("Good evening, Test User");
+      setGreeting("Good evening, " + CURRENT_USER.first_name + " " + CURRENT_USER.last_name);
     }
   }, [])
 

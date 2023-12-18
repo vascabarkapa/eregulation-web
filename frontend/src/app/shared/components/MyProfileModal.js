@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
 
 const MyProfileModal = ({ open, setOpen }) => {
+    const CURRENT_USER = JSON.parse(localStorage.getItem("current_user"));
 
     const handleClose = () => {
         setOpen(false);
@@ -34,13 +35,13 @@ const MyProfileModal = ({ open, setOpen }) => {
                 <DialogContent>
                     <DialogContentText id="alert-my-profile-description">
                         <Typography className="text-3xl text-white font-extrabold text-center mb-10">
-                            Test User
+                            {CURRENT_USER.first_name && CURRENT_USER.last_name}
                         </Typography>
                         <Typography className="text-xl text-white font-medium text-center">
-                            testuser
+                            {CURRENT_USER.username}
                         </Typography>
                         <Typography className="text-xl text-white font-medium text-center">
-                            test.user@mail.com
+                            {CURRENT_USER.email}
                         </Typography>
                         <Typography className="text-xl text-white font-medium text-center mt-10">
                             <div className="inline font-semibold py-4 px-12 rounded-full truncate bg-pink-200 text-red-800">Admin</div>
