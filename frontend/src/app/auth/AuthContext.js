@@ -15,7 +15,7 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     jwtService.on('onAutoLogin', () => {
-      /* dispatch(showMessage({ message: 'Signing in with JWT' })); */
+      dispatch(showMessage({ message: 'Signing in with JWT' }));
 
       /**
        * Sign in and retrieve user data with stored token
@@ -23,7 +23,7 @@ function AuthProvider({ children }) {
       jwtService
         .signInWithToken()
         .then((user) => {
-          success(user, 'Signed in with JWT');
+          success(user, 'Signed in eRegulation System');
         })
         .catch((error) => {
           pass(error.message);
@@ -54,7 +54,7 @@ function AuthProvider({ children }) {
 
     function success(user, message) {
       if (message) {
-        /* dispatch(showMessage({ message })); */
+        dispatch(showMessage({ message }));
       }
 
       Promise.all([
@@ -68,7 +68,7 @@ function AuthProvider({ children }) {
 
     function pass(message) {
       if (message) {
-        /* dispatch(showMessage({ message })); */
+        dispatch(showMessage({ message }));
       }
 
       setWaitAuthCheck(false);
