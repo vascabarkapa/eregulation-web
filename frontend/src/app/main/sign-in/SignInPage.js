@@ -9,6 +9,10 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { useEffect } from 'react';
 import jwtService from '../../auth/services/jwtService';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import AuthService from 'src/app/shared/services/auth-service';
 
 const schema = yup.object().shape({
   email: yup.string().email('You must enter a valid email').required('You must enter a email'),
@@ -24,6 +28,10 @@ const defaultValues = {
 };
 
 function SignInPage() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+
   const { control, formState, handleSubmit, setError, setValue } = useForm({
     mode: 'onChange',
     defaultValues,
@@ -33,22 +41,31 @@ function SignInPage() {
   const { isValid, dirtyFields, errors } = formState;
 
   useEffect(() => {
-    setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
+    setValue('email', 'admin@mail.com', { shouldDirty: true, shouldValidate: true });
     setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
 
   function onSubmit({ email, password }) {
-    jwtService
-      .signInWithEmailAndPassword(email, password)
-      .catch((_errors) => {
-        _errors.forEach((error) => {
-          setError(error.type, {
-            type: 'manual',
-            message: error.message,
-          });
-        });
-      });
-  }
+    setIsLoading(true);
+    AuthService.login(email, password).then((response) => {
+        if (response) {
+            localStorage.setItem("access_token", response?.data?.accessToken);
+
+            AuthService.currentUser().then((currentUser) => {
+                if (currentUser) {
+                    localStorage.setItem("current_user", JSON.stringify(currentUser?.data));
+                    window.location.href = "/dashboard";
+                }
+            })
+        }
+    }, (err) => {
+        if (err) {
+            setIsLoading(false);
+            setValue('password', '', { shouldDirty: true, shouldValidate: true });
+            dispatch(showMessage({ message: err?.response?.data?.message || "An error occurred! Try again." }));
+        }
+    })
+}
 
   return (
     <div className="flex flex-col flex-auto items-center justify-center min-w-0 md:p-32 rounded-0 rounded-2xl">

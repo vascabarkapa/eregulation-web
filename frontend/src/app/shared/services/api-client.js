@@ -1,4 +1,4 @@
-import axiosInstance from "./axiosInstance";
+import axiosInstance from "./axios-instance";
 
 const get = (endpoint, query = "") => {
     return axiosInstance.get(`${endpoint}?${query}`);
