@@ -29,7 +29,7 @@ const usersSchema = yup.object().shape({
         .required('Required field'),
 });
 
-const UsersFormModal = ({ user, open, setOpen, onConfirm }) => {
+const UsersFormModal = ({ user, setUser, open, setOpen, onConfirm }) => {
     const { control, formState, handleSubmit, setValue } = useForm({
         mode: 'onChange',
         resolver: yupResolver(usersSchema),
@@ -44,7 +44,6 @@ const UsersFormModal = ({ user, open, setOpen, onConfirm }) => {
             setValue('username', user.username, { shouldDirty: true, shouldValidate: true });
             setValue('email', user.email, { shouldDirty: true, shouldValidate: true });
         }, [setValue]);
-    
     }
 
     function onSubmit({
@@ -61,6 +60,7 @@ const UsersFormModal = ({ user, open, setOpen, onConfirm }) => {
             first_name: firstName,
             last_name: lastName
         })
+        
         onConfirm(body);
     }
 
