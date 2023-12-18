@@ -13,45 +13,70 @@ import { motion } from 'framer-motion';
 import UsersDeleteModal from './UsersDeleteModal';
 import UsersFormModal from './UsersFormModal';
 import SnackbarAlert from 'src/app/shared/components/SnackbarAlert';
-
-function createData(first_name, last_name, username, email, actions) {
-    return { first_name, last_name, username, email, actions };
-}
-
-const rows = [
-    createData('John', 'Smith', 'johnsmith', 'john.smith@gmail.com', ''),
-    createData('Emma', 'Johnson', 'emmajohnson', 'emma.johnson@gmail.com', ''),
-    createData('Michael', 'Davis', 'michaeldavis', 'michael.davis@gmail.com', ''),
-    createData('Sophia', 'Garcia', 'sophiagarcia', 'sophia.garcia@gmail.com', ''),
-    createData('William', 'Brown', 'williambrown', 'william.brown@gmail.com', ''),
-    createData('Isabella', 'Martinez', 'isabellamartinez', 'isabella.martinez@gmail.com', ''),
-    createData('Ethan', 'Anderson', 'ethananderson', 'ethan.anderson@gmail.com', ''),
-    createData('Olivia', 'Taylor', 'oliviataylor', 'olivia.taylor@gmail.com', ''),
-    createData('Liam', 'Thomas', 'liamthomas', 'liam.thomas@gmail.com', ''),
-    createData('Ava', 'Hernandez', 'avahernandez', 'ava.hernandez@gmail.com', ''),
-];
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import UserService from 'src/app/shared/services/user-service';
+import { useEffect } from 'react';
+import FuseLoading from '@fuse/core/FuseLoading';
 
 const UsersTable = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [isLoading, setIsloading] = useState(false);
+    const [users, setUsers] = useState([]);
+    const [tempUsers, setTempUsers] = useState([]);
+    const [userToDelete, setUserToDelete] = useState({});
+    const [trigger, setTrigger] = useState(false);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
     const [openFormModal, setOpenFormModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [openNotification, setOpenNotification] = useState(false);
 
-    function handleOpenFormModal(user) {
-        setOpenFormModal(true);
-    }
+    let pageSize = 10;
+    let startIndex = (page - 1) * pageSize;
+    let endIndex = startIndex + pageSize;
 
-    const handleForm = () => {
-        setOpenFormModal(false);
-        // delete api
-    }
+    useEffect(() => {
+        setIsloading(true);
+        UserService.getUsers().then((response) => {
+            if (response) {
+                setUsers(response?.data);
+                setTempUsers(response?.data?.slice(startIndex, endIndex));
+                setIsloading(false);
+                setTotalPages(Math.ceil(response?.data?.length / pageSize));
+            }
+        })
+    }, [trigger]);
+
+    useEffect(() => {
+        setTempUsers(users?.slice(startIndex, endIndex));
+    }, [page]);
+
+    const handleChangePage = (event, value) => {
+        setPage(value);
+    };
 
     function handleOpenDeleteModal(user) {
+        setUserToDelete(user);
         setOpenDeleteModal(true);
-    }
+    };
+
+    function handleEditUser(id) {
+        navigate("/settings/users/edit/" + id);
+    };
 
     const handleDelete = () => {
-        setOpenDeleteModal(false);
-        // delete api
+        UserService.deleteUser(userToDelete?._id).then((response) => {
+            if (response) {
+                setOpenDeleteModal(false);
+                dispatch(showMessage({ message: "User successfully deleted!" }));
+                setTrigger(!trigger);
+                setPage(1);
+            }
+        })
     }
 
     return (
@@ -59,36 +84,37 @@ const UsersTable = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
         >
-            <TableContainer sx={{ width: '95%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '2rem' }} component={Paper}>
+            {!isLoading ? <TableContainer sx={{ width: '95%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '2rem' }} component={Paper}>
                 <Table sx={{ minWidth: 650 }}>
                     <TableHead>
                         <TableRow>
                             <TableCell className="font-extrabold uppercase">Full Name</TableCell>
                             <TableCell className="font-extrabold uppercase">Username</TableCell>
                             <TableCell className="font-extrabold uppercase">Email</TableCell>
-                            <TableCell className="font-extrabold uppercase">Role</TableCell>
                             <TableCell className="font-extrabold uppercase"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {tempUsers?.length > 0 ? tempUsers.map((user) => (
                             <TableRow
-                                key={row.email}
+                                key={user?._id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                className="hover:bg-gray-900"
                             >
-                                <TableCell>{row.first_name + ' ' + row.last_name}</TableCell>
-                                <TableCell>{row.username}</TableCell>
-                                <TableCell>{row.email}</TableCell>
-                                <TableCell>
-                                    <div className="inline text-12 font-semibold py-4 px-12 rounded-full truncate bg-pink-200 text-red-800">Admin</div>
+                                <TableCell component="th" scope="row">
+                                    {user?.username}
                                 </TableCell>
-                                <TableCell align="right">
+                                <TableCell>{user?.first_name + " " + user?.last_name}</TableCell>
+                                <TableCell>{user?.email}</TableCell>
+                                <TableCell style={{ display: "flex", justifyContent: "right" }}>
                                     <Tooltip title="Edit" placement="top">
                                         <Button
-                                            variant="text"
-                                            color="secondary"
+                                            variant="contained"
+                                            color="primary"
                                             type="button"
-                                            onClick={() => handleOpenFormModal(row)}
+                                            size="small"
+                                            className="mr-5 hover:bg-blue"
+                                            onClick={() => handleEditUser(user._id)}
                                         >
                                             <FuseSvgIcon>
                                                 heroicons-solid:pencil-alt
@@ -97,10 +123,12 @@ const UsersTable = () => {
                                     </Tooltip>
                                     <Tooltip title="Delete" placement="top">
                                         <Button
-                                            variant="text"
-                                            color="secondary"
+                                            variant="contained"
+                                            color="primary"
                                             type="button"
-                                            onClick={() => handleOpenDeleteModal(row)}
+                                            size="small"
+                                            className="hover:bg-red"
+                                            onClick={() => handleOpenDeleteModal(user)}
                                         >
                                             <FuseSvgIcon>
                                                 heroicons-solid:trash
@@ -109,10 +137,23 @@ const UsersTable = () => {
                                     </Tooltip>
                                 </TableCell>
                             </TableRow>
-                        ))}
+                        )) : <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            className="hover:bg-gray-900"
+                        >
+                            <TableCell colSpan={6} className="text-center" component="th" scope="row">
+                                No users available
+                            </TableCell></TableRow>}
                     </TableBody>
+                    {users?.length > 10 && <TableFooter>
+                        <TableRow>
+                            <TableCell colSpan={6} className="text-center" component="th" scope="row">
+                                <Pagination count={totalPages} page={page} onChange={handleChangePage} color="secondary" />
+                            </TableCell>
+                        </TableRow>
+                    </TableFooter>}
                 </Table>
-            </TableContainer>
+            </TableContainer> : <FuseLoading />}
             {openFormModal && <UsersFormModal open={openFormModal} setOpen={setOpenFormModal}
                 onConfirm={handleForm} />}
             {openDeleteModal && <UsersDeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal}
