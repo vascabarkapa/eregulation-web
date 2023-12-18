@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,17 +6,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Tooltip } from '@mui/material';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon';
+import { useState } from 'react';
+import { Button, Tooltip, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { showMessage } from 'app/store/fuse/messageSlice';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon/FuseSvgIcon';
 import UsersDeleteModal from './UsersDeleteModal';
 import UsersFormModal from './UsersFormModal';
-import SnackbarAlert from 'src/app/shared/components/SnackbarAlert';
-import { useDispatch } from 'react-redux';
 import UserService from 'src/app/shared/services/user-service';
-import { useEffect } from 'react';
 import FuseLoading from '@fuse/core/FuseLoading';
-import { showMessage } from 'app/store/fuse/messageSlice';
 
 const UsersTable = () => {
     const dispatch = useDispatch();
@@ -33,7 +32,6 @@ const UsersTable = () => {
 
     const [openFormModal, setOpenFormModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
-    const [openNotification, setOpenNotification] = useState(false);
 
     let pageSize = 10;
     let startIndex = (page - 1) * pageSize;
@@ -64,7 +62,7 @@ const UsersTable = () => {
         setOpenDeleteModal(true);
     };
 
-    function handleEditUser(user) {
+    function handleOpenFormUser(user) {
         setUserToEdit(user);
         setOpenFormModal(true);
     };
@@ -109,6 +107,32 @@ const UsersTable = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
         >
+            <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between py-32  px-24 sm:px-32">
+                <Typography
+                    component={motion.span}
+                    initial={{ x: -20 }}
+                    animate={{ x: 0, transition: { delay: 0.2 } }}
+                    delay={300}
+                    className="text-24 md:text-32 font-extrabold tracking-tight mx-16"
+                >
+                    Users
+                </Typography>
+                <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
+                    className="mx-16"
+                >
+                    <Button
+                        size="large"
+                        onClick={() => handleOpenFormUser(null)}
+                        variant="contained"
+                        color="secondary"
+                        startIcon={<FuseSvgIcon>feather:user-plus</FuseSvgIcon>}
+                    >
+                        Add User
+                    </Button>
+                </motion.div>
+            </div>
             {!isLoading ? <TableContainer sx={{ width: '95%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '2rem' }} component={Paper}>
                 <Table sx={{ minWidth: 650 }}>
                     <TableHead>
@@ -139,7 +163,7 @@ const UsersTable = () => {
                                             type="button"
                                             size="small"
                                             className="mr-5 hover:bg-blue"
-                                            onClick={() => handleEditUser(user)}
+                                            onClick={() => handleOpenFormUser(user)}
                                         >
                                             <FuseSvgIcon>
                                                 heroicons-solid:pencil-alt
@@ -179,7 +203,7 @@ const UsersTable = () => {
                     </TableFooter>}
                 </Table>
             </TableContainer> : <FuseLoading />}
-            {openFormModal && <UsersFormModal user={userToEdit} open={openFormModal} setOpen={setOpenFormModal}
+            {openFormModal && <UsersFormModal user={userToEdit} setUser={setUserToEdit} open={openFormModal} setOpen={setOpenFormModal}
                 onConfirm={handleForm} />}
             {openDeleteModal && <UsersDeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal}
                 onConfirm={handleDelete} />}
