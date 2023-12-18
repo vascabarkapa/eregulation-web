@@ -1,4 +1,4 @@
-import axiosInstance from "./axios-instance";
+import axiosInstance from "./axiosInstance";
 
 const get = (endpoint, query = "") => {
     return axiosInstance.get(`${endpoint}?${query}`);
@@ -16,4 +16,4 @@ const remove = (endpoint, query = "") => {
     return axiosInstance.delete(`${endpoint}?${query}`);
 }
 
-export { get, post, put, remove }
+export {get, post, put, remove}
