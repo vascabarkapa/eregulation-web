@@ -27,6 +27,7 @@ const UsersTable = () => {
     const [isLoading, setIsloading] = useState(false);
     const [users, setUsers] = useState([]);
     const [tempUsers, setTempUsers] = useState([]);
+    const [userToEdit, setUserToEdit] = useState({});
     const [userToDelete, setUserToDelete] = useState({});
     const [trigger, setTrigger] = useState(false);
     const [page, setPage] = useState(1);
@@ -65,9 +66,14 @@ const UsersTable = () => {
         setOpenDeleteModal(true);
     };
 
-    function handleEditUser(id) {
-        navigate("/settings/users/edit/" + id);
+    function handleEditUser(user) {
+        setUserToEdit(user);
+        setOpenFormModal(true);
     };
+
+    const handleForm = () => {
+
+    }
 
     const handleDelete = () => {
         UserService.deleteUser(userToDelete?._id).then((response) => {
@@ -115,7 +121,7 @@ const UsersTable = () => {
                                             type="button"
                                             size="small"
                                             className="mr-5 hover:bg-blue"
-                                            onClick={() => handleEditUser(user._id)}
+                                            onClick={() => handleEditUser(user)}
                                         >
                                             <FuseSvgIcon>
                                                 heroicons-solid:pencil-alt
@@ -155,10 +161,11 @@ const UsersTable = () => {
                     </TableFooter>}
                 </Table>
             </TableContainer> : <FuseLoading />}
-            {openFormModal && <UsersFormModal open={openFormModal} setOpen={setOpenFormModal}
+            {openFormModal && <UsersFormModal user={userToEdit} open={openFormModal} setOpen={setOpenFormModal}
                 onConfirm={handleForm} />}
             {openDeleteModal && <UsersDeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal}
                 onConfirm={handleDelete} />}
+
             <div className="hidden md:block">
                 {openNotification && <SnackbarAlert
                     open={openNotification}

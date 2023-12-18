@@ -9,6 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useEffect } from 'react';
 
 const usersSchema = yup.object().shape({
     username: yup.string()
@@ -28,13 +29,23 @@ const usersSchema = yup.object().shape({
         .required('Required field'),
 });
 
-const UsersFormModal = ({ open, setOpen, onConfirm }) => {
-    const { control, formState, handleSubmit } = useForm({
+const UsersFormModal = ({ user, open, setOpen, onConfirm }) => {
+    const { control, formState, handleSubmit, setValue } = useForm({
         mode: 'onChange',
         resolver: yupResolver(usersSchema),
     });
 
-    const { errors } = formState;
+    const { isValid, dirtyFields, errors } = formState;
+
+    if(user) {
+        useEffect(() => {
+            setValue('firstName', user.first_name, { shouldDirty: true, shouldValidate: true });
+            setValue('lastName', user.last_name, { shouldDirty: true, shouldValidate: true });
+            setValue('username', user.username, { shouldDirty: true, shouldValidate: true });
+            setValue('email', user.email, { shouldDirty: true, shouldValidate: true });
+        }, [setValue]);
+    
+    }
 
     function onSubmit({
         username,
@@ -68,7 +79,7 @@ const UsersFormModal = ({ open, setOpen, onConfirm }) => {
                 maxWidth="md"
             >
                 <DialogTitle id="alert-users-form-title">
-                    Add/Edit User
+                    {!user ? "Add new User" : "Edit User"}
                 </DialogTitle>
                 <form
                     name="usersForm"
@@ -201,7 +212,7 @@ const UsersFormModal = ({ open, setOpen, onConfirm }) => {
                             Cancel
                         </Button>
                         <Button type="submit" color="success">
-                            Add/Edit
+                            {!user ? "Add" : "Edit"}
                         </Button>
                     </DialogActions>
                 </form>
