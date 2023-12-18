@@ -151,9 +151,9 @@ const UsersTable = () => {
                                 className="hover:bg-gray-900"
                             >
                                 <TableCell component="th" scope="row">
-                                    {user?.username}
+                                    {user?.first_name + " " + user?.last_name}
                                 </TableCell>
-                                <TableCell>{user?.first_name + " " + user?.last_name}</TableCell>
+                                <TableCell>{user?.username}</TableCell>
                                 <TableCell>{user?.email}</TableCell>
                                 <TableCell style={{ display: "flex", justifyContent: "right" }}>
                                     <Tooltip title="Edit" placement="top">

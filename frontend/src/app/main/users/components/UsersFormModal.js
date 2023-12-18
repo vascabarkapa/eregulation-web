@@ -37,7 +37,7 @@ const UsersFormModal = ({ user, setUser, open, setOpen, onConfirm }) => {
 
     const { isValid, dirtyFields, errors } = formState;
 
-    if(user) {
+    if (user) {
         useEffect(() => {
             setValue('firstName', user.first_name, { shouldDirty: true, shouldValidate: true });
             setValue('lastName', user.last_name, { shouldDirty: true, shouldValidate: true });
@@ -60,7 +60,7 @@ const UsersFormModal = ({ user, setUser, open, setOpen, onConfirm }) => {
             first_name: firstName,
             last_name: lastName
         })
-        
+
         onConfirm(body);
     }
 

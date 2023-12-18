@@ -21,18 +21,18 @@ function UserMenu(props) {
 
     const [openProfile, setOpenProfile] = useState(false);
     const [userMenu, setUserMenu] = useState(null);
-  
+
     const userMenuClick = (event) => {
-      setUserMenu(event.currentTarget);
+        setUserMenu(event.currentTarget);
     };
-  
+
     const handleMyProfileModal = () => {
-      setOpenProfile(true);
-      setUserMenu(null);
+        setOpenProfile(true);
+        setUserMenu(null);
     };
-  
+
     const userMenuClose = () => {
-      setUserMenu(null);
+        setUserMenu(null);
     };
 
     return (
@@ -57,11 +57,11 @@ function UserMenu(props) {
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
-                  }}
-                  transformOrigin={{
+                }}
+                transformOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
-                  }}
+                }}
                 classes={{
                     paper: 'py-8',
                 }}

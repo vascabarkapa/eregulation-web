@@ -48,24 +48,24 @@ function SignInPage() {
   function onSubmit({ email, password }) {
     setIsLoading(true);
     AuthService.login(email, password).then((response) => {
-        if (response) {
-            localStorage.setItem("access_token", response?.data?.accessToken);
+      if (response) {
+        localStorage.setItem("access_token", response?.data?.accessToken);
 
-            AuthService.currentUser().then((currentUser) => {
-                if (currentUser) {
-                    localStorage.setItem("current_user", JSON.stringify(currentUser?.data));
-                    window.location.href = "/dashboard";
-                }
-            })
-        }
+        AuthService.currentUser().then((currentUser) => {
+          if (currentUser) {
+            localStorage.setItem("current_user", JSON.stringify(currentUser?.data));
+            window.location.href = "/dashboard";
+          }
+        })
+      }
     }, (err) => {
-        if (err) {
-            setIsLoading(false);
-            setValue('password', '', { shouldDirty: true, shouldValidate: true });
-            dispatch(showMessage({ message: err?.response?.data?.message || "An error occurred! Try again." }));
-        }
+      if (err) {
+        setIsLoading(false);
+        setValue('password', '', { shouldDirty: true, shouldValidate: true });
+        dispatch(showMessage({ message: err?.response?.data?.message || "An error occurred! Try again." }));
+      }
     })
-}
+  }
 
   return (
     <div className="flex flex-col flex-auto items-center justify-center min-w-0 md:p-32 rounded-0 rounded-2xl">
