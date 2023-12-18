@@ -61,7 +61,7 @@ const UsersFormModal = ({ user, open, setOpen, onConfirm }) => {
             first_name: firstName,
             last_name: lastName
         })
-        onConfirm();
+        onConfirm(body);
     }
 
     const handleClose = () => {

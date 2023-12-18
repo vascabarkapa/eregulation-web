@@ -14,7 +14,6 @@ import UsersDeleteModal from './UsersDeleteModal';
 import UsersFormModal from './UsersFormModal';
 import SnackbarAlert from 'src/app/shared/components/SnackbarAlert';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import UserService from 'src/app/shared/services/user-service';
 import { useEffect } from 'react';
 import FuseLoading from '@fuse/core/FuseLoading';
@@ -22,13 +21,12 @@ import { showMessage } from 'app/store/fuse/messageSlice';
 
 const UsersTable = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
-    const [isLoading, setIsloading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [tempUsers, setTempUsers] = useState([]);
-    const [userToEdit, setUserToEdit] = useState({});
-    const [userToDelete, setUserToDelete] = useState({});
+    const [userToEdit, setUserToEdit] = useState(null);
+    const [userToDelete, setUserToDelete] = useState(null);
     const [trigger, setTrigger] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -42,12 +40,12 @@ const UsersTable = () => {
     let endIndex = startIndex + pageSize;
 
     useEffect(() => {
-        setIsloading(true);
+        setIsLoading(true);
         UserService.getUsers().then((response) => {
             if (response) {
                 setUsers(response?.data);
                 setTempUsers(response?.data?.slice(startIndex, endIndex));
-                setIsloading(false);
+                setIsLoading(false);
                 setTotalPages(Math.ceil(response?.data?.length / pageSize));
             }
         })
@@ -71,8 +69,28 @@ const UsersTable = () => {
         setOpenFormModal(true);
     };
 
-    const handleForm = () => {
-
+    const handleForm = (body) => {
+        if (userToEdit) {
+            UserService.updateUser(userToEdit._id, body).then((response) => {
+                if (response) {
+                    setTrigger(!trigger);
+                    setPage(1);
+                    setIsLoading(false);
+                    setOpenFormModal(false);
+                    dispatch(showMessage({ message: "Updated User successfully!" }));
+                }
+            })
+        } else {
+            UserService.createUser(body).then((response) => {
+                if (response) {
+                    setTrigger(!trigger);
+                    setPage(1);
+                    setIsLoading(false);
+                    setOpenFormModal(false);
+                    dispatch(showMessage({ message: "Added new User successfully!" }));
+                }
+            });
+        }
     }
 
     const handleDelete = () => {
@@ -165,30 +183,6 @@ const UsersTable = () => {
                 onConfirm={handleForm} />}
             {openDeleteModal && <UsersDeleteModal open={openDeleteModal} setOpen={setOpenDeleteModal}
                 onConfirm={handleDelete} />}
-
-            <div className="hidden md:block">
-                {openNotification && <SnackbarAlert
-                    open={openNotification}
-                    setOpen={setOpenNotification}
-                    vertical={'top'}
-                    horizontal={'center'}
-                    message={'This is some message'}
-                    type={'success'}
-                />
-                }
-            </div>
-            <div className="block md:hidden">
-                {openNotification && <SnackbarAlert
-                    open={openNotification}
-                    setOpen={setOpenNotification}
-                    vertical={'bottom'}
-                    horizontal={'center'}
-                    message={'This is some message'}
-                    type={'success'}
-                />
-                }
-            </div>
-
         </motion.div>
     );
 }
