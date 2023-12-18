@@ -8,7 +8,7 @@ connectDb();
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors({origin: 'http://localhost:5001'}));
+app.use(cors({origin: 'http://localhost:3000'}));
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
