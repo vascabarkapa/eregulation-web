@@ -1,4 +1,6 @@
 const mqtt = require("mqtt");
+const {addData} = require("../controllers/dataController");
+const parseLiveMessageToJson = require("../shared/parseLiveMessageToJson");
 
 class MqttHandler {
     constructor() {
@@ -45,7 +47,13 @@ class MqttHandler {
     }
 
     handleIncomingMessage(topic, message) {
+        const regexLiveMessage = /^t-(\d+)-h-(\d+)-l-(\d+)$/;
         console.log(`Received message on topic ${topic}: ${message}`);
+
+        if (regexLiveMessage.test(message)) {
+            const parsedLiveMessage = parseLiveMessageToJson(message);
+            addData(parsedLiveMessage);
+        }
     }
 
     sendMessage(topic, payload) {
