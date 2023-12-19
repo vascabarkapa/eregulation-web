@@ -1,39 +1,57 @@
 const mqtt = require("mqtt");
 
-const connectMqttBroker = (protocol, host, port, topics, onMessageCallback, username, password) => {
-    const client = mqtt.connect({
-        protocol: protocol,
-        host: host,
-        port: port,
-        username: username,
-        password: password,
-    });
+class MqttHandler {
+    constructor() {
+        const protocol = process.env.MQTT_PROTOCOL;
+        const host = process.env.MQTT_HOST;
+        const port = process.env.MQTT_PORT;
+        const username = process.env.MQTT_USERNAME;
+        const password = process.env.MQTT_PASSWORD;
 
-    client.on("connect", () => {
-        console.log(`Connected to MQTT cluster at ${host}:${port}`);
+        const options = {
+            protocol: protocol,
+            host: host,
+            port: port,
+            username: username,
+            password: password,
+        };
 
-        topics.forEach(topic => {
-            client.subscribe(topic);
+        this.client = mqtt.connect(options);
+
+        this.client.on("connect", () => {
+            console.log(`Connected to MQTT cluster at ${host}:${port}`);
+            this.subscribeToTopics();
         });
-    });
 
-    client.on("error", (error) => {
-        console.error(`Error connecting to MQTT cluster at ${host}:${port}: ${error}`);
-    });
+        this.client.on("error", (error) => {
+            console.error(`Error connecting to MQTT cluster at ${host}:${port}: ${error}`);
+        });
 
-    client.on("close", () => {
-        console.log(`Disconnected from MQTT cluster at ${host}:${port}`);
-    });
+        this.client.on("close", () => {
+            console.log(`Disconnected from MQTT cluster at ${host}:${port}`);
+        });
 
-    client.on("offline", () => {
-        console.log(`MQTT client is offline`);
-    });
+        this.client.on("offline", () => {
+            console.log(`MQTT client is offline`);
+        });
 
-    client.on("message", (mqttTopic, message) => {
-        onMessageCallback(mqttTopic, message);
-    });
+        this.client.on("message", (topic, message) => {
+            this.handleIncomingMessage(topic, message.toString());
+        });
+    }
 
-    return client;
-};
+    subscribeToTopics() {
+        this.client.subscribe('eregulation/web');
+    }
 
-module.exports = connectMqttBroker;
+    handleIncomingMessage(topic, message) {
+        console.log(`Received message on topic ${topic}: ${message}`);
+    }
+
+    sendMessage(topic, payload) {
+        this.client.publish(topic, payload);
+        console.log(`Sent message on topic ${topic}: ${payload}`);
+    }
+}
+
+module.exports = MqttHandler;
