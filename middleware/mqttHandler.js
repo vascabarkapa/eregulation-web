@@ -41,7 +41,7 @@ class MqttHandler {
     }
 
     subscribeToTopics() {
-        this.client.subscribe('eregulation/web');
+        this.client.subscribe("eregulation/web");
     }
 
     handleIncomingMessage(topic, message) {

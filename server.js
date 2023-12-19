@@ -6,10 +6,9 @@ const cors = require("cors");
 const MqttHandler = require("./middleware/mqttHandler");
 
 connectDb();
+new MqttHandler();
 const app = express();
 const port = process.env.PORT || 5000;
-
-const mqttHandler = new MqttHandler();
 
 app.use(cors({origin: process.env.FRONT_URL}));
 app.use(express.json());
