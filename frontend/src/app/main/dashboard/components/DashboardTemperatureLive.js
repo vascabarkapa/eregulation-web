@@ -6,7 +6,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Tooltip } from '@mui/material';
 import { motion } from 'framer-motion';
 
-function DashboardTemperatureLive() {
+const DashboardTemperatureLive = ({liveTemperature}) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -27,7 +27,7 @@ function DashboardTemperatureLive() {
                                 </div>
                                 <div className="text-center mt-20">
                                     <Typography className="text-7xl sm:text-9xl font-bold tracking-tight leading-none">
-                                        28&deg;C
+                                        {liveTemperature?.value}&deg;C
                                     </Typography>
                                 </div>
                                 <div className="flex items-center justify-between px-8 pt-12">
