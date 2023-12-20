@@ -32,9 +32,9 @@ const TemperatureTable = ({isLoading, tempTemperatureData, temperatureData, tota
                                 key={temperature._id}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell>{DateTimeHelper.getDate(temperature.createdAt)}</TableCell>
-                                <TableCell>{DateTimeHelper.getTime(temperature.createdAt)}</TableCell>
-                                <TableCell>{temperature.value.toFixed(1)}&deg;C</TableCell>
+                                <TableCell>{DateTimeHelper.getDate(temperature?.createdAt)}</TableCell>
+                                <TableCell>{DateTimeHelper.getTime(temperature?.createdAt)}</TableCell>
+                                <TableCell>{temperature?.value.toFixed(1)}&deg;C</TableCell>
                             </TableRow>
                         )) : <TableRow
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}

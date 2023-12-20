@@ -8,8 +8,6 @@ import {motion} from 'framer-motion';
 import {Tooltip} from '@mui/material';
 
 const TemperatureLive = ({liveTemperature}) => {
-    const {date} = {date: '2023-05-01T22:24:15.000Z'};
-
     return (
         <motion.div
             initial={{opacity: 0, y: 40}}
@@ -22,7 +20,7 @@ const TemperatureLive = ({liveTemperature}) => {
                             Current Temperature
                         </Typography>
                         <Typography className="text-green-600 font-medium text-sm">Last Update
-                            in {DateTimeHelper.convertToLocalFormatWithSeconds(liveTemperature.createdAt)}</Typography>
+                            in {DateTimeHelper.convertToLocalFormatWithSeconds(liveTemperature?.createdAt)}</Typography>
                     </div>
                     <div className="-mt-8">
                         <Tooltip title="Refresh" placement="top">
@@ -36,7 +34,7 @@ const TemperatureLive = ({liveTemperature}) => {
                     <div className="flex items-center">
                         <div className="h-16 w-16 bg-red-500 rounded-full animate-ping mr-32"></div>
                         <Typography className="text-10xl font-extrabold" variant="h1">
-                            {liveTemperature.value}&deg;C
+                            {liveTemperature?.value}&deg;C
                         </Typography>
                     </div>
                 </div>
