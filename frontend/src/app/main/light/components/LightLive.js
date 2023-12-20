@@ -6,6 +6,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
 import {motion} from 'framer-motion';
 import {Tooltip} from '@mui/material';
+import LightDataHelper from "../../../shared/helpers/LightDataHelper";
 
 function LightLive({liveLight}) {
     const {date} = {date: '2023-05-01T22:24:15.000Z'};
@@ -36,7 +37,7 @@ function LightLive({liveLight}) {
                     <div className="flex items-center">
                         <div className="h-16 w-16 bg-red-500 rounded-full animate-ping mr-32"></div>
                         <Typography className="text-10xl font-extrabold" variant="h1">
-                            {liveLight?.value}
+                            {LightDataHelper.getModeValue(liveLight?.value)}
                         </Typography>
                     </div>
                 </div>

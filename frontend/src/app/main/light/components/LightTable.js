@@ -10,6 +10,7 @@ import {motion} from 'framer-motion';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
 import FuseLoading from "@fuse/core/FuseLoading";
 import {Pagination, TableFooter} from "@mui/material";
+import LightDataHelper from "../../../shared/helpers/LightDataHelper";
 
 const LightTable = ({isLoading, tempLightData, lightData, totalPages, page, handleChangePage}) => {
     return (
@@ -34,7 +35,7 @@ const LightTable = ({isLoading, tempLightData, lightData, totalPages, page, hand
                             >
                                 <TableCell>{DateTimeHelper.getDate(light?.createdAt)}</TableCell>
                                 <TableCell>{DateTimeHelper.getTime(light?.createdAt)}</TableCell>
-                                <TableCell>{light?.value}</TableCell>
+                                <TableCell>{LightDataHelper.getModeValue(light?.value)}</TableCell>
                             </TableRow>
                         )) : <TableRow
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
