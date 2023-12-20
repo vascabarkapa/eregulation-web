@@ -42,6 +42,15 @@ class MqttHandler {
         });
     }
 
+    static instance;
+
+    static getInstance() {
+        if (!MqttHandler.instance) {
+            MqttHandler.instance = new MqttHandler();
+        }
+        return MqttHandler.instance;
+    }
+
     subscribeToTopics() {
         this.client.subscribe("eregulation/web");
     }
