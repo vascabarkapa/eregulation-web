@@ -80,23 +80,6 @@ const pingLatestData = () => {
 };
 
 /**
- * @desc Ping the latest data
- * @route GET /api/data/ping
- * @access Private
- */
-const pingLatestData = () => {
-    try {
-        const MqttHandler = require("../middleware/mqttHandler");
-        const mqttHandlerInstance = MqttHandler.getInstance();
-
-        mqttHandlerInstance.sendMessage("eregulation/arduino", "ping");
-        res.status(200).json("Message 'ping' successfully sent to MQTT broker");
-    } catch (error) {
-        console.error("Error sending message to MQTT broker:", error);
-    }
-};
-
-/**
  * @desc Get the latest data
  * @route GET /api/data/latest
  * @access Private

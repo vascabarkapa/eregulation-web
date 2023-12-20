@@ -14,8 +14,12 @@ function getLightData() {
     return get(ENDPOINT + "/light");
 }
 
+function getLatestData() {
+    return get(ENDPOINT + "/latest");
+}
+
 const DataService = {
-    getTemperatureData, getHumidityData, getLightData
+    getTemperatureData, getHumidityData, getLightData, getLatestData
 }
 
 export default DataService;
