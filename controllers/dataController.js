@@ -20,7 +20,8 @@ const addData = asyncHandler(async (body) => {
  */
 const getTemperatureData = asyncHandler(async (req, res) => {
     try {
-        const temperatureData = await Data.find({type: "t"});
+        const temperatureData = await Data.find({ type: "t" }).sort({ createdAt: -1 });
+
 
         res.status(200).json(temperatureData);
     } catch (error) {
@@ -36,7 +37,7 @@ const getTemperatureData = asyncHandler(async (req, res) => {
  */
 const getHumidityData = asyncHandler(async (req, res) => {
     try {
-        const humidityData = await Data.find({type: "h"});
+        const humidityData = await Data.find({type: "h"}).sort({ createdAt: -1 });
 
         res.status(200).json(humidityData);
     } catch (error) {
@@ -52,7 +53,7 @@ const getHumidityData = asyncHandler(async (req, res) => {
  */
 const getLightData = asyncHandler(async (req, res) => {
     try {
-        const lightData = await Data.find({type: "l"});
+        const lightData = await Data.find({type: "l"}).sort({ createdAt: -1 });
 
         res.status(200).json(lightData);
     } catch (error) {
