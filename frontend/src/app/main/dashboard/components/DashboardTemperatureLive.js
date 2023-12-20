@@ -1,16 +1,18 @@
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { memo } from 'react';
+import {memo} from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { Tooltip } from '@mui/material';
-import { motion } from 'framer-motion';
+import {Tooltip} from '@mui/material';
+import {motion} from 'framer-motion';
+import DateTimeHelper from "../../../shared/helpers/DateTimeHelper";
 
 const DashboardTemperatureLive = ({liveTemperature}) => {
+    console.log(liveTemperature)
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+            initial={{opacity: 0, y: 40}}
+            animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
             <Paper>
                 <div class="flex flex-row">
@@ -21,7 +23,8 @@ const DashboardTemperatureLive = ({liveTemperature}) => {
                         <div class="flex flex-col shadow rounded-2xl">
                             <Paper className="flex flex-col shadow rounded-2xl">
                                 <div className="flex items-center justify-center px-8 pt-12">
-                                    <Typography className="text-2xl md:text-3xl font-semibold tracking-tight text-center leading-7">
+                                    <Typography
+                                        className="text-2xl md:text-3xl font-semibold tracking-tight text-center leading-7">
                                         Current Temperature
                                     </Typography>
                                 </div>
@@ -31,8 +34,10 @@ const DashboardTemperatureLive = ({liveTemperature}) => {
                                     </Typography>
                                 </div>
                                 <div className="flex items-center justify-between px-8 pt-12">
-                                    <Typography className="mr-16 text-sm md:text-md font-medium tracking-tight leading-7 text-green-600">
-                                        Last update: 04/22/2023 03:03:15 AM
+                                    <Typography
+                                        className="mr-16 text-sm md:text-md font-medium tracking-tight leading-7 text-green-600">
+                                        Last
+                                        Update: {DateTimeHelper.convertToLocalFormatWithSeconds(liveTemperature?.createdAt)}
                                     </Typography>
                                     <Tooltip title="Refresh" placement="top">
                                         <IconButton size="large">
