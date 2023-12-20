@@ -6,33 +6,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
+import FuseLoading from "@fuse/core/FuseLoading";
+import {Pagination, TableFooter} from "@mui/material";
 
-function createData(value, timestamp) {
-    return { value, timestamp };
-}
-
-const rows = [
-    createData(25.7, '2023-05-01T18:39:00.000Z'),
-    createData(25.9, '2023-05-01T18:38:00.000Z'),
-    createData(26.5, '2023-05-01T18:37:00.000Z'),
-    createData(26.6, '2023-05-01T18:36:00.000Z'),
-    createData(27.0, '2023-05-01T18:35:00.000Z'),
-    createData(26.3, '2023-05-01T18:34:00.000Z'),
-    createData(26.2, '2023-05-01T18:33:00.000Z'),
-    createData(26.6, '2023-05-01T18:32:00.000Z'),
-    createData(25.8, '2023-05-01T18:31:00.000Z'),
-    createData(25.6, '2023-05-01T18:30:00.000Z'),
-];
-
-const TemperatureTable = () => {
+const TemperatureTable = ({isLoading, tempTemperatureData, temperatureData, totalPages, page, handleChangePage}) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+            initial={{opacity: 0, y: 40}}
+            animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
-            <TableContainer sx={{ marginLeft: 'auto', marginRight: 'auto' }} component={Paper}>
+            {!isLoading ? <TableContainer sx={{marginLeft: 'auto', marginRight: 'auto'}} component={Paper}>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
@@ -42,19 +27,31 @@ const TemperatureTable = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {tempTemperatureData?.length > 0 ? tempTemperatureData.map((temperature) => (
                             <TableRow
-                                key={row.timestamp}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                key={temperature._id}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell>{DateTimeHelper.getDate(row.timestamp)}</TableCell>
-                                <TableCell>{DateTimeHelper.getTime(row.timestamp)}</TableCell>
-                                <TableCell>{row.value.toFixed(1)}&deg;C</TableCell>
+                                <TableCell>{DateTimeHelper.getDate(temperature.createdAt)}</TableCell>
+                                <TableCell>{DateTimeHelper.getTime(temperature.createdAt)}</TableCell>
+                                <TableCell>{temperature.value.toFixed(1)}&deg;C</TableCell>
                             </TableRow>
-                        ))}
+                        )) : <TableRow
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                        >
+                            <TableCell colSpan={3} className="text-center" component="th" scope="row">
+                                No Temperature data available
+                            </TableCell></TableRow>}
                     </TableBody>
+                    {temperatureData?.length > 10 && <TableFooter>
+                        <TableRow>
+                            <TableCell colSpan={3} className="text-center border-0" component="th" scope="row">
+                                <Pagination count={totalPages} page={page} onChange={handleChangePage} color="secondary" />
+                            </TableCell>
+                        </TableRow>
+                    </TableFooter>}
                 </Table>
-            </TableContainer>
+            </TableContainer> : <FuseLoading/>}
         </motion.div>
     );
 }
