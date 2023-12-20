@@ -6,33 +6,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
+import FuseLoading from "@fuse/core/FuseLoading";
+import {Pagination, TableFooter} from "@mui/material";
 
-function createData(value, timestamp) {
-    return { value, timestamp };
-}
-
-const rows = [
-    createData(45.7, '2023-05-01T20:19:00.000Z'),
-    createData(45.9, '2023-05-01T20:18:00.000Z'),
-    createData(45.5, '2023-05-01T20:17:00.000Z'),
-    createData(46.6, '2023-05-01T20:16:00.000Z'),
-    createData(45.0, '2023-05-01T20:15:00.000Z'),
-    createData(45.3, '2023-05-01T20:14:00.000Z'),
-    createData(45.2, '2023-05-01T20:13:00.000Z'),
-    createData(46.6, '2023-05-01T20:12:00.000Z'),
-    createData(41.8, '2023-05-01T20:11:00.000Z'),
-    createData(40.6, '2023-05-01T20:10:00.000Z'),
-];
-
-const HumidityTable = () => {
+const HumidityTable = ({isLoading, tempHumidityData, humidityData, totalPages, page, handleChangePage}) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+            initial={{opacity: 0, y: 40}}
+            animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
-            <TableContainer sx={{ marginLeft: 'auto', marginRight: 'auto' }} component={Paper}>
+            {!isLoading ? <TableContainer sx={{marginLeft: 'auto', marginRight: 'auto'}} component={Paper}>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
@@ -42,19 +27,31 @@ const HumidityTable = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {tempHumidityData?.length > 0 ? tempHumidityData.map((humidity) => (
                             <TableRow
-                                key={row.timestamp}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                key={humidity?._id}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell>{DateTimeHelper.getDate(row.timestamp)}</TableCell>
-                                <TableCell>{DateTimeHelper.getTime(row.timestamp)}</TableCell>
-                                <TableCell>{row.value.toFixed(1)}%</TableCell>
+                                <TableCell>{DateTimeHelper.getDate(humidity?.createdAt)}</TableCell>
+                                <TableCell>{DateTimeHelper.getTime(humidity?.createdAt)}</TableCell>
+                                <TableCell>{humidity?.value.toFixed(1)}%</TableCell>
                             </TableRow>
-                        ))}
+                        )) : <TableRow
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                        >
+                            <TableCell colSpan={3} className="text-center" component="th" scope="row">
+                                No Humidity data available
+                            </TableCell></TableRow>}
                     </TableBody>
+                    {humidityData?.length > 10 && <TableFooter>
+                        <TableRow>
+                            <TableCell colSpan={3} className="text-center border-0" component="th" scope="row">
+                                <Pagination count={totalPages} page={page} onChange={handleChangePage} color="secondary" />
+                            </TableCell>
+                        </TableRow>
+                    </TableFooter>}
                 </Table>
-            </TableContainer>
+            </TableContainer> : <FuseLoading/>}
         </motion.div>
     );
 }
