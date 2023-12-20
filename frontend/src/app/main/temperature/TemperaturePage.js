@@ -12,6 +12,7 @@ const TemperaturePage = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [temperatureData, setTemperatureData] = useState([]);
+    const [liveTemperature, setLiveTemperature] = useState({});
     const [tempTemperatureData, setTempTemperatureData] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -25,6 +26,7 @@ const TemperaturePage = () => {
         DataService.getTemperatureData().then((response) => {
             if (response) {
                 setTemperatureData(response?.data);
+                setLiveTemperature(response?.data[0]);
                 setTempTemperatureData(response?.data?.slice(startIndex, endIndex));
                 setIsLoading(false);
                 setTotalPages(Math.ceil(response?.data?.length / pageSize));
@@ -52,7 +54,7 @@ const TemperaturePage = () => {
                 <div className="w-full md:w-1/2">
                     <div className="flex flex-col gap-20">
                         <DateRangeFilter/>
-                        <TemperatureLive/>
+                        <TemperatureLive liveTemperature={liveTemperature}/>
                     </div>
                 </div>
             </div>
@@ -63,9 +65,11 @@ const TemperaturePage = () => {
             </div>
 
             <div className="flex flex-col gap-20 md:hidden m-20">
-                <TemperatureLive/>
+                <TemperatureLive liveTemperature={liveTemperature}/>
                 <DateRangeFilter/>
-                <TemperatureTable/>
+                <TemperatureTable isLoading={isLoading} tempTemperatureData={tempTemperatureData}
+                                  temperatureData={temperatureData} totalPages={totalPages} page={page}
+                                  handleChangePage={handleChangePage}/>
                 {/*<TemperatureAverageChart />*/}
             </div>
         </div>
