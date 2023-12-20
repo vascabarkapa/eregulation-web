@@ -1,19 +1,19 @@
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { memo } from 'react';
+import {memo} from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
-import { motion } from 'framer-motion';
-import { Tooltip } from '@mui/material';
+import {motion} from 'framer-motion';
+import {Tooltip} from '@mui/material';
 
 function TemperatureLive() {
-    const { date } = { date: '2023-05-01T22:24:15.000Z' };
+    const {date} = {date: '2023-05-01T22:24:15.000Z'};
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+            initial={{opacity: 0, y: 40}}
+            animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
             <Paper className="relative flex flex-col flex-auto p-24 pr-12 pb-12 rounded-2xl shadow overflow-hidden">
                 <div className="flex items-center justify-between">
@@ -21,8 +21,8 @@ function TemperatureLive() {
                         <Typography className="text-3xl font-bold" variant="h1">
                             Current Temperature
                         </Typography>
-                        <Typography className="text-green-600 font-medium text-sm">Last Update in {DateTimeHelper.convertToLocalFormatWithSeconds(date)}</Typography>
-
+                        <Typography className="text-green-600 font-medium text-sm">Last Update
+                            in {DateTimeHelper.convertToLocalFormatWithSeconds(date)}</Typography>
                     </div>
                     <div className="-mt-8">
                         <Tooltip title="Refresh" placement="top">
@@ -35,7 +35,7 @@ function TemperatureLive() {
                 <div className="flex flex-col flex-wrap mt-16">
                     <div className="flex items-center">
                         <div className="h-16 w-16 bg-red-500 rounded-full animate-ping mr-32"></div>
-                        <Typography className="text-9xl font-extrabold" variant="h1">
+                        <Typography className="text-10xl font-extrabold" variant="h1">
                             25&deg;C
                         </Typography>
                     </div>
