@@ -29,7 +29,7 @@ const TemperatureTable = ({isLoading, tempTemperatureData, temperatureData, tota
                     <TableBody>
                         {tempTemperatureData?.length > 0 ? tempTemperatureData.map((temperature) => (
                             <TableRow
-                                key={temperature._id}
+                                key={temperature?._id}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell>{DateTimeHelper.getDate(temperature?.createdAt)}</TableCell>
