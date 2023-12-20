@@ -40,8 +40,8 @@ function TemperatureLive() {
                         </Typography>
                     </div>
                 </div>
-                <div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-96 h-96 -m-24">
-                    <FuseSvgIcon size={100} className="opacity-25 text-white-400">
+                <div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-120 h-120 -m-24">
+                    <FuseSvgIcon size={125} className="opacity-25 text-white-400">
                         material-outline:thermostat
                     </FuseSvgIcon>
                 </div>
