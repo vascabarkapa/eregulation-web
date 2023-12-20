@@ -5,11 +5,8 @@ import TemperatureTable from "./components/TemperatureTable";
 import TemperatureAverageChart from "./components/TemperatureAverageChart";
 import {useEffect, useState} from "react";
 import DataService from "../../shared/services/data-service";
-import {useDispatch} from "react-redux";
 
 const TemperaturePage = () => {
-    const dispatch = useDispatch();
-
     const [isLoading, setIsLoading] = useState(false);
     const [temperatureData, setTemperatureData] = useState([]);
     const [liveTemperature, setLiveTemperature] = useState({});
