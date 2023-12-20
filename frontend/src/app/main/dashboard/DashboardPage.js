@@ -9,6 +9,7 @@ import DashboardHumidityLive from "./components/DashboardHumidityLive";
 import DashboardLightLive from "./components/DashboardLightLive";
 import {useEffect, useState} from "react";
 import DataService from "../../shared/services/data-service";
+import LightDataHelper from "../../shared/helpers/LightDataHelper";
 
 const Root = styled(FusePageSimple)(({theme}) => ({
     '& .FusePageSimple-header': {
@@ -30,10 +31,26 @@ const DashboardPage = () => {
                 setLiveTemperature(response?.data["t"]);
                 setLiveHumidity(response?.data["h"]);
                 setLiveLight(response?.data["l"]);
+
+                const handleVisibilityChange = () => {
+                    if (document.hidden) {
+                        document.title = response?.data["t"]?.value +
+                            "\u00B0C | " + response?.data["h"]?.value + "% | " +
+                            LightDataHelper.getModeValue(response?.data["l"]?.value);
+                    } else {
+                        document.title = "eRegulation";
+                    }
+                };
+
+                document.addEventListener("visibilitychange", handleVisibilityChange);
                 setIsLoading(false);
             }
         })
-    }, [])
+    }, []);
+
+    useEffect(() => {
+
+    }, []);
 
     return (
         <Root
