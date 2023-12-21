@@ -18,8 +18,12 @@ function getLatestData() {
     return get(ENDPOINT + "/latest");
 }
 
+function pingLatestData() {
+    return get(ENDPOINT + "/ping");
+}
+
 const DataService = {
-    getTemperatureData, getHumidityData, getLightData, getLatestData
+    getTemperatureData, getHumidityData, getLightData, getLatestData, pingLatestData
 }
 
 export default DataService;
