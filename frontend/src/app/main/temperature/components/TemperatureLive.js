@@ -33,13 +33,13 @@ const TemperatureLive = ({liveTemperature}) => {
                 <div className="flex flex-col flex-wrap mt-16">
                     <div className="flex items-center">
                         <div className="h-16 w-16 bg-red-500 rounded-full animate-ping mr-32"></div>
-                        <Typography className="text-10xl font-extrabold" variant="h1">
+                        <Typography className="text-9xl md:text-10xl font-extrabold" variant="h1">
                             {liveTemperature?.value}&deg;C
                         </Typography>
                     </div>
                 </div>
-                <div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-120 h-120 -m-24">
-                    <FuseSvgIcon size={125} className="opacity-25 text-white-400">
+                <div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-150 h-150 -m-24">
+                    <FuseSvgIcon size={150} className="opacity-25 text-white-400">
                         material-outline:thermostat
                     </FuseSvgIcon>
                 </div>
