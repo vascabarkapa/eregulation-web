@@ -8,10 +8,11 @@ const {
 const validateToken = require("../middleware/validateTokenHandler");
 const router = express.Router();
 
+router.route("/latest").get(getLatestData);
+
 router.use(validateToken);
 router.route("/temperature").get(getTemperatureData);
 router.route("/humidity").get(getHumidityData);
 router.route("/light").get(getLightData);
-router.route("/latest").get(getLatestData);
 
 module.exports = router;
