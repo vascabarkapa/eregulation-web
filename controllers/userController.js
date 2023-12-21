@@ -6,10 +6,9 @@ const User = require("../models/userModel");
 //@route GET /api/users
 //@access private
 const getUsers = asyncHandler(async (req, res) => {
-    const users = await User.find();
-    const sortedUsers = users.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    const users = await User.find().sort({createdAt: -1});
 
-    res.status(200).json(sortedUsers);
+    res.status(200).json(users);
 });
 
 //@desc Get user by id
