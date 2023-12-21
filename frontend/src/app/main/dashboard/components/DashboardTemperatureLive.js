@@ -7,20 +7,19 @@ import {Tooltip} from '@mui/material';
 import {motion} from 'framer-motion';
 import DateTimeHelper from "../../../shared/helpers/DateTimeHelper";
 
-const DashboardTemperatureLive = ({liveTemperature}) => {
-    console.log(liveTemperature)
+const DashboardTemperatureLive = ({liveTemperature, trigger, setTrigger}) => {
     return (
         <motion.div
             initial={{opacity: 0, y: 40}}
             animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
             <Paper>
-                <div class="flex flex-row">
-                    <div class="w-1/3 md:flex justify-center items-center hidden">
+                <div className="flex flex-row">
+                    <div className="w-1/3 md:flex justify-center items-center hidden">
                         <FuseSvgIcon size={'40%'} className="animate-ping">material-outline:thermostat</FuseSvgIcon>
                     </div>
-                    <div class="md:w-2/3 w-full">
-                        <div class="flex flex-col shadow rounded-2xl">
+                    <div className="md:w-2/3 w-full">
+                        <div className="flex flex-col shadow rounded-2xl">
                             <Paper className="flex flex-col shadow rounded-2xl">
                                 <div className="flex items-center justify-center px-8 pt-12">
                                     <Typography
@@ -40,7 +39,7 @@ const DashboardTemperatureLive = ({liveTemperature}) => {
                                         Update: {DateTimeHelper.convertToLocalFormatWithSeconds(liveTemperature?.createdAt)}
                                     </Typography>
                                     <Tooltip title="Refresh" placement="top">
-                                        <IconButton size="large">
+                                        <IconButton size="large" onClick={() => setTrigger(!trigger)}>
                                             <FuseSvgIcon>material-outline:refresh</FuseSvgIcon>
                                         </IconButton>
                                     </Tooltip>

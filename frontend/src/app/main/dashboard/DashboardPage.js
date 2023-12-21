@@ -19,6 +19,7 @@ const Root = styled(FusePageSimple)(({theme}) => ({
 }));
 
 const DashboardPage = () => {
+    const [trigger, setTrigger] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [liveTemperature, setLiveTemperature] = useState({});
     const [liveHumidity, setLiveHumidity] = useState({});
@@ -48,6 +49,30 @@ const DashboardPage = () => {
         })
     }, []);
 
+    useEffect(() => {
+        DataService.pingLatestData().then((response) => {
+            setIsLoading(true);
+            if (response) {
+                setLiveTemperature(response?.data["t"]);
+                setLiveHumidity(response?.data["h"]);
+                setLiveLight(response?.data["l"]);
+
+                const handleVisibilityChange = () => {
+                    if (document.hidden) {
+                        document.title = response?.data["t"]?.value +
+                            "\u00B0C | " + response?.data["h"]?.value + "% | " +
+                            LightDataHelper.getModeValue(response?.data["l"]?.value);
+                    } else {
+                        document.title = "eRegulation";
+                    }
+                };
+
+                document.addEventListener("visibilitychange", handleVisibilityChange);
+                setIsLoading(false);
+            }
+        })
+    }, [trigger]);
+
     return (
         <Root
             header={<DashboardHeader/>}
@@ -55,7 +80,8 @@ const DashboardPage = () => {
                 <div className="grid grid-cols-1 w-full mt-10 mx-20">
                     <div className="grid grid-cols-1 md:grid-cols-3">
                         <div className="md:col-span-1 col-span-3 my-10 md:mr-10">
-                            {!isLoading && <DashboardTemperatureLive liveTemperature={liveTemperature}/>}
+                            {!isLoading && <DashboardTemperatureLive liveTemperature={liveTemperature} trigger={trigger}
+                                                                     setTrigger={setTrigger}/>}
                         </div>
                         <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
                             {!isLoading && <DashboardHumidityLive liveHumidity={liveHumidity}/>}
