@@ -25,9 +25,11 @@ const DashboardPage = () => {
     const [liveHumidity, setLiveHumidity] = useState({});
     const [liveLight, setLiveLight] = useState({});
 
-    useEffect(() => {
-        DataService.getLatestData().then((response) => {
-            setIsLoading(true);
+    const fetchDataAndUpdateState = async () => {
+        setIsLoading(true);
+
+        try {
+            const response = await DataService.getLatestData();
             if (response) {
                 setLiveTemperature(response?.data["t"]);
                 setLiveHumidity(response?.data["h"]);
@@ -35,8 +37,11 @@ const DashboardPage = () => {
 
                 const handleVisibilityChange = () => {
                     if (document.hidden) {
-                        document.title = response?.data["t"]?.value +
-                            "\u00B0C | " + response?.data["h"]?.value + "% | " +
+                        document.title =
+                            response?.data["t"]?.value +
+                            "\u00B0C | " +
+                            response?.data["h"]?.value +
+                            "% | " +
                             LightDataHelper.getModeValue(response?.data["l"]?.value);
                     } else {
                         document.title = "eRegulation";
@@ -44,33 +49,20 @@ const DashboardPage = () => {
                 };
 
                 document.addEventListener("visibilitychange", handleVisibilityChange);
-                setIsLoading(false);
             }
-        })
+        } catch (error) {
+            console.log("Error while fetching latest data: " + error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchDataAndUpdateState();
     }, []);
 
     useEffect(() => {
-        DataService.pingLatestData().then((response) => {
-            setIsLoading(true);
-            if (response) {
-                setLiveTemperature(response?.data["t"]);
-                setLiveHumidity(response?.data["h"]);
-                setLiveLight(response?.data["l"]);
-
-                const handleVisibilityChange = () => {
-                    if (document.hidden) {
-                        document.title = response?.data["t"]?.value +
-                            "\u00B0C | " + response?.data["h"]?.value + "% | " +
-                            LightDataHelper.getModeValue(response?.data["l"]?.value);
-                    } else {
-                        document.title = "eRegulation";
-                    }
-                };
-
-                document.addEventListener("visibilitychange", handleVisibilityChange);
-                setIsLoading(false);
-            }
-        })
+        fetchDataAndUpdateState();
     }, [trigger]);
 
     return (
