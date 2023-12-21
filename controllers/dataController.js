@@ -63,11 +63,11 @@ const getLightData = asyncHandler(async (req, res) => {
 });
 
 /**
- * @desc Ping the latest data
- * @route GET /api/data/ping
+ * @desc Get the latest data
+ * @route GET /api/data/latest
  * @access Private
  */
-const pingLatestData = asyncHandler(async (req, res) => {
+const getLatestData = asyncHandler(async (req, res) => {
     try {
         const MqttHandler = require("../middleware/mqttHandler");
         const mqttHandlerInstance = MqttHandler.getInstance();
@@ -93,28 +93,4 @@ const pingLatestData = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * @desc Get the latest data
- * @route GET /api/data/latest
- * @access Private
- */
-const getLatestData = asyncHandler(async (req, res) => {
-    try {
-        const latestT = await Data.findOne({type: 't'}).sort({createdAt: -1}).limit(1);
-        const latestH = await Data.findOne({type: 'h'}).sort({createdAt: -1}).limit(1);
-        const latestL = await Data.findOne({type: 'l'}).sort({createdAt: -1}).limit(1);
-
-        const latestData = {
-            t: latestT,
-            h: latestH,
-            l: latestL,
-        };
-
-        res.status(200).json(latestData);
-    } catch (error) {
-        console.error("Error getting the latest data:", error);
-        res.status(500).json({error: "Internal Server Error"});
-    }
-});
-
-module.exports = {addData, getTemperatureData, getHumidityData, getLightData, pingLatestData, getLatestData};
+module.exports = {addData, getTemperatureData, getHumidityData, getLightData, getLatestData};
