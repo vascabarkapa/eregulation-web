@@ -7,7 +7,7 @@ import {Tooltip} from '@mui/material';
 import {motion} from 'framer-motion';
 import DateTimeHelper from "../../../shared/helpers/DateTimeHelper";
 
-const DashboardHumidityLive = ({liveHumidity}) => {
+const DashboardHumidityLive = ({liveHumidity, trigger, setTrigger}) => {
     return (
         <motion.div
             initial={{opacity: 0, y: 40}}
@@ -39,7 +39,7 @@ const DashboardHumidityLive = ({liveHumidity}) => {
                                         Update: {DateTimeHelper.convertToLocalFormatWithSeconds(liveHumidity?.createdAt)}
                                     </Typography>
                                     <Tooltip title="Refresh" placement="top">
-                                        <IconButton size="large">
+                                        <IconButton size="large" onClick={() => setTrigger(!trigger)}>
                                             <FuseSvgIcon>material-outline:refresh</FuseSvgIcon>
                                         </IconButton>
                                     </Tooltip>

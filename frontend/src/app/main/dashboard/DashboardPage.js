@@ -84,10 +84,12 @@ const DashboardPage = () => {
                                                                      setTrigger={setTrigger}/>}
                         </div>
                         <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
-                            {!isLoading && <DashboardHumidityLive liveHumidity={liveHumidity}/>}
+                            {!isLoading && <DashboardHumidityLive liveHumidity={liveHumidity} trigger={trigger}
+                                                                  setTrigger={setTrigger}/>}
                         </div>
                         <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
-                            {!isLoading && <DashboardLightLive liveLight={liveLight}/>}
+                            {!isLoading && <DashboardLightLive liveLight={liveLight} trigger={trigger}
+                                                               setTrigger={setTrigger}/>}
                         </div>
                     </div>
                     <div className="w-full my-10">

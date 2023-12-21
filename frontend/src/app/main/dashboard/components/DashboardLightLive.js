@@ -8,7 +8,7 @@ import {motion} from 'framer-motion';
 import LightDataHelper from "../../../shared/helpers/LightDataHelper";
 import DateTimeHelper from "../../../shared/helpers/DateTimeHelper";
 
-const DashboardLightLive = ({liveLight}) => {
+const DashboardLightLive = ({liveLight, trigger, setTrigger}) => {
     return (
         <motion.div
             initial={{opacity: 0, y: 40}}
@@ -40,7 +40,7 @@ const DashboardLightLive = ({liveLight}) => {
                                         Update: {DateTimeHelper.convertToLocalFormatWithSeconds(liveLight?.createdAt)}
                                     </Typography>
                                     <Tooltip title="Refresh" placement="top">
-                                        <IconButton size="large">
+                                        <IconButton size="large" onClick={() => setTrigger(!trigger)}>
                                             <FuseSvgIcon>material-outline:refresh</FuseSvgIcon>
                                         </IconButton>
                                     </Tooltip>
