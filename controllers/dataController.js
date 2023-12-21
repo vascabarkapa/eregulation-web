@@ -67,17 +67,31 @@ const getLightData = asyncHandler(async (req, res) => {
  * @route GET /api/data/ping
  * @access Private
  */
-const pingLatestData = () => {
+const pingLatestData = asyncHandler(async (req, res) => {
     try {
         const MqttHandler = require("../middleware/mqttHandler");
         const mqttHandlerInstance = MqttHandler.getInstance();
 
         mqttHandlerInstance.sendMessage("eregulation/arduino", "ping");
-        res.status(200).json("Message 'ping' successfully sent to MQTT broker");
+
+        // testirati i smanjiti na nekih 0,25sec
+        await new Promise(resolve => setTimeout(resolve, 5000));
+
+        const latestT = await Data.findOne({type: 't'}).sort({createdAt: -1}).limit(1);
+        const latestH = await Data.findOne({type: 'h'}).sort({createdAt: -1}).limit(1);
+        const latestL = await Data.findOne({type: 'l'}).sort({createdAt: -1}).limit(1);
+
+        const latestData = {
+            t: latestT,
+            h: latestH,
+            l: latestL,
+        };
+
+        res.status(200).json(latestData);
     } catch (error) {
         console.error("Error sending message to MQTT broker:", error);
     }
-};
+});
 
 /**
  * @desc Get the latest data
