@@ -1,4 +1,5 @@
 const express = require("express");
+const cronJob = require("./config/cronjob");
 const errorHandler = require("./middleware/errorHandler");
 const connectDb = require("./config/db_connection");
 const dotenv = require("dotenv").config();
