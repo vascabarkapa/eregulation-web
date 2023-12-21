@@ -34,7 +34,7 @@ const LightTable = ({isLoading, tempLightData, lightData, totalPages, page, hand
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell>{DateTimeHelper.getDate(light?.createdAt)}</TableCell>
-                                <TableCell>{DateTimeHelper.getTime(light?.createdAt)}</TableCell>
+                                <TableCell>{DateTimeHelper.getTimeWithSeconds(light?.createdAt)}</TableCell>
                                 <TableCell>{LightDataHelper.getModeValue(light?.value)}</TableCell>
                             </TableRow>
                         )) : <TableRow

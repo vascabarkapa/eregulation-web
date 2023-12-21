@@ -33,7 +33,7 @@ const HumidityTable = ({isLoading, tempHumidityData, humidityData, totalPages, p
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell>{DateTimeHelper.getDate(humidity?.createdAt)}</TableCell>
-                                <TableCell>{DateTimeHelper.getTime(humidity?.createdAt)}</TableCell>
+                                <TableCell>{DateTimeHelper.getTimeWithSeconds(humidity?.createdAt)}</TableCell>
                                 <TableCell>{humidity?.value.toFixed(1)}%</TableCell>
                             </TableRow>
                         )) : <TableRow
