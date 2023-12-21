@@ -71,7 +71,9 @@ const DashboardPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3">
                         {
                             isLoading ?
-                                <FuseLoading/> :
+                                <div className="md:col-span-3 col-span-3 my-10">
+                                    <FuseLoading/>
+                                </div> :
                                 <>
                                     <div className="md:col-span-1 col-span-3 my-10 md:mr-10">
                                         <DashboardTemperatureLive liveTemperature={liveTemperature} trigger={trigger}
