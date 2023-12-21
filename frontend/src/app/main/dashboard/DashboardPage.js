@@ -48,10 +48,6 @@ const DashboardPage = () => {
         })
     }, []);
 
-    useEffect(() => {
-
-    }, []);
-
     return (
         <Root
             header={<DashboardHeader/>}
