@@ -6,8 +6,12 @@ import TemperatureAverageChart from "./components/TemperatureAverageChart";
 import {useEffect, useState} from "react";
 import DataService from "../../shared/services/data-service";
 import FuseLoading from "@fuse/core/FuseLoading";
+import {useDispatch} from 'react-redux';
+import {showMessage} from "app/store/fuse/messageSlice";
 
 const TemperaturePage = () => {
+    const dispatch = useDispatch();
+
     const [trigger, setTrigger] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [temperatureData, setTemperatureData] = useState([]);
@@ -30,10 +34,13 @@ const TemperaturePage = () => {
                     setLiveTemperature(response?.data[0]);
                     setTempTemperatureData(response?.data?.slice(startIndex, endIndex));
                     setTotalPages(Math.ceil(response?.data?.length / pageSize));
+
+                    dispatch(showMessage({message: "Updated latest temperature data"}));
                     setIsLoading(false);
                 }
             } catch (error) {
                 console.error('Error while updating temperature data: ', error);
+                dispatch(showMessage({message: error || "An error occurred! Reload page."}));
                 setIsLoading(false);
             }
         };

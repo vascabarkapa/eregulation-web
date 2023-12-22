@@ -6,8 +6,12 @@ import HumidityAverageChart from "./components/HumidityAverageChart";
 import {useEffect, useState} from "react";
 import DataService from "../../shared/services/data-service";
 import FuseLoading from "@fuse/core/FuseLoading";
+import {useDispatch} from 'react-redux';
+import {showMessage} from "app/store/fuse/messageSlice";
 
 const HumidityPage = () => {
+    const dispatch = useDispatch();
+
     const [trigger, setTrigger] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [humidityData, setHumidityData] = useState([]);
@@ -29,11 +33,14 @@ const HumidityPage = () => {
                     setHumidityData(response?.data);
                     setLiveHumidity(response?.data[0]);
                     setTempHumidityData(response?.data?.slice(startIndex, endIndex));
-                    setIsLoading(false);
                     setTotalPages(Math.ceil(response?.data?.length / pageSize));
+
+                    dispatch(showMessage({message: "Updated latest humidity data"}));
+                    setIsLoading(false);
                 }
             } catch (error) {
                 console.error('Error while updating humidity data: ', error);
+                dispatch(showMessage({message: error || "An error occurred! Reload page."}));
                 setIsLoading(false);
             }
         };
