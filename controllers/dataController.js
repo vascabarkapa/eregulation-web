@@ -14,6 +14,22 @@ const addData = asyncHandler(async (body) => {
 });
 
 /**
+ * @desc Get current temperature data
+ * @route GET /api/data/temperature/current
+ * @access Private
+ */
+const getCurrentTemperatureData = asyncHandler(async (req, res) => {
+    try {
+        const currentTemperatureData = await Data.findOne({type: 't'}).sort({createdAt: -1}).limit(1);
+
+        res.status(200).json(currentTemperatureData);
+    } catch (error) {
+        console.error("Error getting current temperature data:", error);
+        res.status(500).json({error: "Internal Server Error"});
+    }
+});
+
+/**
  * @desc Get all temperature data
  * @route GET /api/data/temperature
  * @access Private
@@ -40,6 +56,22 @@ const getTemperatureData = asyncHandler(async (req, res) => {
 });
 
 /**
+ * @desc Get current humidity data
+ * @route GET /api/data/humidity/current
+ * @access Private
+ */
+const getCurrentHumidityData = asyncHandler(async (req, res) => {
+    try {
+        const currentHumidityData = await Data.findOne({type: 'h'}).sort({createdAt: -1}).limit(1);
+
+        res.status(200).json(currentHumidityData);
+    } catch (error) {
+        console.error("Error getting current humidity data:", error);
+        res.status(500).json({error: "Internal Server Error"});
+    }
+});
+
+/**
  * @desc Get all humidity data
  * @route GET /api/data/humidity
  * @access Private
@@ -61,6 +93,22 @@ const getHumidityData = asyncHandler(async (req, res) => {
         res.status(200).json(humidityData);
     } catch (error) {
         console.error("Error getting humidity data:", error);
+        res.status(500).json({error: "Internal Server Error"});
+    }
+});
+
+/**
+ * @desc Get current light data
+ * @route GET /api/data/light/current
+ * @access Private
+ */
+const getCurrentLightData = asyncHandler(async (req, res) => {
+    try {
+        const currentLightData = await Data.findOne({type: 'l'}).sort({createdAt: -1}).limit(1);
+
+        res.status(200).json(currentLightData);
+    } catch (error) {
+        console.error("Error getting current light data:", error);
         res.status(500).json({error: "Internal Server Error"});
     }
 });
@@ -122,4 +170,13 @@ const getLatestData = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {addData, getTemperatureData, getHumidityData, getLightData, getLatestData};
+module.exports = {
+    addData,
+    getCurrentTemperatureData,
+    getTemperatureData,
+    getCurrentHumidityData,
+    getHumidityData,
+    getCurrentLightData,
+    getLightData,
+    getLatestData
+};
