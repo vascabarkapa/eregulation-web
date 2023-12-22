@@ -69,7 +69,7 @@ const TemperaturePage = () => {
                         <div className="flex flex-col gap-20 md:hidden m-20">
                             <TemperatureLive liveTemperature={liveTemperature}/>
                             <DateRangeFilter/>
-                            <TemperatureTable isLoading={isLoading} tempTemperatureData={tempTemperatureData}
+                            <TemperatureTable tempTemperatureData={tempTemperatureData}
                                               temperatureData={temperatureData} totalPages={totalPages} page={page}
                                               handleChangePage={handleChangePage}/>
                             {/*<TemperatureAverageChart />*/}

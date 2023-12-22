@@ -8,10 +8,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {motion} from 'framer-motion';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
-import FuseLoading from "@fuse/core/FuseLoading";
 import {Pagination, TableFooter} from "@mui/material";
 
-const TemperatureTable = ({isLoading, tempTemperatureData, temperatureData, totalPages, page, handleChangePage}) => {
+const TemperatureTable = ({tempTemperatureData, temperatureData, totalPages, page, handleChangePage}) => {
     return (
         <motion.div
             initial={{opacity: 0, y: 40}}

@@ -8,16 +8,15 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {motion} from 'framer-motion';
 import DateTimeHelper from 'src/app/shared/helpers/DateTimeHelper';
-import FuseLoading from "@fuse/core/FuseLoading";
 import {Pagination, TableFooter} from "@mui/material";
 
-const HumidityTable = ({isLoading, tempHumidityData, humidityData, totalPages, page, handleChangePage}) => {
+const HumidityTable = ({tempHumidityData, humidityData, totalPages, page, handleChangePage}) => {
     return (
         <motion.div
             initial={{opacity: 0, y: 40}}
             animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
-            {!isLoading ? <TableContainer sx={{marginLeft: 'auto', marginRight: 'auto'}} component={Paper}>
+            <TableContainer sx={{marginLeft: 'auto', marginRight: 'auto'}} component={Paper}>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
@@ -46,12 +45,13 @@ const HumidityTable = ({isLoading, tempHumidityData, humidityData, totalPages, p
                     {humidityData?.length > 10 && <TableFooter>
                         <TableRow>
                             <TableCell colSpan={3} className="text-center border-0" component="th" scope="row">
-                                <Pagination count={totalPages} page={page} onChange={handleChangePage} color="secondary" />
+                                <Pagination count={totalPages} page={page} onChange={handleChangePage}
+                                            color="secondary"/>
                             </TableCell>
                         </TableRow>
                     </TableFooter>}
                 </Table>
-            </TableContainer> : <FuseLoading/>}
+            </TableContainer>
         </motion.div>
     );
 }
