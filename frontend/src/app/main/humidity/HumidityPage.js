@@ -57,7 +57,7 @@ const HumidityPage = () => {
                                 <div className="flex flex-col gap-20">
                                     <DateRangeFilter/>
                                     <HumidityLive liveHumidity={liveHumidity} trigger={trigger}
-                                                  setTrigger={{setTrigger}}/>
+                                                  setTrigger={setTrigger}/>
                                 </div>
                             </div>
                         </div>
