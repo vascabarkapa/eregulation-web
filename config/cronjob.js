@@ -9,7 +9,9 @@ cron.schedule('*/30 * * * * *', () => {
 function getLatestData() {
     axios.get(process.env.API_URL + 'data/latest')
         .then((response) => {
-            console.log('Last live data retrieved from MQTT broker: ' + new Date());
+            if(response) {
+                console.log('Last live data retrieved from MQTT broker: ' + new Date());
+            }
         })
         .catch((error) => {
             console.error('Error calling API:', error.message);
