@@ -23,11 +23,11 @@ const getTemperatureData = asyncHandler(async (req, res) => {
         let query = {type: "t"};
 
         if (req.query.startDate !== 'null') {
-            query.createdAt = {$gte: new Date(req.query.startDate).toISOString()};
+            query.createdAt = {$gte: new Date(req.query.startDate + 'T00:00:00.000Z').toISOString()};
         }
 
         if (req.query.endDate !== 'null') {
-            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate).toISOString()};
+            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate + 'T23:59:59.999Z').toISOString()};
         }
 
         const temperatureData = await Data.find(query).sort({createdAt: -1});
@@ -49,11 +49,11 @@ const getHumidityData = asyncHandler(async (req, res) => {
         let query = {type: "h"};
 
         if (req.query.startDate !== 'null') {
-            query.createdAt = {$gte: new Date(req.query.startDate).toISOString()};
+            query.createdAt = {$gte: new Date(req.query.startDate + 'T00:00:00.000Z').toISOString()};
         }
 
         if (req.query.endDate !== 'null') {
-            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate).toISOString()};
+            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate + 'T23:59:59.999Z').toISOString()};
         }
 
         const humidityData = await Data.find(query).sort({createdAt: -1});
@@ -75,11 +75,11 @@ const getLightData = asyncHandler(async (req, res) => {
         let query = {type: "l"};
 
         if (req.query.startDate !== 'null') {
-            query.createdAt = {$gte: new Date(req.query.startDate).toISOString()};
+            query.createdAt = {$gte: new Date(req.query.startDate + 'T00:00:00.000Z').toISOString()};
         }
 
         if (req.query.endDate !== 'null') {
-            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate).toISOString()};
+            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate + 'T23:59:59.999Z').toISOString()};
         }
 
         const lightData = await Data.find(query).sort({createdAt: -1});
