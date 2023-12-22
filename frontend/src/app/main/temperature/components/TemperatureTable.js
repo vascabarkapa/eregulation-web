@@ -17,7 +17,7 @@ const TemperatureTable = ({isLoading, tempTemperatureData, temperatureData, tota
             initial={{opacity: 0, y: 40}}
             animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
-            {!isLoading ? <TableContainer sx={{marginLeft: 'auto', marginRight: 'auto'}} component={Paper}>
+            <TableContainer sx={{marginLeft: 'auto', marginRight: 'auto'}} component={Paper}>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
@@ -46,12 +46,13 @@ const TemperatureTable = ({isLoading, tempTemperatureData, temperatureData, tota
                     {temperatureData?.length > 10 && <TableFooter>
                         <TableRow>
                             <TableCell colSpan={3} className="text-center border-0" component="th" scope="row">
-                                <Pagination count={totalPages} page={page} onChange={handleChangePage} color="secondary" />
+                                <Pagination count={totalPages} page={page} onChange={handleChangePage}
+                                            color="secondary"/>
                             </TableCell>
                         </TableRow>
                     </TableFooter>}
                 </Table>
-            </TableContainer> : <FuseLoading/>}
+            </TableContainer>
         </motion.div>
     );
 }
