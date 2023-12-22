@@ -21,16 +21,30 @@ const TemperaturePage = () => {
     let endIndex = startIndex + pageSize;
 
     useEffect(() => {
-        setIsLoading(true);
-        DataService.getTemperatureData().then((response) => {
-            if (response) {
-                setTemperatureData(response?.data);
-                setLiveTemperature(response?.data[0]);
-                setTempTemperatureData(response?.data?.slice(startIndex, endIndex));
+        const fetchTemperatureData = async () => {
+            setIsLoading(true);
+            try {
+                const response = await DataService.getTemperatureData();
+                if (response) {
+                    setTemperatureData(response?.data);
+                    setLiveTemperature(response?.data[0]);
+                    setTempTemperatureData(response?.data?.slice(startIndex, endIndex));
+                    setTotalPages(Math.ceil(response?.data?.length / pageSize));
+                    setIsLoading(false);
+                }
+            } catch (error) {
+                console.error('Error while updating temperature data: ', error);
                 setIsLoading(false);
-                setTotalPages(Math.ceil(response?.data?.length / pageSize));
             }
-        })
+        };
+
+        fetchTemperatureData();
+
+        const intervalId = setInterval(() => {
+            setTrigger((trigger) => !trigger);
+        }, 30000);
+
+        return () => clearInterval(intervalId);
     }, [trigger]);
 
     useEffect(() => {
