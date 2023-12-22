@@ -12,13 +12,13 @@ import FuseLoading from "@fuse/core/FuseLoading";
 import {Pagination, TableFooter} from "@mui/material";
 import LightDataHelper from "../../../shared/helpers/LightDataHelper";
 
-const LightTable = ({isLoading, tempLightData, lightData, totalPages, page, handleChangePage}) => {
+const LightTable = ({tempLightData, lightData, totalPages, page, handleChangePage}) => {
     return (
         <motion.div
             initial={{opacity: 0, y: 40}}
             animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
-            {!isLoading ? <TableContainer sx={{marginLeft: 'auto', marginRight: 'auto'}} component={Paper}>
+            <TableContainer sx={{marginLeft: 'auto', marginRight: 'auto'}} component={Paper}>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
@@ -53,7 +53,7 @@ const LightTable = ({isLoading, tempLightData, lightData, totalPages, page, hand
                         </TableRow>
                     </TableFooter>}
                 </Table>
-            </TableContainer> : <FuseLoading/>}
+            </TableContainer>
         </motion.div>
     );
 }

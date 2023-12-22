@@ -8,9 +8,7 @@ import {motion} from 'framer-motion';
 import {Tooltip} from '@mui/material';
 import LightDataHelper from "../../../shared/helpers/LightDataHelper";
 
-function LightLive({liveLight}) {
-    const {date} = {date: '2023-05-01T22:24:15.000Z'};
-
+function LightLive({liveLight, trigger, setTrigger}) {
     return (
         <motion.div
             initial={{opacity: 0, y: 40}}
@@ -27,7 +25,7 @@ function LightLive({liveLight}) {
                     </div>
                     <div className="-mt-8">
                         <Tooltip title="Refresh" placement="top">
-                            <IconButton size="large">
+                            <IconButton size="large" onClick={() => setTrigger(!trigger)}>
                                 <FuseSvgIcon>material-outline:refresh</FuseSvgIcon>
                             </IconButton>
                         </Tooltip>
