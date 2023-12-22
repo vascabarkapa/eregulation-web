@@ -20,16 +20,30 @@ const LightPage = () => {
     let endIndex = startIndex + pageSize;
 
     useEffect(() => {
-        setIsLoading(true);
-        DataService.getLightData().then((response) => {
-            if (response) {
-                setLightData(response?.data);
-                setLiveLight(response?.data[0]);
-                setTempLightData(response?.data?.slice(startIndex, endIndex));
+        const fetchLightData = async () => {
+            setIsLoading(true);
+            try {
+                const response = await DataService.getLightData();
+                if (response) {
+                    setLightData(response?.data);
+                    setLiveLight(response?.data[0]);
+                    setTempLightData(response?.data?.slice(startIndex, endIndex));
+                    setIsLoading(false);
+                    setTotalPages(Math.ceil(response?.data?.length / pageSize));
+                }
+            } catch (error) {
+                console.error('Error while updating light data: ', error);
                 setIsLoading(false);
-                setTotalPages(Math.ceil(response?.data?.length / pageSize));
             }
-        })
+        };
+
+        fetchLightData();
+
+        const intervalId = setInterval(() => {
+            setTrigger((trigger) => !trigger);
+        }, 30000);
+
+        return () => clearInterval(intervalId);
     }, [trigger]);
 
     useEffect(() => {
