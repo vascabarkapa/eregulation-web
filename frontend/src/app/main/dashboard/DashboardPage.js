@@ -31,37 +31,45 @@ const DashboardPage = () => {
     const [liveLight, setLiveLight] = useState({});
 
     useEffect(() => {
-        setIsLoading(true);
+        const fetchLatestData = async () => {
+            setIsLoading(true);
+            try {
+                DataService.getLatestData().then((response) => {
+                    if (response) {
+                        setLiveTemperature(response?.data["t"]);
+                        setLiveHumidity(response?.data["h"]);
+                        setLiveLight(response?.data["l"]);
 
-        try {
-            DataService.getLatestData().then((response) => {
-                if (response) {
-                    setLiveTemperature(response?.data["t"]);
-                    setLiveHumidity(response?.data["h"]);
-                    setLiveLight(response?.data["l"]);
+                        const handleVisibilityChange = () => {
+                            if (document.hidden) {
+                                document.title = response?.data["t"]?.value +
+                                    "\u00B0C | " + response?.data["h"]?.value + "% | " +
+                                    LightDataHelper.getModeValue(response?.data["l"]?.value);
+                            } else {
+                                document.title = "eRegulation";
+                            }
+                        };
 
-                    const handleVisibilityChange = () => {
-                        if (document.hidden) {
-                            document.title = response?.data["t"]?.value +
-                                "\u00B0C | " + response?.data["h"]?.value + "% | " +
-                                LightDataHelper.getModeValue(response?.data["l"]?.value);
-                        } else {
-                            document.title = "eRegulation";
-                        }
-                    };
+                        document.addEventListener("visibilitychange", handleVisibilityChange);
+                        dispatch(showMessage({message: "Updated latest data"}));
+                        setIsLoading(false);
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching latest data:", error);
+                dispatch(showMessage({message: error || "An error occurred! Reload page."}));
+                setIsLoading(false);
+            }
+        };
 
-                    document.addEventListener("visibilitychange", handleVisibilityChange);
-                    dispatch(showMessage({message: "Updated latest data"}));
-                    setIsLoading(false);
-                }
-            });
-        } catch (error) {
-            console.error("Error fetching latest data:", error);
-            dispatch(showMessage({message: error || "An error occurred! Reload page."}));
-            setIsLoading(false);
-        }
+        fetchLatestData();
+
+        const intervalId = setInterval(() => {
+            setTrigger((trigger) => !trigger);
+        }, 30000);
+
+        return () => clearInterval(intervalId);
     }, [trigger]);
-
 
     return (
         <Root
