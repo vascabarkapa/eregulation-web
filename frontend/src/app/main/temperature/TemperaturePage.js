@@ -20,6 +20,9 @@ const TemperaturePage = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
     let pageSize = 10;
     let startIndex = (page - 1) * pageSize;
     let endIndex = startIndex + pageSize;
@@ -28,7 +31,7 @@ const TemperaturePage = () => {
         const fetchTemperatureData = async () => {
             setIsLoading(true);
             try {
-                const response = await DataService.getTemperatureData();
+                const response = await DataService.getTemperatureData(startDate, endDate);
                 if (response) {
                     setTemperatureData(response?.data);
                     setLiveTemperature(response?.data[0]);
@@ -52,7 +55,7 @@ const TemperaturePage = () => {
         }, 30000);
 
         return () => clearInterval(intervalId);
-    }, [trigger]);
+    }, [trigger, startDate, endDate]);
 
     useEffect(() => {
         setTempTemperatureData(temperatureData?.slice(startIndex, endIndex));
@@ -76,7 +79,8 @@ const TemperaturePage = () => {
                             </div>
                             <div className="w-full md:w-1/2">
                                 <div className="flex flex-col gap-20">
-                                    <DateRangeFilter/>
+                                    <DateRangeFilter startDate={startDate} setStartDate={setStartDate} endDate={endDate}
+                                                     setEndDate={setEndDate}/>
                                     <TemperatureLive liveTemperature={liveTemperature} trigger={trigger}
                                                      setTrigger={setTrigger}/>
                                 </div>
@@ -89,7 +93,8 @@ const TemperaturePage = () => {
                         </div>
                         <div className="flex flex-col gap-20 md:hidden m-20">
                             <TemperatureLive liveTemperature={liveTemperature}/>
-                            <DateRangeFilter/>
+                            <DateRangeFilter startDate={startDate} setStartDate={setStartDate} endDate={endDate}
+                                             setEndDate={setEndDate}/>
                             <TemperatureTable tempTemperatureData={tempTemperatureData}
                                               temperatureData={temperatureData} totalPages={totalPages} page={page}
                                               handleChangePage={handleChangePage}/>

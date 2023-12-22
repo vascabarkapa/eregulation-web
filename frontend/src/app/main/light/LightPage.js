@@ -19,6 +19,9 @@ const LightPage = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
     let pageSize = 10;
     let startIndex = (page - 1) * pageSize;
     let endIndex = startIndex + pageSize;
@@ -27,7 +30,7 @@ const LightPage = () => {
         const fetchLightData = async () => {
             setIsLoading(true);
             try {
-                const response = await DataService.getLightData();
+                const response = await DataService.getLightData(startDate, endDate);
                 if (response) {
                     setLightData(response?.data);
                     setLiveLight(response?.data[0]);
@@ -51,7 +54,7 @@ const LightPage = () => {
         }, 30000);
 
         return () => clearInterval(intervalId);
-    }, [trigger]);
+    }, [trigger, startDate, endDate]);
 
     useEffect(() => {
         setTempLightData(lightData?.slice(startIndex, endIndex));
@@ -75,14 +78,16 @@ const LightPage = () => {
                             </div>
                             <div className="w-full md:w-1/2">
                                 <div className="flex flex-col gap-20">
-                                    <DateRangeFilter/>
+                                    <DateRangeFilter startDate={startDate} setStartDate={setStartDate} endDate={endDate}
+                                                     setEndDate={setEndDate}/>
                                     <LightLive liveLight={liveLight} trigger={trigger} setTrigger={setTrigger}/>
                                 </div>
                             </div>
                         </div>
                         <div className="flex flex-col gap-20 md:hidden m-20">
                             <LightLive liveLight={liveLight}/>
-                            <DateRangeFilter/>
+                            <DateRangeFilter startDate={startDate} setStartDate={setStartDate} endDate={endDate}
+                                             setEndDate={setEndDate}/>
                             <LightTable isLoading={isLoading} tempLightData={tempLightData}
                                         lightData={lightData} totalPages={totalPages} page={page}
                                         handleChangePage={handleChangePage}/>

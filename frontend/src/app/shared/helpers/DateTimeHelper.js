@@ -77,13 +77,22 @@ function getTimeWithSeconds(dateTime) {
     return `${formattedHours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
 }
 
+function convertToSearchDate(dateTime) {
+    const year = dateTime.$y;
+    const month = (dateTime.$M + 1).toString().padStart(2, '0');
+    const day = dateTime.$D.toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
+
 
 const DateTimeHelper = {
     convertToLocalFormatWithSeconds,
     convertToLocalFormat,
     getDate,
     getTime,
-    getTimeWithSeconds
+    getTimeWithSeconds,
+    convertToSearchDate
 }
 
 export default DateTimeHelper;

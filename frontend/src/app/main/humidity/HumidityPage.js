@@ -20,6 +20,9 @@ const HumidityPage = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
     let pageSize = 10;
     let startIndex = (page - 1) * pageSize;
     let endIndex = startIndex + pageSize;
@@ -28,7 +31,7 @@ const HumidityPage = () => {
         const fetchHumidityData = async () => {
             setIsLoading(true);
             try {
-                const response = await DataService.getHumidityData();
+                const response = await DataService.getHumidityData(startDate, endDate);
                 if (response) {
                     setHumidityData(response?.data);
                     setLiveHumidity(response?.data[0]);
@@ -52,7 +55,7 @@ const HumidityPage = () => {
         }, 30000);
 
         return () => clearInterval(intervalId);
-    }, [trigger]);
+    }, [trigger, startDate, endDate]);
 
     useEffect(() => {
         setTempHumidityData(humidityData?.slice(startIndex, endIndex));
@@ -76,7 +79,8 @@ const HumidityPage = () => {
                             </div>
                             <div className="w-full md:w-1/2">
                                 <div className="flex flex-col gap-20">
-                                    <DateRangeFilter/>
+                                    <DateRangeFilter startDate={startDate} setStartDate={setStartDate} endDate={endDate}
+                                                     setEndDate={setEndDate}/>
                                     <HumidityLive liveHumidity={liveHumidity} trigger={trigger}
                                                   setTrigger={setTrigger}/>
                                 </div>
@@ -91,7 +95,8 @@ const HumidityPage = () => {
                             <HumidityLive tempHumidityData={tempHumidityData}
                                           humidityData={humidityData} totalPages={totalPages} page={page}
                                           handleChangePage={handleChangePage}/>
-                            <DateRangeFilter/>
+                            <DateRangeFilter startDate={startDate} setStartDate={setStartDate} endDate={endDate}
+                                             setEndDate={setEndDate}/>
                             <HumidityTable liveHumidity={liveHumidity}/>
                             {/*<HumidityAverageChart />*/}
                         </div>
