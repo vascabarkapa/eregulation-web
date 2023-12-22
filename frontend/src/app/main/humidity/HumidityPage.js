@@ -28,17 +28,28 @@ const HumidityPage = () => {
     let endIndex = startIndex + pageSize;
 
     useEffect(() => {
-        const fetchHumidityData = async () => {
+        const fetchCurrentHumidityData = async () => {
             setIsLoading(true);
+            try {
+                const response = await DataService.getCurrentHumidityData();
+                if (response) {
+                    setLiveHumidity(response?.data);
+                }
+            } catch (error) {
+                console.error('Error while updating live humidity data: ', error);
+                dispatch(showMessage({message: error || "An error occurred! Reload page."}));
+            }
+        };
+
+        const fetchHumidityData = async () => {
             try {
                 const response = await DataService.getHumidityData(startDate, endDate);
                 if (response) {
                     setHumidityData(response?.data);
-                    setLiveHumidity(response?.data[0]);
                     setTempHumidityData(response?.data?.slice(startIndex, endIndex));
                     setTotalPages(Math.ceil(response?.data?.length / pageSize));
 
-                    dispatch(showMessage({message: "Updated latest humidity data"}));
+                    dispatch(showMessage({message: "Updated Humidity Data"}));
                     setIsLoading(false);
                 }
             } catch (error) {
@@ -48,6 +59,7 @@ const HumidityPage = () => {
             }
         };
 
+        fetchCurrentHumidityData();
         fetchHumidityData();
 
         const intervalId = setInterval(() => {

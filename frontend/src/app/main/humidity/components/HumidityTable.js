@@ -39,7 +39,7 @@ const HumidityTable = ({tempHumidityData, humidityData, totalPages, page, handle
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
                             <TableCell colSpan={3} className="text-center" component="th" scope="row">
-                                No Humidity data available
+                                No Humidity Data available
                             </TableCell></TableRow>}
                     </TableBody>
                     {humidityData?.length > 10 && <TableFooter>

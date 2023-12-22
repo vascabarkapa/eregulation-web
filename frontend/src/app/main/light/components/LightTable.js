@@ -41,7 +41,7 @@ const LightTable = ({tempLightData, lightData, totalPages, page, handleChangePag
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
                             <TableCell colSpan={3} className="text-center" component="th" scope="row">
-                                No Light data available
+                                No Light Data available
                             </TableCell></TableRow>}
                     </TableBody>
                     {lightData?.length > 10 && <TableFooter>

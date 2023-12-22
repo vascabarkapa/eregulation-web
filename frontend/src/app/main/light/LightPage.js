@@ -27,17 +27,28 @@ const LightPage = () => {
     let endIndex = startIndex + pageSize;
 
     useEffect(() => {
-        const fetchLightData = async () => {
+        const fetchCurrentLightData = async () => {
             setIsLoading(true);
+            try {
+                const response = await DataService.getCurrentLightData();
+                if (response) {
+                    setLiveLight(response?.data);
+                }
+            } catch (error) {
+                console.error('Error while updating live light data: ', error);
+                dispatch(showMessage({message: error || "An error occurred! Reload page."}));
+            }
+        };
+
+        const fetchLightData = async () => {
             try {
                 const response = await DataService.getLightData(startDate, endDate);
                 if (response) {
                     setLightData(response?.data);
-                    setLiveLight(response?.data[0]);
                     setTempLightData(response?.data?.slice(startIndex, endIndex));
                     setTotalPages(Math.ceil(response?.data?.length / pageSize));
 
-                    dispatch(showMessage({message: "Updated latest light data"}));
+                    dispatch(showMessage({message: "Updated Light Data"}));
                     setIsLoading(false);
                 }
             } catch (error) {
@@ -47,6 +58,7 @@ const LightPage = () => {
             }
         };
 
+        fetchCurrentLightData();
         fetchLightData();
 
         const intervalId = setInterval(() => {

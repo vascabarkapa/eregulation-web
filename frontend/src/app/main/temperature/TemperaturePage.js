@@ -28,17 +28,28 @@ const TemperaturePage = () => {
     let endIndex = startIndex + pageSize;
 
     useEffect(() => {
-        const fetchTemperatureData = async () => {
+        const fetchCurrentTemperatureData = async () => {
             setIsLoading(true);
+            try {
+                const response = await DataService.getCurrentTemperatureData();
+                if (response) {
+                    setLiveTemperature(response?.data);
+                }
+            } catch (error) {
+                console.error('Error while updating live temperature data: ', error);
+                dispatch(showMessage({message: error || "An error occurred! Reload page."}));
+            }
+        };
+
+        const fetchTemperatureData = async () => {
             try {
                 const response = await DataService.getTemperatureData(startDate, endDate);
                 if (response) {
                     setTemperatureData(response?.data);
-                    setLiveTemperature(response?.data[0]);
                     setTempTemperatureData(response?.data?.slice(startIndex, endIndex));
                     setTotalPages(Math.ceil(response?.data?.length / pageSize));
 
-                    dispatch(showMessage({message: "Updated latest temperature data"}));
+                    dispatch(showMessage({message: "Updated Temperature Data"}));
                     setIsLoading(false);
                 }
             } catch (error) {
@@ -48,6 +59,7 @@ const TemperaturePage = () => {
             }
         };
 
+        fetchCurrentTemperatureData();
         fetchTemperatureData();
 
         const intervalId = setInterval(() => {
