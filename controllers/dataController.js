@@ -20,8 +20,17 @@ const addData = asyncHandler(async (body) => {
  */
 const getTemperatureData = asyncHandler(async (req, res) => {
     try {
-        const temperatureData = await Data.find({type: "t"}).sort({createdAt: -1});
+        let query = {type: "t"};
 
+        if (req.query.startDate !== 'null') {
+            query.createdAt = {$gte: new Date(req.query.startDate).toISOString()};
+        }
+
+        if (req.query.endDate !== 'null') {
+            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate).toISOString()};
+        }
+
+        const temperatureData = await Data.find(query).sort({createdAt: -1});
 
         res.status(200).json(temperatureData);
     } catch (error) {
@@ -37,7 +46,17 @@ const getTemperatureData = asyncHandler(async (req, res) => {
  */
 const getHumidityData = asyncHandler(async (req, res) => {
     try {
-        const humidityData = await Data.find({type: "h"}).sort({createdAt: -1});
+        let query = {type: "h"};
+
+        if (req.query.startDate !== 'null') {
+            query.createdAt = {$gte: new Date(req.query.startDate).toISOString()};
+        }
+
+        if (req.query.endDate !== 'null') {
+            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate).toISOString()};
+        }
+
+        const humidityData = await Data.find(query).sort({createdAt: -1});
 
         res.status(200).json(humidityData);
     } catch (error) {
@@ -53,7 +72,17 @@ const getHumidityData = asyncHandler(async (req, res) => {
  */
 const getLightData = asyncHandler(async (req, res) => {
     try {
-        const lightData = await Data.find({type: "l"}).sort({createdAt: -1});
+        let query = {type: "l"};
+
+        if (req.query.startDate !== 'null') {
+            query.createdAt = {$gte: new Date(req.query.startDate).toISOString()};
+        }
+
+        if (req.query.endDate !== 'null') {
+            query.createdAt = {...query.createdAt, $lte: new Date(req.query.endDate).toISOString()};
+        }
+
+        const lightData = await Data.find(query).sort({createdAt: -1});
 
         res.status(200).json(lightData);
     } catch (error) {
