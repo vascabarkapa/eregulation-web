@@ -2,16 +2,16 @@ import {get, post, put, remove} from "./api-client";
 
 const ENDPOINT = "/data";
 
-function getTemperatureData() {
-    return get(ENDPOINT + "/temperature");
+function getTemperatureData(startDate = null, endDate = null) {
+    return get(ENDPOINT + "/temperature", "startDate=" + startDate + "&endDate=" + endDate);
 }
 
-function getHumidityData() {
-    return get(ENDPOINT + "/humidity");
+function getHumidityData(startDate = null, endDate = null) {
+    return get(ENDPOINT + "/humidity", "startDate=" + startDate + "&endDate=" + endDate);
 }
 
-function getLightData() {
-    return get(ENDPOINT + "/light");
+function getLightData(startDate = null, endDate = null) {
+    return get(ENDPOINT + "/light", "startDate=" + startDate + "&endDate=" + endDate);
 }
 
 function getLatestData() {
