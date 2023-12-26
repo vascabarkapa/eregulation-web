@@ -1,16 +1,16 @@
-import { useSelector } from 'react-redux';
-import { styled, ThemeProvider, useTheme } from '@mui/material/styles';
+import {useSelector} from 'react-redux';
+import {styled, ThemeProvider, useTheme} from '@mui/material/styles';
 import ReactApexChart from 'react-apexcharts';
-import { useState } from 'react';
-import { selectContrastMainTheme } from 'app/store/fuse/settingsSlice';
+import {useState} from 'react';
+import {selectContrastMainTheme} from 'app/store/fuse/settingsSlice';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ChartData from 'src/app/shared/components/ChartData';
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
 import DateTimeHelper from "../../../shared/helpers/DateTimeHelper";
 
 
-const Root = styled(Paper)(({ theme }) => ({
+const Root = styled(Paper)(({theme}) => ({
     background: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
 }));
@@ -18,7 +18,7 @@ const Root = styled(Paper)(({ theme }) => ({
 function DashboardTemperatureHistoryChart({temperatureHistoryData}) {
     const theme = useTheme();
     const contrastTheme = useSelector(selectContrastMainTheme(theme.palette.primary.main));
-    const { series, ranges } = ChartData.getTemperatureHistoryChartData(temperatureHistoryData);
+    const {series, ranges} = ChartData.getTemperatureHistoryChartData(temperatureHistoryData);
     const [tabValue, setTabValue] = useState(0);
     const currentRange = Object.keys(ranges)[tabValue];
 
@@ -118,8 +118,8 @@ function DashboardTemperatureHistoryChart({temperatureHistoryData}) {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+            initial={{opacity: 0, y: 40}}
+            animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
             <ThemeProvider theme={contrastTheme}>
                 <Root className="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto shadow rounded-2xl">

@@ -1,21 +1,32 @@
-import { useTheme } from '@mui/material/styles';
+import {useTheme} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ReactApexChart from 'react-apexcharts';
 import ChartData from 'src/app/shared/components/ChartData';
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
+import {useState} from "react";
+import {useSelector} from "react-redux";
+import {selectContrastMainTheme} from "app/store/fuse/settingsSlice";
+import DateTimeHelper from "../../../shared/helpers/DateTimeHelper";
 
-function DashboardHumidityHistoryChart(props) {
+function DashboardHumidityHistoryChart({humidityHistoryData}) {
     const theme = useTheme();
-    const { series, averageRatio, predictedRatio, overallScore, labels } = ChartData.getHumidityHistoryChartData();
+    const contrastTheme = useSelector(selectContrastMainTheme(theme.palette.primary.main));
+    const {series, ranges} = ChartData.getHumidityHistoryChartData(humidityHistoryData);
+    const [tabValue, setTabValue] = useState(0);
+    const currentRange = Object.keys(ranges)[tabValue];
 
     const chartOptions = {
         chart: {
             animations: {
-                enabled: false,
+                speed: 400,
+                animateGradually: {
+                    enabled: false,
+                },
             },
             fontFamily: 'inherit',
             foreColor: 'inherit',
+            width: '100%',
             height: '100%',
             type: 'area',
             toolbar: {
@@ -36,13 +47,17 @@ function DashboardHumidityHistoryChart(props) {
         grid: {
             show: false,
             padding: {
+                top: 10,
                 bottom: -40,
                 left: 0,
-                right: 0,
+                right: -40,
             },
-        },
-        legend: {
-            show: false,
+            position: 'back',
+            xaxis: {
+                lines: {
+                    show: true,
+                },
+            },
         },
         stroke: {
             curve: 'smooth',
@@ -51,44 +66,56 @@ function DashboardHumidityHistoryChart(props) {
         tooltip: {
             followCursor: true,
             theme: 'dark',
-            x: {
-                format: 'MMM dd, yyyy',
+            y: {
+                formatter: (value) => `${value}%`,
             },
         },
         xaxis: {
             axisBorder: {
                 show: false,
             },
+            axisTicks: {
+                show: false,
+            },
+            crosshairs: {
+                stroke: {
+                    color: theme.palette.divider,
+                    dashArray: 0,
+                    width: 2,
+                },
+            },
             labels: {
                 offsetY: -20,
-                rotate: 0,
                 style: {
                     colors: theme.palette.text.secondary,
                 },
+                formatter: (value) => `${DateTimeHelper.getTimeWithSeconds(value)}`,
+                rotate: 0
             },
-            tickAmount: 3,
+            tickAmount: 10,
             tooltip: {
                 enabled: false,
             },
-            type: 'datetime',
         },
         yaxis: {
-            labels: {
-                style: {
-                    colors: theme.palette.divider,
-                },
+            axisTicks: {
+                show: false,
             },
-            max: (max) => max + 250,
-            min: (min) => min - 250,
-            show: false,
+            axisBorder: {
+                show: false,
+            },
+            min: 0,
+            max: (max) => max,
             tickAmount: 5,
+            show: false,
         },
     };
 
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+            initial={{opacity: 0, y: 40}}
+            animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
             <Paper className="flex flex-col flex-auto shadow rounded-2xl">
                 <div className="flex items-center justify-between mt-40 ml-40 mr-24 sm:mr-40">
@@ -97,7 +124,7 @@ function DashboardHumidityHistoryChart(props) {
                             Humidity Overview
                         </Typography>
                         <Typography className="font-medium" color="text.secondary">
-                            Humidity overview by month
+                            Measurement data in the last 24 hours
                         </Typography>
                     </div>
                 </div>
@@ -105,7 +132,7 @@ function DashboardHumidityHistoryChart(props) {
                     <ReactApexChart
                         className="flex-auto w-full h-full"
                         options={chartOptions}
-                        series={series}
+                        series={series[currentRange]}
                         type={chartOptions.chart.type}
                         height={chartOptions.chart.height}
                     />
