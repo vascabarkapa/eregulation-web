@@ -170,6 +170,33 @@ const getLatestData = asyncHandler(async (req, res) => {
     }
 });
 
+/**
+ * @desc Get previous temperature data for chart
+ * @route GET /api/data/temperature/history
+ * @access Private
+ */
+const getPreviousTemperatureData = asyncHandler(async (req, res) => {
+    try {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        let query = {type: "t"};
+        query.createdAt = {$gte: yesterday.toISOString()};
+
+        const data = await Data.find(query).sort({createdAt: 1});
+
+        const formattedData = data.map(item => ({
+            x: item.createdAt.toISOString(),
+            y: item.value
+        }));
+
+        res.json(formattedData);
+    } catch (error) {
+        console.error("Error getting history temperature data:", error);
+        res.status(500).json({error: "Internal Server Error"});
+    }
+});
+
 module.exports = {
     addData,
     getCurrentTemperatureData,
@@ -178,5 +205,6 @@ module.exports = {
     getHumidityData,
     getCurrentLightData,
     getLightData,
-    getLatestData
+    getLatestData,
+    getPreviousTemperatureData
 };

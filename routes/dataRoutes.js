@@ -6,7 +6,8 @@ const {
     getHumidityData,
     getCurrentLightData,
     getLightData,
-    getLatestData
+    getLatestData,
+    getPreviousTemperatureData
 } = require("../controllers/dataController");
 const validateToken = require("../middleware/validateTokenHandler");
 const router = express.Router();
@@ -16,6 +17,7 @@ router.route("/latest").get(getLatestData);
 router.use(validateToken);
 router.route("/temperature/current").get(getCurrentTemperatureData);
 router.route("/temperature").get(getTemperatureData);
+router.route("/temperature/history").get(getPreviousTemperatureData);
 router.route("/humidity/current").get(getCurrentHumidityData);
 router.route("/humidity").get(getHumidityData);
 router.route("/light/current").get(getCurrentLightData);
