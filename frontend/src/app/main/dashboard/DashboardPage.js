@@ -92,40 +92,30 @@ const DashboardPage = () => {
         <Root
             header={<DashboardHeader/>}
             content={
-                <div className="grid grid-cols-1 w-full mt-10 mx-20">
-                    <div className="grid grid-cols-1 md:grid-cols-3">
-                        {
-                            isLoading ?
-                                <div className="md:col-span-3 col-span-3 my-10">
-                                    <FuseLoading/>
-                                </div> :
-                                <>
-                                    <div className="md:col-span-1 col-span-3 my-10 md:mr-10">
-                                        <DashboardTemperatureLive liveTemperature={liveTemperature} trigger={trigger}
-                                                                  setTrigger={setTrigger}/>
-                                    </div>
-                                    <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
-                                        <DashboardHumidityLive liveHumidity={liveHumidity} trigger={trigger}
-                                                               setTrigger={setTrigger}/>
-                                    </div>
-                                    <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
-                                        <DashboardLightLive liveLight={liveLight} trigger={trigger}
-                                                            setTrigger={setTrigger}/>
-                                    </div>
-                                </>
-                        }
+                isLoading ? <FuseLoading/> :
+                    <div className="grid grid-cols-1 w-full mt-10 mx-20">
+                        <div className="grid grid-cols-1 md:grid-cols-3">
+                            <div className="md:col-span-1 col-span-3 my-10 md:mr-10">
+                                <DashboardTemperatureLive liveTemperature={liveTemperature} trigger={trigger}
+                                                          setTrigger={setTrigger}/>
+                            </div>
+                            <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
+                                <DashboardHumidityLive liveHumidity={liveHumidity} trigger={trigger}
+                                                       setTrigger={setTrigger}/>
+                            </div>
+                            <div className="md:col-span-1 col-span-3 my-10 md:ml-10">
+                                <DashboardLightLive liveLight={liveLight} trigger={trigger}
+                                                    setTrigger={setTrigger}/>
+                            </div>
+                        </div>
+                        <div className="w-full my-10">
+
+                            <DashboardTemperatureHistoryChart temperatureHistoryData={temperatureHistoryData}/>
+                        </div>
+                        <div className="w-full mt-10 mb-20">
+                            <DashboardHumidityHistoryChart/>
+                        </div>
                     </div>
-                    <div className="w-full my-10">
-                        {
-                            isLoading ?
-                                <FuseLoading/> :
-                                <DashboardTemperatureHistoryChart temperatureHistoryData={temperatureHistoryData}/>
-                        }
-                    </div>
-                    <div className="w-full mt-10 mb-20">
-                        {/*<DashboardHumidityHistoryChart />*/}
-                    </div>
-                </div>
             }
         />
     );
