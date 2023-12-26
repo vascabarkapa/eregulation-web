@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ChartData from 'src/app/shared/components/ChartData';
 import { motion } from 'framer-motion';
+import DateTimeHelper from "../../../shared/helpers/DateTimeHelper";
 
 
 const Root = styled(Paper)(({ theme }) => ({
@@ -55,7 +56,7 @@ function DashboardTemperatureHistoryChart({temperatureHistoryData}) {
                 top: 10,
                 bottom: -40,
                 left: 0,
-                right: 0,
+                right: -40,
             },
             position: 'back',
             xaxis: {
@@ -70,11 +71,8 @@ function DashboardTemperatureHistoryChart({temperatureHistoryData}) {
         tooltip: {
             followCursor: true,
             theme: 'dark',
-            x: {
-                format: 'MMM dd, yyyy',
-            },
             y: {
-                formatter: (value) => `${value}`,
+                formatter: (value) => `${value}&deg;C`,
             },
         },
         xaxis: {
@@ -96,12 +94,13 @@ function DashboardTemperatureHistoryChart({temperatureHistoryData}) {
                 style: {
                     colors: contrastTheme.palette.text.secondary,
                 },
+                formatter: (value) => `${DateTimeHelper.getTimeWithSeconds(value)}`,
+                rotate: 0
             },
-            tickAmount: 20,
+            tickAmount: 10,
             tooltip: {
                 enabled: false,
             },
-            type: 'datetime',
         },
         yaxis: {
             axisTicks: {
@@ -110,8 +109,8 @@ function DashboardTemperatureHistoryChart({temperatureHistoryData}) {
             axisBorder: {
                 show: false,
             },
-            min: (min) => min - 750,
-            max: (max) => max + 250,
+            min: 0,
+            max: (max) => max,
             tickAmount: 5,
             show: false,
         },
