@@ -10,6 +10,10 @@ function getTemperatureData(startDate = null, endDate = null) {
     return get(ENDPOINT + "/temperature", "startDate=" + startDate + "&endDate=" + endDate);
 }
 
+function getTemperatureHistoryData() {
+    return get(ENDPOINT + "/temperature/history");
+}
+
 function getCurrentHumidityData() {
     return get(ENDPOINT + "/humidity/current");
 }
@@ -37,7 +41,8 @@ const DataService = {
     getHumidityData,
     getCurrentLightData,
     getLightData,
-    getLatestData
+    getLatestData,
+    getTemperatureHistoryData
 }
 
 export default DataService;
