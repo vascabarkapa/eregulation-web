@@ -14,10 +14,10 @@ const Root = styled(Paper)(({ theme }) => ({
     color: theme.palette.primary.contrastText,
 }));
 
-function DashboardTemperatureHistoryChart() {
+function DashboardTemperatureHistoryChart({temperatureHistoryData}) {
     const theme = useTheme();
     const contrastTheme = useSelector(selectContrastMainTheme(theme.palette.primary.main));
-    const { series, ranges } = ChartData.getTemperatureHistoryChartData();
+    const { series, ranges } = ChartData.getTemperatureHistoryChartData(temperatureHistoryData);
     const [tabValue, setTabValue] = useState(0);
     const currentRange = Object.keys(ranges)[tabValue];
 
@@ -130,7 +130,7 @@ function DashboardTemperatureHistoryChart() {
                                 Temperature Overview
                             </Typography>
                             <Typography className="font-medium" color="text.secondary">
-                                Temperature overview by month
+                                Measurement data in the last 24 hours
                             </Typography>
                         </div>
                     </div>
