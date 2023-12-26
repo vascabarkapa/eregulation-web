@@ -30,6 +30,7 @@ const DashboardPage = () => {
     const [liveHumidity, setLiveHumidity] = useState({});
     const [liveLight, setLiveLight] = useState({});
     const [temperatureHistoryData, setTemperatureHistoryData] = useState([]);
+    const [humidityHistoryData, setHumidityHistoryData] = useState([]);
 
     useEffect(() => {
         const fetchLatestData = async () => {
@@ -63,7 +64,7 @@ const DashboardPage = () => {
             }
         };
 
-        const fetchHistoryData = async () => {
+        const fetchTemperatureHistoryData = async () => {
             setIsLoading(true);
             try {
                 DataService.getTemperatureHistoryData().then((response) => {
@@ -72,13 +73,30 @@ const DashboardPage = () => {
                     }
                 });
             } catch (error) {
-                console.error("Error fetching latest data:", error);
+                console.error("Error fetching temperature history data:", error);
                 dispatch(showMessage({message: error || "An error occurred! Reload page."}));
                 setIsLoading(false);
             }
         };
 
-        fetchHistoryData();
+        const fetchHumidityHistoryData = async () => {
+            setIsLoading(true);
+            try {
+                DataService.getHumidityHistoryData().then((response) => {
+                    if (response) {
+                        setHumidityHistoryData(response?.data);
+                        console.log(response?.data)
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching humidity history data:", error);
+                dispatch(showMessage({message: error || "An error occurred! Reload page."}));
+                setIsLoading(false);
+            }
+        };
+
+        fetchTemperatureHistoryData();
+        fetchHumidityHistoryData();
         fetchLatestData();
 
         const intervalId = setInterval(() => {
@@ -113,7 +131,7 @@ const DashboardPage = () => {
                             <DashboardTemperatureHistoryChart temperatureHistoryData={temperatureHistoryData}/>
                         </div>
                         <div className="w-full mt-10 mb-20">
-                            <DashboardHumidityHistoryChart/>
+                            <DashboardHumidityHistoryChart humidityHistoryData={humidityHistoryData}/>
                         </div>
                     </div>
             }
