@@ -29,6 +29,7 @@ const DashboardPage = () => {
     const [liveTemperature, setLiveTemperature] = useState({});
     const [liveHumidity, setLiveHumidity] = useState({});
     const [liveLight, setLiveLight] = useState({});
+    const [temperatureHistoryData, setTemperatureHistoryData] = useState([]);
 
     useEffect(() => {
         const fetchLatestData = async () => {
@@ -62,6 +63,22 @@ const DashboardPage = () => {
             }
         };
 
+        const fetchHistoryData = async () => {
+            setIsLoading(true);
+            try {
+                DataService.getTemperatureHistoryData().then((response) => {
+                    if (response) {
+                        setTemperatureHistoryData(response?.data);
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching latest data:", error);
+                dispatch(showMessage({message: error || "An error occurred! Reload page."}));
+                setIsLoading(false);
+            }
+        };
+
+        fetchHistoryData();
         fetchLatestData();
 
         const intervalId = setInterval(() => {
@@ -99,7 +116,11 @@ const DashboardPage = () => {
                         }
                     </div>
                     <div className="w-full my-10">
-                        {/*<DashboardTemperatureHistoryChart />*/}
+                        {
+                            isLoading ?
+                                <FuseLoading/> :
+                                <DashboardTemperatureHistoryChart temperatureHistoryData={temperatureHistoryData}/>
+                        }
                     </div>
                     <div className="w-full mt-10 mb-20">
                         {/*<DashboardHumidityHistoryChart />*/}
