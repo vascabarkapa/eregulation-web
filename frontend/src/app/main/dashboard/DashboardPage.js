@@ -44,8 +44,8 @@ const DashboardPage = () => {
 
                         const handleVisibilityChange = () => {
                             if (document.hidden) {
-                                document.title = response?.data["t"]?.value +
-                                    "\u00B0C | " + response?.data["h"]?.value + "% | " +
+                                document.title = Math.round(response?.data["t"]?.value) +
+                                    "\u00B0C | " + Math.round(response?.data["h"]?.value) + "% | " +
                                     LightDataHelper.getModeValue(response?.data["l"]?.value);
                             } else {
                                 document.title = "eRegulation";

@@ -34,7 +34,7 @@ const TemperatureLive = ({liveTemperature, trigger, setTrigger}) => {
                     <div className="flex items-center">
                         <div className="h-16 w-16 bg-red-500 rounded-full animate-ping mr-32"></div>
                         <Typography className="text-9xl md:text-10xl font-extrabold" variant="h1">
-                            {liveTemperature?.value}&deg;C
+                            {Math.round(liveTemperature?.value)}&deg;C
                         </Typography>
                     </div>
                 </div>

@@ -29,7 +29,7 @@ const DashboardTemperatureLive = ({liveTemperature, trigger, setTrigger}) => {
                                 </div>
                                 <div className="text-center mt-20">
                                     <Typography className="text-7xl sm:text-9xl font-bold tracking-tight leading-none">
-                                        {liveTemperature?.value}&deg;C
+                                        {Math.round(liveTemperature?.value)}&deg;C
                                     </Typography>
                                 </div>
                                 <div className="flex items-center justify-between px-8 pt-12">
