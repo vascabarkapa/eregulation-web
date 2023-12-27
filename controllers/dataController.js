@@ -151,7 +151,7 @@ const getLatestData = asyncHandler(async (req, res) => {
 
         mqttHandlerInstance.sendMessage("eregulation/arduino", "ping");
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         const latestT = await Data.findOne({type: 't'}).sort({createdAt: -1}).limit(1);
         const latestH = await Data.findOne({type: 'h'}).sort({createdAt: -1}).limit(1);
