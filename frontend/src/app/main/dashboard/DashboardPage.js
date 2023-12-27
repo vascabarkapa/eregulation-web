@@ -85,7 +85,6 @@ const DashboardPage = () => {
                 DataService.getHumidityHistoryData().then((response) => {
                     if (response) {
                         setHumidityHistoryData(response?.data);
-                        console.log(response?.data)
                     }
                 });
             } catch (error) {

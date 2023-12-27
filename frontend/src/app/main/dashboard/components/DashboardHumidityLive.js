@@ -14,12 +14,12 @@ const DashboardHumidityLive = ({liveHumidity, trigger, setTrigger}) => {
             animate={{opacity: 1, y: 0, transition: {delay: 0.2}}}
         >
             <Paper>
-                <div class="flex flex-row">
-                    <div class="w-1/3 md:flex justify-center items-center hidden">
+                <div className="flex flex-row">
+                    <div className="w-1/3 md:flex justify-center items-center hidden">
                         <FuseSvgIcon size={'40%'} className="animate-ping">material-outline:water_drop</FuseSvgIcon>
                     </div>
-                    <div class="md:w-2/3 w-full">
-                        <div class="flex flex-col shadow rounded-2xl">
+                    <div className="md:w-2/3 w-full">
+                        <div className="flex flex-col shadow rounded-2xl">
                             <Paper className="flex flex-col shadow rounded-2xl">
                                 <div className="flex items-center justify-center px-8 pt-12">
                                     <Typography
