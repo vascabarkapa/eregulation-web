@@ -56,7 +56,7 @@ class MqttHandler {
     }
 
     handleIncomingMessage(topic, message) {
-        const regexLiveMessage = /^t-(\d+)-h-(\d+)-l-(\d+)$/;
+        const regexLiveMessage = /^t-([\d.]+)-h-([\d.]+)-l-([\d.]+)$/;
         console.log(`Received message on topic ${topic}: ${message}`);
 
         if (regexLiveMessage.test(message)) {
