@@ -1,10 +1,10 @@
 function parseLiveMessageToJson(receivedMessage) {
-    const regex = /^t-(\d+)-h-(\d+)-l-(\d+)$/;
+    const regex = /^t-([\d.]+)-h-([\d.]+)-l-([\d.]+)$/;
 
     const match = receivedMessage.match(regex);
-    const temperature = parseInt(match[1], 10);
-    const humidity = parseInt(match[2], 10);
-    const light = parseInt(match[3], 10);
+    const temperature = parseFloat(match[1]).toFixed(2);
+    const humidity = parseFloat(match[2]).toFixed(2);
+    const light = parseInt(match[3]);
 
     return [
         {type: "t", value: temperature},
