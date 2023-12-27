@@ -33,7 +33,7 @@ const TemperatureTable = ({tempTemperatureData, temperatureData, totalPages, pag
                             >
                                 <TableCell>{DateTimeHelper.getDate(temperature?.createdAt)}</TableCell>
                                 <TableCell>{DateTimeHelper.getTimeWithSeconds(temperature?.createdAt)}</TableCell>
-                                <TableCell>{temperature?.value.toFixed(1)}&deg;C</TableCell>
+                                <TableCell>{temperature?.value.toFixed(2)}&deg;C</TableCell>
                             </TableRow>
                         )) : <TableRow
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
