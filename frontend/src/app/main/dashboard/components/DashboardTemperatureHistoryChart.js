@@ -72,7 +72,7 @@ function DashboardTemperatureHistoryChart({temperatureHistoryData}) {
             followCursor: true,
             theme: 'dark',
             y: {
-                formatter: (value) => `${value}&deg;C`,
+                formatter: (value) => `${value.toFixed(2)}&deg;C`,
             },
         },
         xaxis: {

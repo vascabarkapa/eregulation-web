@@ -67,7 +67,7 @@ function DashboardHumidityHistoryChart({humidityHistoryData}) {
             followCursor: true,
             theme: 'dark',
             y: {
-                formatter: (value) => `${value}%`,
+                formatter: (value) => `${value.toFixed(2)}%`,
             },
         },
         xaxis: {
